@@ -22,9 +22,12 @@ import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.IntentFilter;
 import android.os.AsyncTask;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
+
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.text.TextUtils;
+
+import andrax.HackPrefs;
 import andrax.axterminal.compat.ActionBarCompat;
 import andrax.axterminal.compat.ActivityCompat;
 import andrax.axterminal.compat.AndroidCompat;
@@ -93,8 +96,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+
 
 
 /**
@@ -106,6 +108,8 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     /**
      * The ViewFlipper which holds the collection of EmulatorView widgets.
      */
+
+
 
     private TermViewFlipper mViewFlipper;
 
@@ -358,7 +362,10 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     public void onCreate(Bundle icicle) {
         super.onCreate(icicle);
 
-        if(NotificationManagerCompat.from(Term.this).areNotificationsEnabled()) {
+        //getSupportActionBar();
+
+
+        /**if(NotificationManagerCompat.from(Term.this).areNotificationsEnabled()) {
 
         } else {
 
@@ -366,7 +373,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             finish();
             finish();
 
-        }
+        } **/
 
         checkinstallterm();
 
@@ -403,10 +410,10 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             if (AndroidCompat.V11ToV20) {
                 switch (actionBarMode) {
                     case TermSettings.ACTION_BAR_MODE_ALWAYS_VISIBLE:
-                        setTheme(R.style.Theme_Holo);
+                        //setTheme(R.style.Theme_Holo);
                         break;
                     case TermSettings.ACTION_BAR_MODE_HIDES:
-                        setTheme(R.style.Theme_Holo_ActionBarOverlay);
+                        //setTheme(R.style.Theme_Holo_ActionBarOverlay);
                         break;
                 }
             }
@@ -905,7 +912,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     }
 
     private void confirmCloseWindow() {
-        final AlertDialog.Builder b = new AlertDialog.Builder(this);
+        final AlertDialog.Builder b = new AlertDialog.Builder(Term.this);
         b.setIcon(android.R.drawable.ic_dialog_alert);
         b.setMessage(R.string.confirm_window_close_message);
         final Runnable closeWindow = new Runnable() {
@@ -1311,11 +1318,12 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             startActivity(openLink);
     }
 
-    String installchecker;
+    String installchecker = "fail";
 
     public void checkinstallterm() {
 
         try {
+
 
             Process process04 = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/ANDRAX/bin/checkinstall");
             // Reads stdout.
@@ -1352,9 +1360,64 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
 
 
-        if(installchecker.equals("OK")) {
+        try {
 
-        } else {
+
+            if(installchecker.equals("OK")) {
+
+                try {
+
+                    Process moveshell = Runtime.getRuntime().exec("su -c cp -Rf /data/data/com.thecrackertechnology.andrax/ANDRAX/tmp/andraxzsh /system/xbin/andraxzsh");
+                    moveshell.waitFor();
+
+                }
+                catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            } else {
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(Term.this);
+                builder.setTitle("INSTALL ANDRAX!!!");
+                builder.setMessage("ANDRAX system is not installed, yet, go to ANDRAX interface and install. Press \"OK\"");
+                builder.setIcon(R.drawable.axterminalnotification);
+
+                String positiveText = getString(android.R.string.ok);
+                builder.setPositiveButton(positiveText,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                                Intent intent = null;
+
+                                try {
+                                    intent = new Intent(Term.this, Class.forName("com.thecrackertechnology.andrax.SplashActivity"));
+                                } catch (ClassNotFoundException e) {
+                                    e.printStackTrace();
+                                }
+                                startActivity(intent);
+
+                            }
+                        });
+
+                String negativeText = getString(android.R.string.cancel);
+                builder.setNegativeButton(negativeText,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+
+                AlertDialog dialog = builder.create();
+                // display dialog
+                dialog.show();
+
+            }
+
+
+
+        } catch (NullPointerException e) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(Term.this);
             builder.setTitle("INSTALL ANDRAX!!!");
@@ -1393,6 +1456,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             dialog.show();
 
         }
+
 
     }
 

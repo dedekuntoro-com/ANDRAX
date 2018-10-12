@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 27
+    buildToolsVersion '28.0.2'
 
     defaultConfig {
         //applicationId "andrax.axterminal"
@@ -11,7 +11,7 @@ android {
 
         ndk {
             moduleName "libandrax-axterminal5"
-            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a"
+            abiFilters "armeabi", "armeabi-v7a", "arm64-v8a","x86"
             ldLibs "log"
         }
     }
@@ -35,10 +35,10 @@ android {
 }
 
 dependencies {
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:appcompat-v7:26.1.0'
-    compile 'com.android.support:design:26.1.0'
-    compile project(':emulatorview')
-    compile project(':libtermexec')
-    compile 'com.android.support:support-v4:26.1.0'
+    implementation project(':emulatorview')
+    implementation project(':libtermexec')
+    implementation 'com.android.support:support-v4:27.1.1'
+    implementation 'com.android.support:appcompat-v7:27.1.1'
+    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:preference-v7:27.1.1'
 }

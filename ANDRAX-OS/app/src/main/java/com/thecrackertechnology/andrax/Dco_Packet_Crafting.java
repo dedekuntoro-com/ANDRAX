@@ -58,7 +58,7 @@ public class Dco_Packet_Crafting extends Activity {
                 Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-                intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo scapy");
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "scapy");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }

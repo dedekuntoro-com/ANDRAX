@@ -34,7 +34,7 @@ public class Dco_network_hacking extends Activity {
                 Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-                intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo arpspoof");
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "arpspoof");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }
@@ -46,7 +46,7 @@ public class Dco_network_hacking extends Activity {
                 Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-                intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo bettercap");
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "bettercap");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }
@@ -58,7 +58,7 @@ public class Dco_network_hacking extends Activity {
                 Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-                intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo mitmproxy");
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "mitmproxy");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }
@@ -70,7 +70,7 @@ public class Dco_network_hacking extends Activity {
                 Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-                intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo evilginx2");
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "evilginx2");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }
@@ -94,7 +94,7 @@ public class Dco_network_hacking extends Activity {
                 Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-                intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo scapy");
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "scapy");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }

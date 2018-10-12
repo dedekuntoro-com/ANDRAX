@@ -201,7 +201,7 @@ public class NmapFragment extends Fragment  implements View.OnClickListener, Ada
         Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
         intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-        intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo nmap " + scanstr + " " + scanmode + " " + "--system-dns");
+        intentstart.putExtra("andrax.axterminal.iInitialCommand", "nmap " + scanstr + " " + scanmode + " " + "--system-dns");
         intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intentstart);
 

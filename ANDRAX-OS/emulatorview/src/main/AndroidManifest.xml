@@ -3,5 +3,5 @@
       package="andrax.axterminal.emulatorview"
       android:versionCode="43"
       android:versionName="1.0.42">
-    <uses-sdk android:minSdkVersion="3" android:targetSdkVersion="11" />
+    <uses-sdk />
 </manifest>

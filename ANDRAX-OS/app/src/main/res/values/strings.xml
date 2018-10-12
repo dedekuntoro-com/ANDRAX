@@ -33,5 +33,8 @@
     <string name="busyofdesc">You do not have a BusyBox installed or it is not installed in the correct place \"/system/xbin\" ANDRAX needs a busybox\nClick \"OK\" and ANDRAX will install it.</string>
     <string name="busyboxnottitle">Unofficial BusyBox!</string>
     <string name="busyboxnotdesc">You have a BusyBox installed but it is NOT OFFICIAL and will not work with ANDRAX\nClick on \"OK\" and ANDRAX will perform the installation of a new BusyBox</string>
+    <string name="acra_dialog_text">ANDRAX has CRASHED Send US a Report!!!</string>
+    <string name="acra_dialog_comment">We need you to submit this report so we can correct the errors.</string>
+    <string name="acra_dialod_title">ANDRAX has CRASHED!</string>
 
 </resources>

@@ -254,8 +254,17 @@
             android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".CustomCrashReport"
+            android:process=":acra"
+            android:theme="@android:style/Theme.Material"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true"
+            android:launchMode="singleInstance">
         </activity>
     </application>
 

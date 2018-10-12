@@ -115,7 +115,7 @@ public class AircrackFragment extends Fragment  implements View.OnClickListener{
                     Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
                     intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-                    intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo airodump-ng " + interfaceaircrack);
+                    intentstart.putExtra("andrax.axterminal.iInitialCommand", "airodump-ng " + interfaceaircrack);
                     intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     startActivity(intentstart);
 

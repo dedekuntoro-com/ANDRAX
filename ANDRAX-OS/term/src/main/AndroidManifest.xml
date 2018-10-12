@@ -92,7 +92,7 @@
         </activity>
         <activity android:name="andrax.axterminal.TermPreferences"
                 android:label="@string/preferences"
-                android:theme="@style/Theme"/>
+                />
         <activity android:name="andrax.axterminal.WindowList"
                 android:label="@string/window_list" />
         <service android:name="andrax.axterminal.TermService" >

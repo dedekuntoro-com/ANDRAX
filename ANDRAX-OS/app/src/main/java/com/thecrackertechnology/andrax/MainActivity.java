@@ -23,6 +23,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
@@ -44,11 +45,21 @@ import java.net.URLConnection;
 import andrax.axterminal.RunScript;
 import andrax.axterminal.Term;
 
+
+
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener{
 
 
+    static {
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+    }
+
     String installchecker = "";
+
+    String resulzsh = "";
+
+    String versiondefault = "163";
 
     String urlcore = "http://download.thecrackertechnology.com/andrax/andrax.r1.tar.xz";
 
@@ -66,6 +77,10 @@ public class MainActivity extends AppCompatActivity
 
     public static final int progressType02 = 1;
 
+    String ab;
+
+    String abc;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -73,6 +88,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putString("shell", "/system/xbin/andraxzsh -su");
+        editor.apply();
 
         new CheckVersion().execute("http://download.thecrackertechnology.com/andrax/version");
 
@@ -192,6 +212,28 @@ public class MainActivity extends AppCompatActivity
 
             process04.waitFor();
 
+            Process checkandraxzsh = Runtime.getRuntime().exec("su -c if [ ! -f /system/xbin/andraxzsh ]; then echo -n \"ERR\"; else echo -n \"OK\"; fi");
+
+            BufferedReader reader2 = new BufferedReader(
+                    new InputStreamReader(checkandraxzsh.getInputStream()));
+            int read2;
+
+            char[] buffer2 = new char[8000];
+            StringBuffer output2 = new StringBuffer();
+            while ((read2 = reader2.read(buffer2)) > 0) {
+
+                output2.append(buffer2, 0, read2 );
+
+
+            }
+
+            checkandraxzsh.waitFor();
+
+            resulzsh = output2.toString();
+
+            reader2.close();
+
+
             reader.close();
 
             installchecker = output.toString();
@@ -209,6 +251,45 @@ public class MainActivity extends AppCompatActivity
 
 
         if(installchecker.equals("OK")) {
+
+            if(resulzsh.equals("OK")) {
+
+            } else {
+
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                builder.setTitle("ANDRAX SHELL ERRO!!!");
+                builder.setMessage("CHECKINSTALL Return \"OK\"\nbut ANDRAXSHELL is not Working!!!");
+                builder.setIcon(R.mipmap.ic_launcher);
+
+                String positiveText = getString(android.R.string.ok);
+                builder.setPositiveButton(positiveText,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+
+                                new DownloadFromURL().execute(urlcore);
+
+
+
+                            }
+                        });
+
+                String negativeText = getString(android.R.string.cancel);
+                builder.setNegativeButton(negativeText,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+
+                            }
+                        });
+
+                AlertDialog dialog = builder.create();
+                // display dialog
+                dialog.show();
+
+            }
 
         } else {
 
@@ -248,6 +329,13 @@ public class MainActivity extends AppCompatActivity
 
 
         installbusybox();
+
+
+
+        // to test crash report
+        //if(ab.equals(abc)) {
+
+        //}
 
 
 
@@ -381,7 +469,7 @@ public class MainActivity extends AppCompatActivity
 
                 SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
                 SharedPreferences.Editor editor = sharedPref.edit();
-                editor.putString("shell", "/system/bin/sh /system/xbin/andraxzsh -su");
+                editor.putString("shell", "/system/xbin/andraxzsh -su");
                 editor.apply();
 
 
@@ -437,7 +525,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo andrax");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "andrax");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -453,7 +541,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo evilginx2");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "evilginx2");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -478,7 +566,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo scapy");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "scapy");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -487,7 +575,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo ax-webserver");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "ax-webserver");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -607,7 +695,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo goldeneye -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "goldeneye -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -617,7 +705,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo hping3 -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "hping3 -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -627,7 +715,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo nping");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "nping");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -637,7 +725,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo hexinject -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "hexinject -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -646,7 +734,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo ncat -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "ncat -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -655,7 +743,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo netcat -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "netcat -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -709,7 +797,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo amap");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "amap");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -718,7 +806,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo firewalk");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "firewalk");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -728,7 +816,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo dns-cracker");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "dns-cracker");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -738,7 +826,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo 0d1n");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "0d1n");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -747,7 +835,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo mitmproxy");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "mitmproxy");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -774,7 +862,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo phpsploit");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "phpsploit");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -802,7 +890,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo payloadmask");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "payloadmask");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -811,7 +899,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo commix -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "commix -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -820,7 +908,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo sqlmap -hh");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sqlmap -hh");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -882,7 +970,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo arpspoof");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "arpspoof");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -891,7 +979,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo bettercap");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "bettercap");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -914,7 +1002,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo tcpdump -v -X");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "tcpdump -v -X");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -923,7 +1011,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo hydra -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "hydra -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -933,7 +1021,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo ncrack");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "ncrack");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -943,7 +1031,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo crunch -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "crunch -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -952,7 +1040,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo john");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "john");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -961,7 +1049,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo msfconsole");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "msfconsole");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -970,7 +1058,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo msfvenom -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "msfvenom -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -979,7 +1067,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo metasm_shell");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "metasm_shell");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -988,7 +1076,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo pattern_create");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "pattern_create");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -997,7 +1085,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo pattern_offset");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "pattern_offset");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -1006,7 +1094,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo egghunter -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "egghunter -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -1015,7 +1103,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo find_badchars -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "find_badchars -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -1024,7 +1112,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo msfbinscan -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "msfbinscan -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -1033,7 +1121,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo msfelfscan -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "msfelfscan -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -1042,7 +1130,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo msfpescan -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "msfpescan -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -1051,7 +1139,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo msfmachscan -h");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "msfmachscan -h");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -1090,7 +1178,7 @@ public class MainActivity extends AppCompatActivity
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo rop-tool");
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "rop-tool");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -1168,7 +1256,7 @@ public class MainActivity extends AppCompatActivity
             } catch (Exception e) {
                 Log.e("Error DOWNLOAD: ", e.getMessage());
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+               /** AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Holy shit!!! :(");
                 builder.setMessage("Unable to download core, contact development team.\n\nError: " + e.getMessage());
                 builder.setIcon(R.mipmap.ic_launcher);
@@ -1186,7 +1274,7 @@ public class MainActivity extends AppCompatActivity
 
                 AlertDialog dialog = builder.create();
                 // display dialog
-                dialog.show();
+                dialog.show(); **/
 
             }
             return null;
@@ -1266,29 +1354,20 @@ public class MainActivity extends AppCompatActivity
 
             try {
 
-                Process unzipcore = Runtime.getRuntime().exec("su -c /system/xbin/busybox tar -xvJf /sdcard/Download/andraxcore.tar.xz -C /data/data/com.thecrackertechnology.andrax/ANDRAX/");
-                // Reads stdout.
-                // NOTE: You can write to stdin of the command using
-                //       process.getOutputStream().
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(unzipcore.getInputStream()));
-                int read;
+                Process removeoldcore = Runtime.getRuntime().exec("su -c rm -rf /data/data/com.thecrackertechnology.andrax/ANDRAX/*");
+                removeoldcore.waitFor();
 
-                char[] buffer = new char[2048];
-                StringBuffer output = new StringBuffer();
-                while ((read = reader.read(buffer)) > 0) {
-
-                    output.append(buffer, 0, read );
-
-                }
+                Process unzipcore = Runtime.getRuntime().exec("su -c /system/xbin/busybox tar -xJf /sdcard/Download/andraxcore.tar.xz -C /data/data/com.thecrackertechnology.andrax/ANDRAX/");
 
                 unzipcore.waitFor();
-
-                reader.close();
 
                 Process cleanzipcore = Runtime.getRuntime().exec("su -c rm -R /sdcard/Download/andraxcore.tar.xz");
 
                 cleanzipcore.waitFor();
+
+                Process createversionfile = Runtime.getRuntime().exec("su -c echo " + versiondefault + "" + "> /data/data/com.thecrackertechnology.andrax/ANDRAX/version");
+
+                createversionfile.waitFor();
 
 
 
@@ -1296,7 +1375,8 @@ public class MainActivity extends AppCompatActivity
                 e.getMessage();
 
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                /**
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Error write TMP file");
                 builder.setMessage("Oh no!\n\nWe have a error installing ANDRAX\n\nYou dont have \"busybox\" or no free space to put core inside!\n\nERROR: " + e.getMessage());
                 builder.setIcon(R.mipmap.ic_launcher);
@@ -1314,12 +1394,14 @@ public class MainActivity extends AppCompatActivity
 
                 AlertDialog dialog = builder.create();
                 // display dialog
-                dialog.show();
+                dialog.show(); **/
 
             } catch (InterruptedException e) {
                 e.printStackTrace();
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                /**
+
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("Interrupted!!!");
                 builder.setMessage("Hey motherfucker, we has been interrupted, fuck off [ERROR] IN-01: " + e.getMessage());
                 builder.setIcon(R.mipmap.ic_launcher);
@@ -1336,7 +1418,7 @@ public class MainActivity extends AppCompatActivity
 
                 AlertDialog dialog = builder.create();
                 // display dialog
-                dialog.show();
+                dialog.show(); **/
 
             }
 
@@ -1353,7 +1435,16 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(String file_url) {
 
-            dismissDialog(3);
+
+
+            try {
+
+                dismissDialog(3);
+
+            } catch (IllegalArgumentException e) {
+
+            }
+
             Intent intent = new Intent(MainActivity.this,SplashActivity.class);
             startActivity(intent);
             finish();
@@ -1371,7 +1462,7 @@ public class MainActivity extends AppCompatActivity
 
         try {
 
-            Process checkbusybox = Runtime.getRuntime().exec("su -c /system/xbin/busybox");
+            Process checkbusybox = Runtime.getRuntime().exec("su -c /system/xbin/busybox id");
 
             int resultcode;
 
@@ -1411,13 +1502,13 @@ public class MainActivity extends AppCompatActivity
 
                                     int remountsystemresult = remountsystem.exitValue();
 
-                                    if(remountsystemresult !=0) {
 
-                                        Process remountsystem02 = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox mount -o remount,rw /system");
 
-                                        remountsystem02.waitFor();
+                                    Process remountsystem02 = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox mount -o remount,rw /system");
 
-                                    }
+                                    remountsystem02.waitFor();
+
+
 
                                     Process removebusyboxsystem = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox rm /system/xbin/busybox");
 
@@ -1446,40 +1537,14 @@ public class MainActivity extends AppCompatActivity
 
                                     if (resultcodeinstallbusyonxbin == 0) {
 
-                                        Process endinstallbusybox = Runtime.getRuntime().exec("su -c echo \"busy2\" > /system/xbin/.andraxbusybox");
-                                        endinstallbusybox.waitFor();
+                                        //Process endinstallbusybox = Runtime.getRuntime().exec("su -c /system/xbin/echo \"busy2\" > /system/xbin/.andraxbusybox");
+                                        //endinstallbusybox.waitFor();
 
+                                        Intent intent = new Intent(MainActivity.this,SplashActivity.class);
+                                        startActivity(intent);
+                                        finish();
+                                        finish();
 
-                                        if(endinstallbusybox.exitValue() == 0) {
-
-                                            Intent intent = new Intent(MainActivity.this,SplashActivity.class);
-                                            startActivity(intent);
-                                            finish();
-                                            finish();
-
-                                        } else {
-
-                                            AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
-                                            builder.setTitle("FATAL ERROR!!!");
-                                            builder.setMessage("ANDRAX Can't install BusyBox on your system\n\nCall DEVELOPER to get HELP!");
-                                            builder.setIcon(R.mipmap.ic_launcher);
-
-                                            String positiveText = getString(android.R.string.ok);
-                                            builder.setPositiveButton(positiveText,
-                                                    new DialogInterface.OnClickListener() {
-                                                        @Override
-                                                        public void onClick(DialogInterface dialog, int which) {
-
-
-
-                                                        }
-                                                    });
-
-                                            AlertDialog dialogerrorbusy = builder.create();
-                                            // display dialog
-                                            dialogerrorbusy.show();
-
-                                        }
 
                                     }
                                 } catch (InterruptedException e1) {
@@ -1506,16 +1571,24 @@ public class MainActivity extends AppCompatActivity
 
             } else {
 
-                Process checkversionbusybox = Runtime.getRuntime().exec("su -c if [[ $(cat /system/xbin/.andraxbusybox) == \"busy2\" ]];then return 0;else return 1;fi");
+                /**Process checkversionbusybox = Runtime.getRuntime().exec("su -c if [[ $(cat /system/xbin/.andraxbusybox) == \"busy2\" ]];then return 0;else return 1;fi");
                 checkversionbusybox.waitFor();
 
                 int andraxbusyboxresult;
 
                 checkversionbusybox.waitFor();
 
-                andraxbusyboxresult = checkversionbusybox.exitValue();
+                andraxbusyboxresult = checkversionbusybox.exitValue(); **/
 
-                if(andraxbusyboxresult != 0) {
+                Process checkbusyboxofandrax = Runtime.getRuntime().exec("su -c /system/xbin/busybox | grep \"ANDRAX\"");
+
+                checkbusyboxofandrax.waitFor();
+
+
+
+
+
+                if(checkbusyboxofandrax.exitValue() != 0) {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setTitle(R.string.busyboxnottitle);
@@ -1571,11 +1644,15 @@ public class MainActivity extends AppCompatActivity
 
                                         if (resultcodeinstallbusyonxbin == 0) {
 
-                                            Process endinstallbusybox = Runtime.getRuntime().exec("su -c echo \"busy2\" > /system/xbin/.andraxbusybox");
-                                            endinstallbusybox.waitFor();
+                                            /**Process endinstallbusybox = Runtime.getRuntime().exec("su -c echo \"busy2\" > /system/xbin/.andraxbusybox");
+                                            endinstallbusybox.waitFor(); **/
+
+                                            Process checkbusyboxofandrax = Runtime.getRuntime().exec("su -c /system/xbin/busybox | /data/data/com.thecrackertechnology.andrax/busybox grep \"ANDRAX\"");
+
+                                            checkbusyboxofandrax.waitFor();
 
 
-                                            if(endinstallbusybox.exitValue() == 0) {
+                                            if(checkbusyboxofandrax.exitValue() == 0) {
 
                                                 Intent intent = new Intent(MainActivity.this,SplashActivity.class);
                                                 startActivity(intent);
@@ -1584,7 +1661,7 @@ public class MainActivity extends AppCompatActivity
 
                                             } else {
 
-                                                AlertDialog.Builder builder = new AlertDialog.Builder(getApplicationContext());
+                                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                                                 builder.setTitle("FATAL ERROR!!!");
                                                 builder.setMessage("ANDRAX Can't install BusyBox on your system\n\nCall DEVELOPER to get HELP!");
                                                 builder.setIcon(R.mipmap.ic_launcher);
@@ -1646,6 +1723,8 @@ public class MainActivity extends AppCompatActivity
 
     }
 
+
+
     public void checkcoreversion() {
 
 
@@ -1685,27 +1764,37 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        /* Ex: 123 #1 is version of ANDRAX, #2 is version of BUILD and #3 is version of core */
-        if(coreversion.equals("122")) {
+        try {
 
-        } else if(coreversion.equals("")) {
+            /* Ex: 123 #1 is version of ANDRAX, #2 is version of BUILD and #3 is version of core */
+            if(coreversion.equals(versiondefault)) {
 
-        }
+            } else if(coreversion.equals("")) {
 
-        else {
+            }
 
+            else {
+
+
+                new DownloadFromURL().execute(urlcore);
+
+
+            }
+
+        } catch (NullPointerException e) {
 
             new DownloadFromURL().execute(urlcore);
 
-
         }
+
+
 
 
     }
 
 
 
-    int VersionFromServer;
+    int VersionFromServer = 0;
 
     class CheckVersion extends AsyncTask<String, String, String> {
         @Override
@@ -1758,7 +1847,7 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(String file_url) {
 
-            if(VersionFromServer > 122) {
+            if(VersionFromServer > 163) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("NEW VERSION");

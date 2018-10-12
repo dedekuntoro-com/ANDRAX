@@ -129,6 +129,9 @@ public class SplashActivity extends AppCompatActivity {
                 Process startbootloader = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/ANDRAX/bin/bootloader");
                 startbootloader.waitFor();
 
+                Process startbootloader02 = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/ANDRAX/bin/bootloader");
+                startbootloader02.waitFor();
+
                 Process checkandraxshell = Runtime.getRuntime().exec("su -c /system/xbin/andraxshell --version");
                 checkandraxshell.waitFor();
 

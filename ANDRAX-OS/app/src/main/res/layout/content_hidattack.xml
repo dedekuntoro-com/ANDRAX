@@ -23,12 +23,12 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <ImageView
+                <!--ImageView
                     android:id="@+id/imageView2"
                     android:layout_width="match_parent"
                     android:layout_height="250dp"
                     android:scaleType="fitCenter"
-                    app:srcCompat="@drawable/hidattackbanner" />
+                    app:srcCompat="@drawable/hidattackbanner" /-->
 
                 <TextView
                     android:id="@+id/textView30"

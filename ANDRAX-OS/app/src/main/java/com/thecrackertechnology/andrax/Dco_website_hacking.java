@@ -52,7 +52,7 @@ public class Dco_website_hacking extends Activity {
                 Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-                intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo mitmproxy");
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "mitmproxy");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }
@@ -88,7 +88,7 @@ public class Dco_website_hacking extends Activity {
                 Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-                intentstart.putExtra("andrax.axterminal.iInitialCommand", "sudo evilginx2");
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "evilginx2");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }

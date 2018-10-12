@@ -153,7 +153,7 @@
 
     <PreferenceCategory android:title="@string/shell_preferences">
 
-        <!--EditTextPreference
+        <EditTextPreference
             android:defaultValue="@string/pref_shell_default"
             android:dialogTitle="@string/dialog_title_shell_preference"
             android:key="shell"
@@ -172,7 +172,7 @@
             android:entryValues="@array/entries_termtype_preference"
             android:key="termtype"
             android:summary="@string/summary_termtype_preference"
-            android:title="@string/title_termtype_preference" /-->
+            android:title="@string/title_termtype_preference" />
         <CheckBoxPreference
             android:defaultValue="@bool/pref_mouse_tracking_default"
             android:key="mouse_tracking"
