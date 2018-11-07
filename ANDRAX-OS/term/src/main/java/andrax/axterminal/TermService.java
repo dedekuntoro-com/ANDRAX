@@ -100,6 +100,7 @@ public class TermService extends Service implements TermSession.FinishCallback
         editor.putString("home_path", homePath);
         editor.commit();
 
+
         compat = new ServiceForegroundCompat(this);
         mTermSessions = new SessionList();
 
@@ -134,16 +135,33 @@ public class TermService extends Service implements TermSession.FinishCallback
 
         startForeground(1, notification);
 
+        //SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        //SharedPreferences.Editor editorhack = sharedPref.edit();
+        //editorhack.clear().apply();
+
         try {
 
-            Process mountreadwrite = Runtime.getRuntime().exec("su -c /system/xbin/busybox mount -o remount,rw /system /system");
+            //Process changedata01 = Runtime.getRuntime().exec("su -c /system/xbin/busybox chmod 777 /data/");
+            //changedata01.waitFor();
+
+            //Process changedata02 = Runtime.getRuntime().exec("su -c /system/xbin/busybox chmod 777 /data/data/");
+            //changedata02.waitFor();
+
+            //Process changedata03 = Runtime.getRuntime().exec("su -c /system/xbin/busybox chmod 777 /data/data/com.thecrackertechnology.andrax/");
+            //changedata03.waitFor();
+
+            //Process changedata04 = Runtime.getRuntime().exec("su -c /system/xbin/busybox chmod 777 /data/data/com.thecrackertechnology.andrax/ANDRAX/");
+            //changedata04.waitFor();
+
+            Process mountreadwrite = Runtime.getRuntime().exec("su -c /system/xbin/busybox mount -o rw,remount /system /system");
             mountreadwrite.waitFor();
 
             int mountreadwriteresult = mountreadwrite.exitValue();
 
             if(mountreadwriteresult !=0) {
 
-                Process mountreadwrite02 = Runtime.getRuntime().exec("su -c /system/xbin/busybox mount -o remount,rw /system");
+                Process mountreadwrite02 = Runtime.getRuntime().exec("su -c /system/xbin/busybox mount -o rw,remount /system");
                 mountreadwrite02.waitFor();
 
             }
@@ -154,8 +172,9 @@ public class TermService extends Service implements TermSession.FinishCallback
             Process chmoddns = Runtime.getRuntime().exec("su -c chmod -R 777 /etc/resolv.conf");
             chmoddns.waitFor();
 
-            Process sethostname = Runtime.getRuntime().exec("su -c hostname ANDRAX-Mobile-Pentest");
-            sethostname.waitFor();
+
+            //Process sethostname = Runtime.getRuntime().exec("su -c hostname ANDRAX-Mobile-Pentest");
+            //sethostname.waitFor();
 
         } catch (InterruptedException e) {
             e.printStackTrace();

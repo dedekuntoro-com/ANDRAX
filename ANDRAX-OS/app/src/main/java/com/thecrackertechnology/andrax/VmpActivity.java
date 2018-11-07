@@ -42,7 +42,7 @@ public class VmpActivity extends AppCompatActivity implements View.OnClickListen
         mStart.setOnClickListener(this);
         mCancel.setOnClickListener(this);
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
     public void onClick(View v) {

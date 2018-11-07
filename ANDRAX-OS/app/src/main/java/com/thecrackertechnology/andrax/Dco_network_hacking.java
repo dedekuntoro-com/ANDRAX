@@ -13,11 +13,9 @@ public class Dco_network_hacking extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Remove title bar
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-//Remove notification bar
-        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         setContentView(R.layout.dco_network_hacking);
 
@@ -27,6 +25,11 @@ public class Dco_network_hacking extends Activity {
         CardView cardviewevilginx2 = findViewById(R.id.card_view_evilginx2);
         CardView cardviewsocat = findViewById(R.id.card_view_socat);
         CardView cardviewscapy = findViewById(R.id.card_view_scapy);
+        CardView cardviewgodoh = findViewById(R.id.card_view_godoh);
+        CardView cardviewdns2tcp = findViewById(R.id.card_view_dns2tcp);
+        CardView cardviewfragroute = findViewById(R.id.card_view_fragroute);
+
+
 
         cardviewarpspoof.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -99,6 +102,48 @@ public class Dco_network_hacking extends Activity {
                 startActivity(intentstart);
             }
         });
+
+        cardviewgodoh.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "godoh");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+
+        cardviewdns2tcp.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "dns2tcpc");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+
+
+        cardviewfragroute.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "fragroute");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+
+
     }
 
     @Override

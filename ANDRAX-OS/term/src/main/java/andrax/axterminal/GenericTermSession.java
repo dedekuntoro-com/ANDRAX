@@ -93,7 +93,7 @@ class GenericTermSession extends TermSession {
             columns = 80;
             rows = 24;
         }
-        // Inform the attached pty of our new size:
+        //Inform the attached pty of our new size:
         setPtyWindowSize(rows, columns, 0, 0);
         super.updateSize(columns, rows);
     }
@@ -110,7 +110,7 @@ class GenericTermSession extends TermSession {
             finish();
         } else if (mProcessExitMessage != null) {
             try {
-                byte[] msg = ("\r\n[" + mProcessExitMessage + "]").getBytes("UTF-8");
+                byte[] msg = ("\r\n[ " + mProcessExitMessage + " ]").getBytes("UTF-8");
                 appendToEmulator(msg, 0, msg.length);
                 notifyUpdate();
             } catch (UnsupportedEncodingException e) {
@@ -173,6 +173,7 @@ class GenericTermSession extends TermSession {
             return;
 
         try {
+
             Exec.setPtyWindowSizeInternal(getIntFd(mTermFd), row, col, xpixel, ypixel);
         } catch (IOException e) {
             Log.e("exec", "Failed to set window size: " + e.getMessage());

@@ -22,3 +22,17 @@
 int init_Exec(JNIEnv *env);
 
 #endif	/* !defined(_TERMEXEC_H) */
+
+/**
+ *
+ * Hack to force resize
+ *
+ * **/
+
+#include <stdio.h>
+#include <ctype.h>
+#include <sys/types.h>
+#include <string.h>
+
+#include <pwd.h>
+

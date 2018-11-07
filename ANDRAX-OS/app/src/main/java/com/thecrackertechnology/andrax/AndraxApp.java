@@ -7,10 +7,6 @@ import com.onesignal.OneSignal;
 
 import org.acra.ACRA;
 import org.acra.annotation.*;
-import org.acra.config.CoreConfigurationBuilder;
-import org.acra.data.StringFormat;
-
-import java.io.IOException;
 
 @AcraCore(buildConfigClass = BuildConfig.class)
 @AcraMailSender(mailTo = "contact@andrax-pentest.org")
@@ -22,9 +18,6 @@ public class AndraxApp extends Application {
         super.onCreate();
         OneSignal.startInit(this).inFocusDisplaying(OneSignal.OSInFocusDisplayOption.Notification).unsubscribeWhenNotificationsAreDisabled(false).init();
 
-        // Call syncHashedEmail anywhere in your app if you have the user's email.
-        // This improves the effectiveness of OneSignal's "best-time" notification scheduling feature.
-        // OneSignal.syncHashedEmail(userEmail);
 
     }
 
@@ -32,7 +25,7 @@ public class AndraxApp extends Application {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
 
-        // The following line triggers the initialization of ACRA
+
         ACRA.init(this);
     }
 }

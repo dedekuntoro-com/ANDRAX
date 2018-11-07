@@ -1,0 +1,44 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_rl"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/blackback"
+    android:padding="10dp"
+    tools:context=".Term">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/blackback"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="ANDRAX HOSTNAME"
+        android:textColor="@color/closeback"
+        android:textColorHint="@color/closeback"
+        android:textSize="24sp" />
+
+    <EditText
+        android:id="@+id/et_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/dialog_title"
+        android:hint="ANDRAX-Mobile-Pentest"
+        android:textColor="@color/accent"
+        android:textColorHint="@color/accent"
+        android:textSize="15dp" />
+
+    <Button
+        android:id="@+id/dialog_positive_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/et_name"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-1dp"
+        android:background="@android:color/background_light"
+        android:text="SET HOSTNAME"
+        android:textColor="@color/blackback"
+        android:textSize="18sp" />
+
+</RelativeLayout>

@@ -62,13 +62,9 @@ public class DirScanner extends AppCompatActivity {
                 String codeexclude = editexclude.getText().toString();
 
                 try {
-                    // Executes the command.
 
 
                     Process process = Runtime.getRuntime().exec("su -c cat /data/data/com.thecrackertechnology.andrax/ANDRAX/dirscanner/output " + "| grep -v " + "\"" + codeexclude + "\"");
-                    // Reads stdout.
-                    // NOTE: You can write to stdin of the command using
-                    //       process.getOutputStream().
                     BufferedReader reader = new BufferedReader(
                             new InputStreamReader(process.getInputStream()));
                     int read;
@@ -84,8 +80,6 @@ public class DirScanner extends AppCompatActivity {
                     reader.close();
 
 
-
-                    // Waits for the command to finish.
 
 
                     process.waitFor();
@@ -167,9 +161,6 @@ public class DirScanner extends AppCompatActivity {
         protected void onPostExecute(String result) {
             String outtext;
             String outtext02;
-
-            //outtext = result.substring(1);
-            //outtext02 = outtext.substring(0, outtext.length()-1);
 
             outtext = result.replace(",", "\n");
             outtext02 = outtext.replace("[", "");

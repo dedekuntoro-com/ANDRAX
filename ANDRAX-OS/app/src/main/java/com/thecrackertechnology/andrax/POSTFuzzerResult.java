@@ -84,13 +84,13 @@ public class POSTFuzzerResult extends AppCompatActivity {
                String match = editmatch.getText().toString();
 
                 try {
-                    // Executes the command.
+
 
 
                     Process process = Runtime.getRuntime().exec("su -c cat /data/data/com.thecrackertechnology.andrax/ANDRAX/postfuzzer/output | grep POST | grep -v " + match);
-                    // Reads stdout.
-                    // NOTE: You can write to stdin of the command using
-                    //       process.getOutputStream().
+
+
+
                     BufferedReader reader = new BufferedReader(
                             new InputStreamReader(process.getInputStream()));
                     int read;
@@ -107,7 +107,7 @@ public class POSTFuzzerResult extends AppCompatActivity {
 
 
 
-                    // Waits for the command to finish.
+
 
 
                     process.waitFor();

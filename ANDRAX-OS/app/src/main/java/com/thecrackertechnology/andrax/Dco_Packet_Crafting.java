@@ -13,11 +13,10 @@ public class Dco_Packet_Crafting extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Remove title bar
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-//Remove notification bar
-        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         setContentView(R.layout.dco_packet_crafting);
 
@@ -27,6 +26,16 @@ public class Dco_Packet_Crafting extends Activity {
         CardView cardviewhexinject = findViewById(R.id.card_view_hexinject);
         CardView cardviewncat = findViewById(R.id.card_view_ncat);
         CardView cardviewsocat = findViewById(R.id.card_view_socat);
+        CardView cardviewiaxflood = findViewById(R.id.card_view_iaxflood);
+        CardView cardviewinviteflood = findViewById(R.id.card_view_inviteflood);
+        CardView cardviewrtpflood = findViewById(R.id.card_view_rtpflood);
+        CardView cardviewrtpbreak = findViewById(R.id.card_view_rtpbreak);
+        CardView cardviewfiked = findViewById(R.id.card_view_fiked);
+        CardView cardviewpig = findViewById(R.id.card_view_pig);
+        CardView cardviewrtpinsertsound = findViewById(R.id.card_view_rtpinsertsound);
+        CardView cardviewrtpmixsound = findViewById(R.id.card_view_rtpmixsound);
+        CardView cardviewsipsak = findViewById(R.id.card_view_sipsak);
+        CardView cardviewenumiax = findViewById(R.id.card_view_enumiax);
 
         cardviewhping.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -95,6 +104,126 @@ public class Dco_Packet_Crafting extends Activity {
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
                 intentstart.putExtra("andrax.axterminal.iInitialCommand", "socat -h");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewiaxflood.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "iaxflood");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewinviteflood.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "inviteflood");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewrtpflood.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "rtpflood");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewrtpbreak.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "rtpbreak");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewfiked.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "fiked");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewpig.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "pig");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewrtpinsertsound.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "rtpinsertsound");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewrtpmixsound.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "rtpmixsound");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewsipsak.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "sipsak");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewenumiax.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "enumiax");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }

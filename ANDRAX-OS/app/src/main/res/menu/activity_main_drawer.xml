@@ -11,6 +11,11 @@
                     android:title="Terminal" />
 
                 <item
+                    android:id="@+id/nav_hidattack"
+                    android:icon="@drawable/hidattack"
+                    android:title="HID Attack" />
+
+                <item
                     android:id="@+id/nav_nmap"
                     android:icon="@drawable/eye"
                     android:title="Nmap" />
@@ -141,6 +146,56 @@
                     android:title="Nping" />
 
                 <item
+                    android:id="@+id/nav_iaxflood"
+                    android:icon="@drawable/andraxicon_svg"
+                    android:title="Iaxflood" />
+
+                <item
+                    android:id="@+id/nav_inviteflood"
+                    android:icon="@drawable/andraxicon_svg"
+                    android:title="Inviteflood" />
+
+                <item
+                    android:id="@+id/nav_rtpflood"
+                    android:icon="@drawable/andraxicon_svg"
+                    android:title="Rtpflood" />
+
+                <item
+                    android:id="@+id/nav_rtpbreak"
+                    android:icon="@drawable/andraxicon_svg"
+                    android:title="Rtpbreak" />
+
+                <item
+                    android:id="@+id/nav_enumiax"
+                    android:icon="@drawable/andraxicon_svg"
+                    android:title="Enumiax" />
+
+                <item
+                    android:id="@+id/nav_sipsak"
+                    android:icon="@drawable/andraxicon_svg"
+                    android:title="Sipsak" />
+
+                <item
+                    android:id="@+id/nav_fiked"
+                    android:icon="@drawable/andraxicon_svg"
+                    android:title="Fiked" />
+
+                <item
+                    android:id="@+id/nav_rtpinsertsound"
+                    android:icon="@drawable/andraxicon_svg"
+                    android:title="Rtpinsertsound" />
+
+                <item
+                    android:id="@+id/nav_rtpmixsound"
+                    android:icon="@drawable/andraxicon_svg"
+                    android:title="Rtpmixsound" />
+
+                <item
+                    android:id="@+id/nav_dhcpig"
+                    android:icon="@drawable/andraxicon_svg"
+                    android:title="Dhcpig" />
+
+                <item
                     android:id="@+id/nav_hexinject"
                     android:icon="@drawable/professional_hexagon"
                     android:title="HexInject" />
@@ -163,10 +218,26 @@
             <menu>
                 <group android:checkableBehavior="single">
 
+
                     <item
                         android:id="@+id/nav_dig"
                         android:icon="@drawable/dig"
                         android:title="DIG" />
+
+                    <item
+                        android:id="@+id/nav_dmitry"
+                        android:icon="@drawable/dmitry"
+                        android:title="Dmitry" />
+
+                    <item
+                        android:id="@+id/nav_0trace"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="0trace" />
+
+                    <item
+                        android:id="@+id/nav_intrace"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Intrace" />
 
                     <item
                         android:id="@+id/nav_dnsrecon"
@@ -178,6 +249,25 @@
                         android:icon="@drawable/raccoon"
                         android:title="RACCOON" />
 
+                    <item
+                        android:id="@+id/nav_braa"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Braa" />
+
+                    <item
+                        android:id="@+id/nav_fierce"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Fierce" />
+
+                    <item
+                        android:id="@+id/nav_automater"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Automater" />
+
+                    <item
+                        android:id="@+id/nav_dhcping"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Dhcping" />
 
                     <item
                         android:id="@+id/nav_masscan"
@@ -229,6 +319,11 @@
                         android:title="MITMPROXY" />
 
                     <item
+                        android:id="@+id/nav_hamster"
+                        android:icon="@drawable/hamster"
+                        android:title="Hamster" />
+
+                    <item
                         android:id="@+id/nav_wapiti"
                         android:icon="@drawable/wapiti"
                         android:title="Wapiti" />
@@ -239,9 +334,44 @@
                         android:title="Recon-NG" />
 
                     <item
+                        android:id="@+id/nav_grabber"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Grabber" />
+
+                    <item
+                        android:id="@+id/nav_fimap"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Fimap" />
+
+                    <item
+                        android:id="@+id/nav_clusterd"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Clusterd" />
+
+                    <item
+                        android:id="@+id/nav_dirb"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Dirb" />
+
+                    <item
+                        android:id="@+id/nav_siege"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Siege" />
+
+                    <item
+                        android:id="@+id/nav_slowhttptest"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Slowhttptest" />
+
+                    <item
                         android:id="@+id/nav_phpsploit"
                         android:icon="@drawable/phpsploit"
                         android:title="PHPSploit" />
+
+                    <item
+                        android:id="@+id/nav_httrack"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Httrack" />
 
                     <item
                         android:id="@+id/nav_photon"
@@ -337,9 +467,24 @@
                         android:title="Bettercap" />
 
                     <item
+                        android:id="@+id/nav_fragroute"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Fragroute" />
+
+                    <item
                         android:id="@+id/nav_socat"
                         android:icon="@drawable/socat"
                         android:title="SOCAT" />
+
+                    <item
+                        android:id="@+id/nav_dns2tcp"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="DNS2Tcp" />
+
+                    <item
+                        android:id="@+id/nav_godoh"
+                        android:icon="@drawable/poison"
+                        android:title="GODOH" />
 
                     <item
                         android:id="@+id/nav_httpleak"
@@ -374,6 +519,21 @@
                         android:id="@+id/nav_john"
                         android:icon="@drawable/john"
                         android:title="John The Ripper" />
+
+                    <item
+                        android:id="@+id/nav_acccheck"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Acccheck" />
+
+                    <item
+                        android:id="@+id/nav_massh-enum"
+                        android:icon="@drawable/massh"
+                        android:title="Massh-enum" />
+
+                    <item
+                        android:id="@+id/nav_findmyhash"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="FindMyHash" />
 
                     <item
                         android:id="@+id/nav_crunch"
@@ -451,9 +611,44 @@
                         android:title="RouterSploit" />
 
                     <item
+                        android:id="@+id/nav_intersect"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Intersect" />
+
+                    <item
                         android:id="@+id/nav_zsc"
                         android:icon="@drawable/zsc"
                         android:title="OWASP zsc" />
+
+                    <item
+                        android:id="@+id/nav_flasm"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Flasm" />
+
+                    <item
+                        android:id="@+id/nav_bed"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Bed" />
+
+                    <item
+                        android:id="@+id/nav_aflfuzz"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Afl-fuzz" />
+
+                    <item
+                        android:id="@+id/nav_sfuzz"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Sfuzz" />
+
+                    <item
+                        android:id="@+id/nav_ocs"
+                        android:icon="@drawable/andraxicon_svg"
+                        android:title="Cisco-ocs" />
+
+                    <item
+                        android:id="@+id/nav_apktool"
+                        android:icon="@drawable/apktool"
+                        android:title="APKTool" />
 
                     <item
                         android:id="@+id/nav_roptool"

@@ -2,6 +2,6 @@
   <color name="primary">#eb0000</color>
   <color name="primary_dark">#cc0000</color>
   <color name="accent">#08ff00</color>
-  <color name="closeback">#FF0000</color>
-  <color name="blackback">#0C0C0C</color>
+  <color name="closeback">#ff0000</color>
+  <color name="blackback">#0c0c0c</color>
 </resources>

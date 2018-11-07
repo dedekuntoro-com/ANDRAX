@@ -29,14 +29,14 @@ public class NmapFragment extends Fragment  implements View.OnClickListener, Ada
 
 
     public NmapFragment() {
-        // Required empty public constructor
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View rootView = inflater.inflate(R.layout.fragment_nmap, container, false);
 
 
@@ -47,15 +47,12 @@ public class NmapFragment extends Fragment  implements View.OnClickListener, Ada
 
 
 
-        // Spinner element
         Spinner spinner = (Spinner) rootView.findViewById(R.id.spinnernmap);
 
 
-
-        // Spinner click listener
         spinner.setOnItemSelectedListener(this);
 
-        // Spinner Drop down elements
+
         List<String> scanmodes = new ArrayList<String>();
         scanmodes.add("Intense Steath: -sS -A -Pn");
         scanmodes.add("TCP SYN: -sS");
@@ -71,13 +68,10 @@ public class NmapFragment extends Fragment  implements View.OnClickListener, Ada
         scanmodes.add("Os fingerprint SYN: -sS -O");
 
 
-        // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, scanmodes);
 
-        // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
 
 
@@ -108,18 +102,13 @@ public class NmapFragment extends Fragment  implements View.OnClickListener, Ada
     }
 
 
-    /**
-     * Called when leaving the activity
-     */
     @Override
     public void onPause() {
 
         super.onPause();
     }
 
-    /**
-     * Called when returning to the activity
-     */
+
     @Override
     public void onResume() {
 
@@ -127,9 +116,7 @@ public class NmapFragment extends Fragment  implements View.OnClickListener, Ada
 
     }
 
-    /**
-     * Called before the activity is destroyed
-     */
+
     @Override
     public void onDestroy() {
 
@@ -143,7 +130,6 @@ public class NmapFragment extends Fragment  implements View.OnClickListener, Ada
 
         spinneritem = item;
 
-        // Showing selected spinner item
         Toast.makeText(parent.getContext(), "SCAN Mode: " + item, Toast.LENGTH_SHORT).show();
 
 

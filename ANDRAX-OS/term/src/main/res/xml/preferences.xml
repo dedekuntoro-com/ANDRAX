@@ -36,7 +36,7 @@
             android:entryValues="@array/entryvalues_actionbar_preference"
             android:key="actionbar"
             android:summary="@string/summary_actionbar_preference"
-            android:title="@string/title_actionbar_preference" />
+            android:title="@string/title_actionbar_preference"/>
 
         <ListPreference
             android:defaultValue="@integer/pref_orientation_default"

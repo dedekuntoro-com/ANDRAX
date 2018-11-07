@@ -46,27 +46,27 @@ public class WebMYTHR extends AppCompatActivity implements AdapterView.OnItemSel
 
 
 
-        // Spinner element
+
         Spinner spinner = (Spinner) findViewById(R.id.spinnerwebmythrmode);
 
 
 
-        // Spinner click listener
+
         spinner.setOnItemSelectedListener(this);
 
-        // Spinner Drop down elements
+
         List<String> attackmodes = new ArrayList<String>();
         attackmodes.add("POST FUZZER");
         attackmodes.add("DIR SCANNER");
 
 
-        // Creating adapter for spinner
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, attackmodes);
 
-        // Drop down layout style - list view with radio button
+
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // attaching data adapter to spinner
+
         spinner.setAdapter(dataAdapter);
 
 
@@ -85,10 +85,10 @@ public class WebMYTHR extends AppCompatActivity implements AdapterView.OnItemSel
     }
 
     public void onCheckboxClicked(View view) {
-        // Is the view now checked?
+
         boolean checked = ((CheckBox) view).isChecked();
 
-        // Check which checkbox was clicked
+
         switch(view.getId()) {
             case R.id.checkBoxhttpswebmythr:
                 if (checked){
@@ -109,7 +109,7 @@ public class WebMYTHR extends AppCompatActivity implements AdapterView.OnItemSel
 
         spinneritem = item;
 
-        // Showing selected spinner item
+
         Toast.makeText(parent.getContext(), "ATTACK Mode: " + item, Toast.LENGTH_SHORT).show();
 
 

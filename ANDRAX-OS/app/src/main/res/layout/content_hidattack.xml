@@ -18,6 +18,14 @@
             android:gravity="center"
             android:orientation="vertical">
 
+            <android.support.v7.widget.AppCompatImageView
+                android:id="@+id/imageView_findmyhash"
+                android:layout_width="match_parent"
+                android:layout_height="230dp"
+                android:layout_centerHorizontal="false"
+                android:layout_centerVertical="true"
+                app:srcCompat="@drawable/andrax_hid" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

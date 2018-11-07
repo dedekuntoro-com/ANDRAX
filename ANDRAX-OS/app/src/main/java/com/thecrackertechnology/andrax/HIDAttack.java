@@ -45,33 +45,27 @@ public class HIDAttack extends AppCompatActivity implements AdapterView.OnItemSe
 
         spinner.setOnItemSelectedListener(this);
 
-        // Spinner Drop down elements
         List<String> hidpayloads = new ArrayList<String>();
 
 
         try {
-            // Executes the command.
 
 
-            Process process = Runtime.getRuntime().exec("su -c ls /data/data/com.thecrackertechnology.andrax/ANDRAX/hidattack/payloads");
-            // Reads stdout.
-            // NOTE: You can write to stdin of the command using
-            //       process.getOutputStream().
+
+            Process process = Runtime.getRuntime().exec("su -c ls -1 /data/data/com.thecrackertechnology.andrax/ANDRAX/hidattack/payloads");
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(process.getInputStream()));
             int read;
 
             char[] buffer = new char[8000];
-            StringBuffer output = new StringBuffer();
-            while ((read = reader.read(buffer)) > 0) {
-                output.append(buffer, 0, read );
+            String output;
+            while ((output = reader.readLine()) != null) {
 
-                hidpayloads.add(output.toString());
+                hidpayloads.add(output);
 
             }
             reader.close();
 
-            // Waits for the command to finish.
 
             process.waitFor();
 
@@ -85,13 +79,10 @@ public class HIDAttack extends AppCompatActivity implements AdapterView.OnItemSe
         }
 
 
-        // Creating adapter for spinner
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, hidpayloads);
 
-        // Drop down layout style - list view with radio button
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
 
 
@@ -102,12 +93,8 @@ public class HIDAttack extends AppCompatActivity implements AdapterView.OnItemSe
 
 
                 try {
-                    // Executes the command.
 
                     Process process = Runtime.getRuntime().exec("su -c printf " + "\"" + args + "\n\"" + " > /data/data/com.thecrackertechnology.andrax/ANDRAX/hidattack/payloads/run.tmp");
-                    // Reads stdout.
-                    // NOTE: You can write to stdin of the command using
-                    //       process.getOutputStream().
                     BufferedReader reader = new BufferedReader(
                             new InputStreamReader(process.getInputStream()));
                     int read;
@@ -121,7 +108,6 @@ public class HIDAttack extends AppCompatActivity implements AdapterView.OnItemSe
                     }
                     reader.close();
 
-                    // Waits for the command to finish.
 
                     process.waitFor();
 
@@ -159,14 +145,10 @@ public class HIDAttack extends AppCompatActivity implements AdapterView.OnItemSe
 
 
         try {
-            // Executes the command.
 
             edithid.setText("");
 
             Process process = Runtime.getRuntime().exec("su -c cat /data/data/com.thecrackertechnology.andrax/ANDRAX/hidattack/payloads/" + item);
-            // Reads stdout.
-            // NOTE: You can write to stdin of the command using
-            //       process.getOutputStream().
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(process.getInputStream()));
             int read;
@@ -181,8 +163,6 @@ public class HIDAttack extends AppCompatActivity implements AdapterView.OnItemSe
             }
             reader.close();
 
-            // Waits for the command to finish.
-
             process.waitFor();
 
 
@@ -195,7 +175,6 @@ public class HIDAttack extends AppCompatActivity implements AdapterView.OnItemSe
         }
 
 
-        // Showing selected spinner item
         Toast.makeText(parent.getContext(), "Payload: " + item, Toast.LENGTH_SHORT).show();
 
 

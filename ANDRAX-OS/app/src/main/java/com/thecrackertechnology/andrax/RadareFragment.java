@@ -41,14 +41,14 @@ public class RadareFragment extends Fragment implements View.OnClickListener{
     static int buttonChecked;
 
     public RadareFragment() {
-        // Required empty public constructor
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         final View rootView = inflater.inflate(R.layout.fragment_radare, container, false);
 
         btnselect = rootView.findViewById(R.id.buttonselect);
@@ -166,7 +166,7 @@ public class RadareFragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        // TODO Auto-generated method stub
+
 
         switch (requestCode) {
             case 7:
@@ -197,7 +197,7 @@ public class RadareFragment extends Fragment implements View.OnClickListener{
     public static String getFilePath(Context context, Uri uri) throws URISyntaxException {
         String selection = null;
         String[] selectionArgs = null;
-        // Uri is different in versions after KITKAT (Android 4.4), we need to
+
         if (Build.VERSION.SDK_INT >= 19 && DocumentsContract.isDocumentUri(context.getApplicationContext(), uri)) {
             if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);

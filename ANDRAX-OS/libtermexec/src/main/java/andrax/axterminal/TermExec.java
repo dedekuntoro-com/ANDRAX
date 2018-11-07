@@ -19,7 +19,7 @@ import java.util.*;
 public class TermExec {
     // Warning: bump the library revision, when an incompatible change happens
     static {
-        System.loadLibrary("andrax-termexec2");
+        System.loadLibrary("andrax-termexec");
     }
 
     public static final String SERVICE_ACTION_V1 = "andrax.axterminal.action.START_TERM.v1";

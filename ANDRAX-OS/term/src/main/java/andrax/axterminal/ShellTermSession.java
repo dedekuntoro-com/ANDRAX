@@ -124,9 +124,12 @@ public class ShellTermSession extends GenericTermSession {
         sendInitialCommand(mInitialCommand);
     }
 
-    private void sendInitialCommand(String initialCommand) {
+
+
+    public void sendInitialCommand(String initialCommand) {
         if (initialCommand.length() > 0) {
             write(initialCommand + '\r');
+            //write("busybox resize > /dev/null" + '\r');
         }
     }
 

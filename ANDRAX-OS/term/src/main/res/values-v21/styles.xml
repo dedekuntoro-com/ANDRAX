@@ -6,7 +6,7 @@
 <resources >
     <!-- This style is used for all activities.
      -->
-    <style name="Theme" parent="@android:style/Theme.DeviceDefault">
+    <style name="Theme" parent="@android:style/Theme.Material">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 

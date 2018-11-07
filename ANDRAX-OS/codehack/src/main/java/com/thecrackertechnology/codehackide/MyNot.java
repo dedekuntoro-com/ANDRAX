@@ -17,7 +17,7 @@ public class MyNot extends Service {
     public void onCreate() {
 
         Intent notificationIntent = new Intent(getApplicationContext(), com.thecrackertechnology.codehackide.MainActivityCodeHackIDE.class);
-        //notificationIntent.setData(Uri.parse("http://www.wgn.com"));
+
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 

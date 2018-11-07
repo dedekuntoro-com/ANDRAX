@@ -13,11 +13,11 @@ public class Dco_Password_Hacking extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Remove title bar
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-//Remove notification bar
-        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+
 
         setContentView(R.layout.dco_password_hacking);
 
@@ -25,6 +25,10 @@ public class Dco_Password_Hacking extends Activity {
         CardView cardviewncrack = findViewById(R.id.card_view_ncrack);
         CardView cardviewjohn = findViewById(R.id.card_view_john);
         CardView cardviewcrunch = findViewById(R.id.card_view_crunch);
+        CardView cardviewmassh = findViewById(R.id.card_view_massh);
+        CardView cardviewacccheck = findViewById(R.id.card_view_acccheck);
+        CardView cardviewfindmyhash = findViewById(R.id.card_view_findmyhash);
+
 
         cardviewhydra.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -73,6 +77,43 @@ public class Dco_Password_Hacking extends Activity {
                 startActivity(intentstart);
             }
         });
+
+        cardviewmassh.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "massh-enum --help");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewacccheck.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "acccheck");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewfindmyhash.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "hash-tool -h");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
 
     }
 

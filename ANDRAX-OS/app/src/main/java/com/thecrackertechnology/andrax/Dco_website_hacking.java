@@ -13,11 +13,10 @@ public class Dco_website_hacking extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Remove title bar
+
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 
-//Remove notification bar
-        //this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
 
         setContentView(R.layout.dco_website_hacking);
 
@@ -33,6 +32,14 @@ public class Dco_website_hacking extends Activity {
         CardView cardviewsqlmap = findViewById(R.id.card_view_sqlmap);
         CardView cardviewpayloadmask = findViewById(R.id.card_view_payloadmask);
         CardView cardviewabernathy = findViewById(R.id.card_view_abernathy);
+        CardView cardviewclusterd = findViewById(R.id.card_view_clusterd);
+        CardView cardviewdirb = findViewById(R.id.card_view_dirb);
+        CardView cardviewfimap = findViewById(R.id.card_view_fimap);
+        CardView cardviewgrabber = findViewById(R.id.card_view_grabber);
+        CardView cardviewhamster = findViewById(R.id.card_view_hamster);
+        CardView cardviewhttrack = findViewById(R.id.card_view_httrack);
+        CardView cardviewsiege = findViewById(R.id.card_view_siege);
+        CardView cardviewslowhttptest = findViewById(R.id.card_view_slowhttptest);
 
         cardviewodin.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -173,6 +180,102 @@ public class Dco_website_hacking extends Activity {
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
                 intentstart.putExtra("andrax.axterminal.iInitialCommand", "abernathy");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewclusterd.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "clusterd");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewdirb.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "dirb");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewfimap.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "fimap -h");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewgrabber.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "grabber -h");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewhamster.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "hamster");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewhttrack.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "httrack");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewsiege.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "siege");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewslowhttptest.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "slowhttptest");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }

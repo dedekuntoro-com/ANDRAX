@@ -3,9 +3,14 @@ package com.thecrackertechnology.andrax;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -44,6 +49,13 @@ public class SplashActivity extends AppCompatActivity {
             Process chmodhack = Runtime.getRuntime().exec("su -c id");
             chmodhack.waitFor();
 
+            if(isInstalledOnSdCard()) {
+
+                Process createsymlinkmnt = Runtime.getRuntime().exec("su -c ln -s /mnt/expand/*/user/0/com.thecrackertechnology.andrax /data/data/com.thecrackertechnology.andrax");
+                createsymlinkmnt.waitFor();
+
+            }
+
 
         } catch (InterruptedException | IOException e) {
             e.printStackTrace();
@@ -60,9 +72,9 @@ public class SplashActivity extends AppCompatActivity {
 
     @Override
     protected void onPause() {
-        // TODO Auto-generated method stub
+
         super.onPause();
-        //finish();
+
     }
 
 
@@ -82,13 +94,13 @@ public class SplashActivity extends AppCompatActivity {
 
                 SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-                if (sharedPref.getString("FirstTimeOpen", "").equals("none")) {
-                    // nothing
+                if (sharedPref.getString("TWOTimeOpen", "").equals("none")) {
+
                 } else {
                     SharedPreferences.Editor editor = sharedPref.edit();
                     editor.clear().apply();
 
-                    editor.putString("FirstTimeOpen", "none");
+                    editor.putString("TWOTimeOpen", "none");
                     editor.apply();
                 }
 
@@ -106,18 +118,16 @@ public class SplashActivity extends AppCompatActivity {
                     Process chmodhack = Runtime.getRuntime().exec("su -c chmod -R 777 /data/data/com.thecrackertechnology.andrax/ANDRAX/");
                     chmodhack.waitFor();
 
-                } else {
-
                 }
 
-                Process process03 = Runtime.getRuntime().exec("su -c mount -o remount,rw /system /system");
+                Process process03 = Runtime.getRuntime().exec("su -c mount -o rw,remount /system /system");
                 process03.waitFor();
 
                 int mount01exit = process03.exitValue();
 
                 if (mount01exit != 0) {
 
-                    Process processforceremount01 = Runtime.getRuntime().exec("su -c mount -o remount,rw /system");
+                    Process processforceremount01 = Runtime.getRuntime().exec("su -c mount -o rw,remount /system");
                     processforceremount01.waitFor();
 
                 }
@@ -139,14 +149,14 @@ public class SplashActivity extends AppCompatActivity {
 
                 if (checkshellresult != 0) {
 
-                    Process remountsystem02 = Runtime.getRuntime().exec("su -c mount -o remount,rw /system /system");
+                    Process remountsystem02 = Runtime.getRuntime().exec("su -c mount -o rw,remount /system /system");
                     remountsystem02.waitFor();
 
                     int mount02exit = remountsystem02.exitValue();
 
                     if (mount02exit != 0) {
 
-                        Process processforceremount02 = Runtime.getRuntime().exec("su -c mount -o remount,rw /system");
+                        Process processforceremount02 = Runtime.getRuntime().exec("su -c mount -o rw,remount /system");
                         processforceremount02.waitFor();
 
                     }
@@ -172,10 +182,9 @@ public class SplashActivity extends AppCompatActivity {
             return null;
         }
 
-        // progress bar Updating
+
 
         protected void onProgressUpdate(String... progress) {
-            // progress percentage
 
         }
 
@@ -193,22 +202,40 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    //progress dialog
+
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
-            case 0: // we set this to 0
+            case 0:
                 ProgressDialog progressDialog = new ProgressDialog(this, AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
                 progressDialog.setProgressStyle(R.style.AppCompatAlertDialogStyle);
                 progressDialog.setMessage("Configuring ANDRAX file system...");
                 progressDialog.setIndeterminate(true);
-                //progressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
                 progressDialog.setCancelable(false);
                 progressDialog.show();
                 return progressDialog;
             default:
                 return null;
         }
+    }
+
+
+    public boolean isInstalledOnSdCard() {
+
+        Context context =  getApplicationContext();
+
+        try {
+            String filesDir = context.getFilesDir().getAbsolutePath();
+            if (filesDir.startsWith("/data/")) {
+                return false;
+            } else if (filesDir.contains("/mnt/") || filesDir.contains("/sdcard/")) {
+                return true;
+            }
+        } catch (Throwable e) {
+
+        }
+
+        return false;
     }
 
 }

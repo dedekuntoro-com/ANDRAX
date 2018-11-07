@@ -26,14 +26,14 @@ public class AircrackFragment extends Fragment  implements View.OnClickListener{
 
 
     public AircrackFragment() {
-        // Required empty public constructor
+
     }
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+
         View rootView = inflater.inflate(R.layout.aircrack_fragment, container, false);
 
         mySwitch = (Switch) rootView.findViewById(R.id.switchaircrack);
@@ -45,7 +45,7 @@ public class AircrackFragment extends Fragment  implements View.OnClickListener{
 
 
         mySwitch.setChecked(false);
-        //attach a listener to check for changes in state
+
         mySwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
             @Override

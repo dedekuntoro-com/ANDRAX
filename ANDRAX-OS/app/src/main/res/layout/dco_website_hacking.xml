@@ -160,6 +160,64 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/card_view_hamster"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_hamster"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/hamster" />
+
+                    <TextView
+                        android:id="@+id/textView_hamster_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_hamster"
+                        android:gravity="center"
+                        android:text="HAMSTER"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_hamster_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_hamster_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_hamster"
+                        android:gravity="center"
+                        android:text="Sidejacking tool"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:id="@+id/card_view_wapiti"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -276,6 +334,354 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/card_view_grabber"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_grabber"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_grabber_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_grabber"
+                        android:gravity="center"
+                        android:text="GRABBER"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_grabber_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_grabber_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_grabber"
+                        android:gravity="center"
+                        android:text="Web application scanner"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_fimap"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_fimap"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_fimap_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_fimap"
+                        android:gravity="center"
+                        android:text="FIMAP"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_fimap_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_fimap_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_fimap"
+                        android:gravity="center"
+                        android:text="Python tool which can find, prepare, audit, exploit "
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_clusterd"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_clusterd"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_clusterd_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_clusterd"
+                        android:gravity="center"
+                        android:text="CLUSTERD"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_clusterd_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_clusterd_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_clusterd"
+                        android:gravity="center"
+                        android:text="Application server attack toolkit"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_dirb"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_dirb"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_dirb_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_dirb"
+                        android:gravity="center"
+                        android:text="DIRB"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_dirb_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_dirb_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_dirb"
+                        android:gravity="center"
+                        android:text="Web Content Scanner"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_siege"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_siege"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_siege_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_siege"
+                        android:gravity="center"
+                        android:text="SIEGE"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_siege_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_siege_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_siege"
+                        android:gravity="center"
+                        android:text="Regression test and benchmark utility"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_slowhttptest"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_slowhttptest"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_slowhttptest_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_slowhttptest"
+                        android:gravity="center"
+                        android:text="SLOWHTTPTEST"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_slowhttptest_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_slowhttptest_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_slowhttptest"
+                        android:gravity="center"
+                        android:text="highly configurable tool that simulates DoS"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:id="@+id/card_view_evilginx2"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -384,6 +790,64 @@
                         android:layout_toEndOf="@+id/imageView_phpsploit"
                         android:gravity="center"
                         android:text="Remote control framework for web"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_httrack"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_httrack"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_httrack_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_httrack"
+                        android:gravity="center"
+                        android:text="HTTRACK"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_httrack_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_httrack_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_httrack"
+                        android:gravity="center"
+                        android:text="Allows you to download a World Wide Web site"
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp"
                         android:textStyle="bold" />

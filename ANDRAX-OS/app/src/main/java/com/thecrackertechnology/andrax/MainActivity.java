@@ -3,14 +3,12 @@ package com.thecrackertechnology.andrax;
 import android.Manifest;
 import android.app.Dialog;
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.AsyncTask;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.preference.PreferenceManager;
@@ -28,7 +26,6 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -42,13 +39,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import andrax.axterminal.RunScript;
-import andrax.axterminal.Term;
 
-
-
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
 
     static {
@@ -59,9 +51,11 @@ public class MainActivity extends AppCompatActivity
 
     String resulzsh = "";
 
-    String versiondefault = "163";
+    String versiondefault = "176";
 
     String urlcore = "http://download.thecrackertechnology.com/andrax/andrax.r1.tar.xz";
+
+    String urlbusybox = "http://download.thecrackertechnology.com/andrax/busybox";
 
     String coreversion;
 
@@ -73,9 +67,12 @@ public class MainActivity extends AppCompatActivity
 
     private ProgressDialog unpackprogressDialog;
 
+    private ProgressDialog busyboxprogressDialog;
+
+    private ProgressDialog installbusyboxprogressDialog;
+
     public static final int progressType = 0;
 
-    public static final int progressType02 = 1;
 
     String ab;
 
@@ -91,41 +88,17 @@ public class MainActivity extends AppCompatActivity
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
         SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putString("shell", "/system/xbin/andraxzsh -su");
+        editor.putString("shell", "/system/xbin/andraxzsh");
         editor.apply();
 
         new CheckVersion().execute("http://download.thecrackertechnology.com/andrax/version");
 
-        //Toast.makeText(getApplicationContext(), "PATH: " + System.getenv("PATH"), Toast.LENGTH_LONG).show();
-
-
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
-        InputStream myInput = null;
-
-        try {
 
 
-            myInput = getAssets().open("busybox");
 
-
-            String outFileName = "/data/data/com.thecrackertechnology.andrax/busybox";
-
-            OutputStream myOutput = new FileOutputStream(outFileName);
-
-            byte[] buffer = new byte[1024];
-            int length;
-            while ((length = myInput.read(buffer)) > 0) {
-                myOutput.write(buffer, 0, length);
-            }
-            // Close the streams
-            myOutput.flush();
-            myOutput.close();
-            myInput.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
 
 
@@ -174,7 +147,7 @@ public class MainActivity extends AppCompatActivity
             builder.setIcon(R.mipmap.ic_launcher);
 
             AlertDialog dialog = builder.create();
-            // display dialog
+
             dialog.show();
 
         }
@@ -194,9 +167,7 @@ public class MainActivity extends AppCompatActivity
         try {
 
             Process process04 = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/ANDRAX/bin/checkinstall");
-            // Reads stdout.
-            // NOTE: You can write to stdin of the command using
-            //       process.getOutputStream().
+
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(process04.getInputStream()));
             int read;
@@ -286,7 +257,7 @@ public class MainActivity extends AppCompatActivity
                         });
 
                 AlertDialog dialog = builder.create();
-                // display dialog
+
                 dialog.show();
 
             }
@@ -322,7 +293,7 @@ public class MainActivity extends AppCompatActivity
                     });
 
             AlertDialog dialog = builder.create();
-            // display dialog
+
             dialog.show();
 
         }
@@ -343,7 +314,7 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    //progress dialog
+
     @Override
     protected Dialog onCreateDialog(int id) {
         switch (id) {
@@ -378,6 +349,28 @@ public class MainActivity extends AppCompatActivity
                 unpackprogressDialog.setCancelable(false);
                 unpackprogressDialog.show();
                 return unpackprogressDialog;
+
+            case 4:
+                busyboxprogressDialog = new ProgressDialog(this, android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                busyboxprogressDialog.setProgressStyle(R.style.AppCompatAlertDialogStyle);
+                busyboxprogressDialog.setMessage("Downloading BusyBox");
+                busyboxprogressDialog.setIndeterminate(false);
+                busyboxprogressDialog.setMax(100);
+                busyboxprogressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                busyboxprogressDialog.setCancelable(false);
+                busyboxprogressDialog.show();
+                return busyboxprogressDialog;
+
+            case 5:
+                installbusyboxprogressDialog = new ProgressDialog(this, android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                installbusyboxprogressDialog.setProgressStyle(R.style.AppCompatAlertDialogStyle);
+                installbusyboxprogressDialog.setMessage("Installing BusyBox...");
+                installbusyboxprogressDialog.setIndeterminate(true);
+                installbusyboxprogressDialog.setMax(0);
+                installbusyboxprogressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                installbusyboxprogressDialog.setCancelable(false);
+                installbusyboxprogressDialog.show();
+                return installbusyboxprogressDialog;
             default:
                 return null;
         }
@@ -416,7 +409,7 @@ public class MainActivity extends AppCompatActivity
                     });
 
             AlertDialog dialog = builder.create();
-            // display dialog
+
             dialog.show();
         }
 
@@ -425,19 +418,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_main) {
 
             MainFragment fragment = new MainFragment();
@@ -506,7 +495,7 @@ public class MainActivity extends AppCompatActivity
                     });
 
             AlertDialog dialog = builder.create();
-            // display dialog
+
             dialog.show();
         }
 
@@ -517,7 +506,7 @@ public class MainActivity extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.nav_terminal) {
@@ -528,6 +517,11 @@ public class MainActivity extends AppCompatActivity
             intentstart.putExtra("andrax.axterminal.iInitialCommand", "andrax");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
+
+        } else if (id == R.id.nav_hidattack) {
+
+            Intent intent = new Intent(MainActivity.this,HIDAttack.class);
+            startActivity(intent);
 
         } else if (id == R.id.nav_nmap) {
 
@@ -673,24 +667,7 @@ public class MainActivity extends AppCompatActivity
                 getApplicationContext().startActivity(intent);
             }
 
-        } /** else if(id == R.id.nav_torguard) {
-
-            Intent intent = getApplicationContext().getPackageManager().getLaunchIntentForPackage("net.torguard.openvpn.client");
-            if (intent == null) {
-                String appPkg = "net.torguard.openvpn.client";
-                try {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPkg)));
-                }
-                catch (android.content.ActivityNotFoundException anfe) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPkg)));
-                }
-
-            } else {
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getApplicationContext().startActivity(intent);
-            }
-
-        } **/ else if (id == R.id.nav_goldeneye) {
+        } else if (id == R.id.nav_goldeneye) {
 
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
@@ -756,6 +733,348 @@ public class MainActivity extends AppCompatActivity
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
+        } else if(id == R.id.nav_dmitry) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "dmitry");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_0trace) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "0trace.sh");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_intrace) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "intrace");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_braa) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "braa");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_fierce) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "fierce --help");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_automater) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "automater -h");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_dhcping) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "dhcping");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_iaxflood) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "iaxflood");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_inviteflood) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "inviteflood");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_rtpflood) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "rtpflood");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_rtpbreak) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "rtpbreak");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_enumiax) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "enumiax");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_sipsak) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sipsak");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_fiked) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "fiked");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_rtpinsertsound) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "rtpinsertsound");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_rtpmixsound) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "rtpmixsound");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_dhcpig) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "pig");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_fragroute) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "fragroute");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_dns2tcp) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "dns2tcpc");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_godoh) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "godoh");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_hamster) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "hamster");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_grabber) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "grabber -h");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_fimap) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "fimap -h");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_clusterd) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "clusterd");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_dirb) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "dirb");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_siege) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "siege");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_slowhttptest) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "slowhttptest");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_httrack) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "httrack");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_acccheck) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "acccheck");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_massh_enum) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "massh-enum --help");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_findmyhash) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "hash-tool -h");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_intersect) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "intersect");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_flasm) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "flasm");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_bed) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "bed");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_aflfuzz) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "afl-fuzz");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_sfuzz) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "sfuzz");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_ocs) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "cisco-ocs");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if(id == R.id.nav_apktool) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "apktool");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
         } else if(id == R.id.nav_dnsrecon) {
 
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
@@ -765,7 +1084,7 @@ public class MainActivity extends AppCompatActivity
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
-        } else if(id == R.id.nav_raccoon) {
+        }  else if(id == R.id.nav_raccoon) {
 
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
@@ -1152,19 +1471,7 @@ public class MainActivity extends AppCompatActivity
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
-        } /** else if (id == R.id.nav_rainpack) {
-
-            Intent intent = getApplicationContext().getPackageManager().getLaunchIntentForPackage("com.thecrackertechnology.rainpack");
-            if (intent == null) {
-
-                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://download.thecrackertechnology.com/andrax/rainpack.apk")));
-
-            } else {
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                getApplicationContext().startActivity(intent);
-            }
-
-        }**/ else if(id == R.id.nav_zsc) {
+        } else if(id == R.id.nav_zsc) {
 
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
@@ -1196,11 +1503,9 @@ public class MainActivity extends AppCompatActivity
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_WRITE: {
-                // If request is cancelled, the result arrays are empty.
+
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, yay! Do the
 
                 } else {
 
@@ -1208,14 +1513,10 @@ public class MainActivity extends AppCompatActivity
                     finish();
                     finish();
 
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
                 }
                 return;
             }
 
-            // other 'case' lines to check for other
-            // permissions this app might request
         }
     }
 
@@ -1235,7 +1536,6 @@ public class MainActivity extends AppCompatActivity
                 URL url = new URL(fileUrl[0]);
                 URLConnection urlConnection = url.openConnection();
                 urlConnection.connect();
-                // show progress bar 0-100%
                 int fileLength = urlConnection.getContentLength();
                 InputStream inputStream = new BufferedInputStream(url.openStream(), 8192);
                 OutputStream outputStream = new FileOutputStream("/sdcard/Download/andraxcore.tar.xz");
@@ -1247,43 +1547,23 @@ public class MainActivity extends AppCompatActivity
                     publishProgress("" + (int) ((total * 100) / fileLength));
                     outputStream.write(data, 0, count);
                 }
-                // flushing output
+
                 outputStream.flush();
-                // closing streams
+
                 outputStream.close();
                 inputStream.close();
 
             } catch (Exception e) {
                 Log.e("Error DOWNLOAD: ", e.getMessage());
 
-               /** AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Holy shit!!! :(");
-                builder.setMessage("Unable to download core, contact development team.\n\nError: " + e.getMessage());
-                builder.setIcon(R.mipmap.ic_launcher);
-
-                String positiveText = getString(android.R.string.ok);
-                builder.setPositiveButton(positiveText,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-
-
-                            }
-                        });
-
-                AlertDialog dialog = builder.create();
-                // display dialog
-                dialog.show(); **/
 
             }
             return null;
         }
 
-        // progress bar Updating
 
         protected void onProgressUpdate(String... progress) {
-            // progress percentage
+
             progressDialog.setProgress(Integer.parseInt(progress[0]));
         }
 
@@ -1375,50 +1655,8 @@ public class MainActivity extends AppCompatActivity
                 e.getMessage();
 
 
-                /**
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Error write TMP file");
-                builder.setMessage("Oh no!\n\nWe have a error installing ANDRAX\n\nYou dont have \"busybox\" or no free space to put core inside!\n\nERROR: " + e.getMessage());
-                builder.setIcon(R.mipmap.ic_launcher);
-
-                String positiveText = getString(android.R.string.ok);
-                builder.setPositiveButton(positiveText,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-
-
-                            }
-                        });
-
-                AlertDialog dialog = builder.create();
-                // display dialog
-                dialog.show(); **/
-
             } catch (InterruptedException e) {
                 e.printStackTrace();
-
-                /**
-
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle("Interrupted!!!");
-                builder.setMessage("Hey motherfucker, we has been interrupted, fuck off [ERROR] IN-01: " + e.getMessage());
-                builder.setIcon(R.mipmap.ic_launcher);
-
-                String positiveText = getString(android.R.string.ok);
-                builder.setPositiveButton(positiveText,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-
-
-                            }
-                        });
-
-                AlertDialog dialog = builder.create();
-                // display dialog
-                dialog.show(); **/
 
             }
 
@@ -1485,83 +1723,13 @@ public class MainActivity extends AppCompatActivity
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-
-                                try {
-
-                                    Process sleep = Runtime.getRuntime().exec("su -c sleep 03");
-
-                                    sleep.waitFor();
-
-                                    Process chmodbusytmp = Runtime.getRuntime().exec("su -c chmod -R 777 /data/data/com.thecrackertechnology.andrax/busybox");
-
-                                    chmodbusytmp.waitFor();
-
-                                    Process remountsystem = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox mount -o remount,rw /system /system");
-
-                                    remountsystem.waitFor();
-
-                                    int remountsystemresult = remountsystem.exitValue();
-
-
-
-                                    Process remountsystem02 = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox mount -o remount,rw /system");
-
-                                    remountsystem02.waitFor();
-
-
-
-                                    Process removebusyboxsystem = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox rm /system/xbin/busybox");
-
-                                    removebusyboxsystem.waitFor();
-
-                                    Process copybusybox = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox cp /data/data/com.thecrackertechnology.andrax/busybox /system/xbin/");
-
-                                    copybusybox.waitFor();
-
-                                    Process chmodnewbusybox = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox chmod -R 777 /system/xbin/busybox");
-
-                                    chmodnewbusybox.waitFor();
-
-
-                                    Process installbusyonxbin = Runtime.getRuntime().exec("su -c /system/xbin/busybox --install -s /system/xbin/");
-
-                                    int resultcodeinstallbusyonxbin;
-
-                                    installbusyonxbin.waitFor();
-
-                                    Process chmodsystem = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox chmod -R 777 /system/xbin/*");
-
-                                    chmodsystem.waitFor();
-
-                                    resultcodeinstallbusyonxbin = installbusyonxbin.exitValue();
-
-                                    if (resultcodeinstallbusyonxbin == 0) {
-
-                                        //Process endinstallbusybox = Runtime.getRuntime().exec("su -c /system/xbin/echo \"busy2\" > /system/xbin/.andraxbusybox");
-                                        //endinstallbusybox.waitFor();
-
-                                        Intent intent = new Intent(MainActivity.this,SplashActivity.class);
-                                        startActivity(intent);
-                                        finish();
-                                        finish();
-
-
-                                    }
-                                } catch (InterruptedException e1) {
-                                    e1.printStackTrace();
-                                } catch (FileNotFoundException e1) {
-                                    e1.printStackTrace();
-                                } catch (IOException e1) {
-                                    e1.printStackTrace();
-                                }
-
-
+                                new downloadbusybox().execute(urlbusybox);
 
                             }
                         });
 
                 AlertDialog dialog = builder.create();
-                // display dialog
+
                 dialog.show();
 
 
@@ -1571,16 +1739,7 @@ public class MainActivity extends AppCompatActivity
 
             } else {
 
-                /**Process checkversionbusybox = Runtime.getRuntime().exec("su -c if [[ $(cat /system/xbin/.andraxbusybox) == \"busy2\" ]];then return 0;else return 1;fi");
-                checkversionbusybox.waitFor();
-
-                int andraxbusyboxresult;
-
-                checkversionbusybox.waitFor();
-
-                andraxbusyboxresult = checkversionbusybox.exitValue(); **/
-
-                Process checkbusyboxofandrax = Runtime.getRuntime().exec("su -c /system/xbin/busybox | grep \"ANDRAX\"");
+                Process checkbusyboxofandrax = Runtime.getRuntime().exec("su -c /system/xbin/busybox | grep -q \"ANDRAX\"");
 
                 checkbusyboxofandrax.waitFor();
 
@@ -1602,101 +1761,13 @@ public class MainActivity extends AppCompatActivity
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {
 
-
-
-                                    try {
-
-                                        Process sleep = Runtime.getRuntime().exec("su -c sleep 03");
-
-                                        sleep.waitFor();
-
-                                        Process chmodbusytmp = Runtime.getRuntime().exec("su -c chmod -R 777 /data/data/com.thecrackertechnology.andrax/busybox");
-
-                                        chmodbusytmp.waitFor();
-
-                                        Process remountsystem = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox mount -o remount,rw /system /system");
-
-                                        remountsystem.waitFor();
-
-                                        Process removebusyboxsystem = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox rm /system/xbin/busybox");
-
-                                        removebusyboxsystem.waitFor();
-
-                                        Process copybusybox = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox cp /data/data/com.thecrackertechnology.andrax/busybox /system/xbin/");
-
-                                        copybusybox.waitFor();
-
-                                        Process chmodnewbusybox = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox chmod -R 777 /system/xbin/busybox");
-
-                                        chmodnewbusybox.waitFor();
-
-                                        Process installbusyonxbin = Runtime.getRuntime().exec("su -c /system/xbin/busybox --install -s /system/xbin/");
-
-                                        int resultcodeinstallbusyonxbin;
-
-                                        installbusyonxbin.waitFor();
-
-                                        Process chmodsystem = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/busybox chmod -R 777 /system/xbin/*");
-
-                                        chmodsystem.waitFor();
-
-                                        resultcodeinstallbusyonxbin = installbusyonxbin.exitValue();
-
-                                        if (resultcodeinstallbusyonxbin == 0) {
-
-                                            /**Process endinstallbusybox = Runtime.getRuntime().exec("su -c echo \"busy2\" > /system/xbin/.andraxbusybox");
-                                            endinstallbusybox.waitFor(); **/
-
-                                            Process checkbusyboxofandrax = Runtime.getRuntime().exec("su -c /system/xbin/busybox | /data/data/com.thecrackertechnology.andrax/busybox grep \"ANDRAX\"");
-
-                                            checkbusyboxofandrax.waitFor();
-
-
-                                            if(checkbusyboxofandrax.exitValue() == 0) {
-
-                                                Intent intent = new Intent(MainActivity.this,SplashActivity.class);
-                                                startActivity(intent);
-                                                finish();
-                                                finish();
-
-                                            } else {
-
-                                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                                                builder.setTitle("FATAL ERROR!!!");
-                                                builder.setMessage("ANDRAX Can't install BusyBox on your system\n\nCall DEVELOPER to get HELP!");
-                                                builder.setIcon(R.mipmap.ic_launcher);
-
-                                                String positiveText = getString(android.R.string.ok);
-                                                builder.setPositiveButton(positiveText,
-                                                        new DialogInterface.OnClickListener() {
-                                                            @Override
-                                                            public void onClick(DialogInterface dialog, int which) {
-
-
-
-                                                            }
-                                                        });
-
-                                                AlertDialog dialogerrorbusy = builder.create();
-                                                // display dialog
-                                                dialogerrorbusy.show();
-
-                                            }
-
-                                        }
-                                    } catch (InterruptedException e1) {
-                                        e1.printStackTrace();
-                                    } catch (FileNotFoundException e1) {
-                                        e1.printStackTrace();
-                                    } catch (IOException e1) {
-                                        e1.printStackTrace();
-                                    }
+                                    new downloadbusybox().execute(urlbusybox);
 
                                 }
                             });
 
                     AlertDialog dialog = builder.create();
-                    // display dialog
+
                     dialog.show();
 
 
@@ -1731,9 +1802,7 @@ public class MainActivity extends AppCompatActivity
         try {
 
             Process checkcoreversioncmd = Runtime.getRuntime().exec("su -c cat /data/data/com.thecrackertechnology.andrax/ANDRAX/version");
-            // Reads stdout.
-            // NOTE: You can write to stdin of the command using
-            //       process.getOutputStream().
+
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(checkcoreversioncmd.getInputStream()));
             int read;
@@ -1837,8 +1906,6 @@ public class MainActivity extends AppCompatActivity
             return null;
         }
 
-        // progress bar Updating
-
         protected void onProgressUpdate(String... progress) {
 
 
@@ -1847,7 +1914,7 @@ public class MainActivity extends AppCompatActivity
         @Override
         protected void onPostExecute(String file_url) {
 
-            if(VersionFromServer > 163) {
+            if(VersionFromServer > 176) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("NEW VERSION");
@@ -1876,10 +1943,162 @@ public class MainActivity extends AppCompatActivity
                         });
 
                 AlertDialog dialog = builder.create();
-                // display dialog
+
                 dialog.show();
 
             }
+
+        }
+    }
+
+
+
+    class downloadbusybox extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            showDialog(4);
+        }
+
+        @Override
+        protected String doInBackground(String... fileUrl) {
+            int count;
+            try {
+                URL url = new URL(fileUrl[0]);
+                URLConnection urlConnection = url.openConnection();
+                urlConnection.connect();
+
+                int fileLength = urlConnection.getContentLength();
+                InputStream inputStream = new BufferedInputStream(url.openStream(), 8192);
+                OutputStream outputStream = new FileOutputStream("/data/data/com.thecrackertechnology.andrax/files/busybox");
+
+                byte data[] = new byte[80000];
+                long total = 0;
+                while ((count = inputStream.read(data)) != -1) {
+                    total += count;
+                    publishProgress("" + (int) ((total * 100) / fileLength));
+                    outputStream.write(data, 0, count);
+                }
+
+                outputStream.flush();
+
+                outputStream.close();
+                inputStream.close();
+
+            } catch (Exception e) {
+                Log.e("Error DOWNLOAD: ", e.getMessage());
+
+
+            }
+            return null;
+        }
+
+
+
+        protected void onProgressUpdate(String... progress) {
+
+            busyboxprogressDialog.setProgress(Integer.parseInt(progress[0]));
+        }
+
+        @Override
+        protected void onPostExecute(String file_url) {
+
+            dismissDialog(4);
+            new installbusybox().execute(urlcore);
+
+
+        }
+    }
+
+
+
+
+    class installbusybox extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+
+            showDialog(5);
+        }
+
+        @Override
+        protected String doInBackground(String... fileUrl) {
+
+
+
+            try {
+
+
+                Process chmodbusytmp = Runtime.getRuntime().exec("su -c chmod -R 777 /data/data/com.thecrackertechnology.andrax/files/busybox");
+
+                chmodbusytmp.waitFor();
+
+                Process remountsystem = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/files/busybox mount -o rw,remount /system /system");
+
+                remountsystem.waitFor();
+
+                int remountsystemresult = remountsystem.exitValue();
+
+
+
+                Process remountsystem02 = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/files/busybox mount -o rw,remount /system");
+
+                remountsystem02.waitFor();
+
+
+
+                Process removebusyboxsystem = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/files/busybox rm /system/xbin/busybox");
+
+                removebusyboxsystem.waitFor();
+
+                Process copybusybox = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/files/busybox cp /data/data/com.thecrackertechnology.andrax/files/busybox /system/xbin/");
+
+                copybusybox.waitFor();
+
+                Process chmodnewbusybox = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/files/busybox chmod -R 777 /system/xbin/busybox");
+
+                chmodnewbusybox.waitFor();
+
+
+                Process installbusyonxbin = Runtime.getRuntime().exec("su -c /system/xbin/busybox --install -s /system/xbin/");
+
+                int resultcodeinstallbusyonxbin;
+
+                installbusyonxbin.waitFor();
+
+                Process chmodsystem = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/files/busybox chmod -R 777 /system/xbin/*");
+
+                chmodsystem.waitFor();
+
+
+
+            } catch (InterruptedException e1) {
+                e1.printStackTrace();
+            } catch (FileNotFoundException e1) {
+                e1.printStackTrace();
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
+
+
+
+            return null;
+        }
+
+
+
+        protected void onProgressUpdate(String... progress) {
+
+        }
+
+        @Override
+        protected void onPostExecute(String file_url) {
+            dismissDialog(5);
+
+            Intent intent = new Intent(MainActivity.this,SplashActivity.class);
+            startActivity(intent);
+            finish();
+            finish();
 
         }
     }

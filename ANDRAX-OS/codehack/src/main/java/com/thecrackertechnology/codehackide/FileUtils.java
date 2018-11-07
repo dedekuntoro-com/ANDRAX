@@ -6,10 +6,6 @@ import android.net.Uri;
 
 import java.net.URISyntaxException;
 
-/**
- * Created by mythical on 14/12/17.
- */
-
 public class FileUtils {
 
     public static String getPath(Context context, Uri uri) throws URISyntaxException {
@@ -24,7 +20,7 @@ public class FileUtils {
                     return cursor.getString(column_index);
                 }
             } catch (Exception e) {
-                // Eat it
+
             }
         }
         else if ("file".equalsIgnoreCase(uri.getScheme())) {

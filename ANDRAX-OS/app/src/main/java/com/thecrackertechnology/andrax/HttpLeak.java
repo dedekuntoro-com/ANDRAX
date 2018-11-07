@@ -26,7 +26,7 @@ public class HttpLeak extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
 
         Button btninject = (Button) findViewById(R.id.button_httpinject);
         final EditText editTextpattern = (EditText) findViewById(R.id.httpleakpattern);

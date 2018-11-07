@@ -153,9 +153,9 @@ public class RemoteInterface extends Activity {
         String initialCommand = mSettings.getInitialCommand();
         if (iInitialCommand != null) {
             if (initialCommand != null) {
-                initialCommand += "\r" + iInitialCommand;
+                initialCommand += '\r' + "clear" + '\r' + iInitialCommand;
             } else {
-                initialCommand = iInitialCommand;
+                initialCommand = "clear;clear;" + iInitialCommand;
             }
         }
 

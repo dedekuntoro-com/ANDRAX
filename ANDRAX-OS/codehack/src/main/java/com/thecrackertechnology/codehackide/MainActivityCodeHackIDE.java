@@ -202,7 +202,6 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
 
 
         web.getSettings().setAllowContentAccess(true);
-        //web.canGoBack();
 
         web.setWebChromeClient(new WebChromeClient() {
         });
@@ -230,7 +229,7 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
         public void run() {
             web.loadUrl("javascript:(function() { editor.getSession().setMode(\"ace/mode/"+ extralanguages + "\"); })();");
             mHandler.removeCallbacks(changelanghandler);
-            //mHandler.postDelayed(this, 1000);
+
         }
 };
 
@@ -279,25 +278,22 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
                     });
 
             AlertDialog dialog = builder.create();
-            // display dialog
+
             dialog.show();
 
-            //super.onBackPressed();
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.main_codehack, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
+
         int id = item.getItemId();
 
         if(id == R.id.action_newfile) {
@@ -317,22 +313,15 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
             if(myfileuri == null) {
 
 
-                // This always works
-                Intent i = new Intent(getApplicationContext(), FilePickerActivity.class);
-                // This works if you defined the intent filter
-                // Intent i = new Intent(Intent.ACTION_GET_CONTENT);
 
-                // Set these depending on your use case. These are the defaults.
+                Intent i = new Intent(getApplicationContext(), FilePickerActivity.class);
+
                 i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
                 i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, true);
                 i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_DIR);
 
                 i.putExtra("android.content.extra.SHOW_ADVANCED", true);
 
-                // Configure initial directory by specifying a String.
-                // You could specify a String like "/storage/emulated/0/", but that can
-                // dangerous. Always use Android's API calls to get paths to the SD-card or
-                // internal memory.
                 i.putExtra(FilePickerActivity.EXTRA_START_PATH, getExternalStorageDirectory().getPath());
 
                 startActivityForResult(i, 3);
@@ -341,8 +330,6 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
                     File f0 = new File(finalfilepath);
                     boolean d0 = f0.delete();
                     Log.w("TMPDELETE", "File deleted: " + d0);
-
-                    //Toast.makeText(getApplicationContext(), "Deleted: " + finalfilepath, Toast.LENGTH_LONG).show();
 
 
                 }
@@ -363,7 +350,6 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
 
                                 try {
                                     FileOutputStream fos = new FileOutputStream(pathtosave);
-                                    //fos.write(dataoftext.replace("\\n", "\n").trim().getBytes());
                                     fos.write(htmlunescapedbytoken.getBytes());
                                     fos.close();
                                 } catch (IOException e) {
@@ -385,20 +371,13 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
 
         } else if (id == R.id.action_save_as) {
 
-            // This always works
-            Intent i = new Intent(getApplicationContext(), FilePickerActivity.class);
-            // This works if you defined the intent filter
-            // Intent i = new Intent(Intent.ACTION_GET_CONTENT);
 
-            // Set these depending on your use case. These are the defaults.
+            Intent i = new Intent(getApplicationContext(), FilePickerActivity.class);
+
             i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
             i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, true);
             i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_DIR);
 
-            // Configure initial directory by specifying a String.
-            // You could specify a String like "/storage/emulated/0/", but that can
-            // dangerous. Always use Android's API calls to get paths to the SD-card or
-            // internal memory.
             i.putExtra(FilePickerActivity.EXTRA_START_PATH, getExternalStorageDirectory().getPath());
 
             startActivityForResult(i, 3);
@@ -406,15 +385,12 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
             return  true;
 
         } else if (id == R.id.action_compile) {
-        // start compile
 
 
             try {
 
                 Process process04 = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/ANDRAX/bin/checkinstall");
-                // Reads stdout.
-                // NOTE: You can write to stdin of the command using
-                //       process.getOutputStream().
+
                 BufferedReader reader = new BufferedReader(
                         new InputStreamReader(process04.getInputStream()));
                 int read;
@@ -528,7 +504,7 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
                         });
 
                 AlertDialog dialog = builder.create();
-                // display dialog
+
                 dialog.show();
 
             }
@@ -539,7 +515,6 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
 
 
 
-        // end compile
         } else if (id == R.id.action_exit) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -578,7 +553,7 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
                         });
 
                 AlertDialog dialog = builder.create();
-                // display dialog
+
                 dialog.show();
 
                 return true;
@@ -591,29 +566,17 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
+
         int id = item.getItemId();
 
         if (id == R.id.nav_openfile) {
 
-            // Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-            // intent.setType("*/*");
-            // startActivityForResult(intent, 10);
-
-            // This always works
             Intent i = new Intent(getApplicationContext(), FilePickerActivity.class);
-            // This works if you defined the intent filter
-            // Intent i = new Intent(Intent.ACTION_GET_CONTENT);
 
-            // Set these depending on your use case. These are the defaults.
             i.putExtra(FilePickerActivity.EXTRA_ALLOW_MULTIPLE, false);
             i.putExtra(FilePickerActivity.EXTRA_ALLOW_CREATE_DIR, true);
             i.putExtra(FilePickerActivity.EXTRA_MODE, FilePickerActivity.MODE_FILE);
 
-            // Configure initial directory by specifying a String.
-            // You could specify a String like "/storage/emulated/0/", but that can
-            // dangerous. Always use Android's API calls to get paths to the SD-card or
-            // internal memory.
             i.putExtra(FilePickerActivity.EXTRA_START_PATH, getExternalStorageDirectory().getPath());
 
             startActivityForResult(i, 5);
@@ -746,10 +709,9 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
                     }); **/
 
             AlertDialog dialog = builder.create();
-            // display dialog
+
             dialog.show();
 
-            //super.onBackPressed();
 
         }
 
@@ -767,7 +729,7 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
     {
         @Override
         public void onPageStarted(WebView view, String url, Bitmap favicon) {
-            // TODO Auto-generated method stub
+
             Log.e("PAGESTART", "Started");
             super.onPageStarted(view, url, favicon);
 
@@ -775,7 +737,6 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
 
         @Override
         public boolean shouldOverrideUrlLoading(WebView view, String url) {
-            // TODO Auto-generated method stub
 
             view.loadUrl(url);
             return true;
@@ -808,16 +769,13 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
         switch (requestCode) {
             case FILE_SELECT_CODE:
                 if (resultCode == RESULT_OK) {
-                    // Get the Uri of the selected file
+
                     Uri uri = data.getData();
                     Log.d("FileCHOOSED", "File Uri: " + uri);
-                   // Toast.makeText(getApplicationContext(), "Uri " + uri, Toast.LENGTH_LONG).show();
-                    // Get the path
+
                     String path;
                     path = uri.getPath();
                     Log.d("FileCHOOSED", "File Path: " + path);
-
-                    //myfileuri = uri.getPath();
 
                     try {
                         myfileuri = getFilePath(getApplicationContext(), uri);
@@ -825,7 +783,6 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
                         e.printStackTrace();
                     }
 
-                   //Toast.makeText(getApplicationContext(), "PATH " + myfileuri, Toast.LENGTH_LONG).show();
                     setcodeoffile();
                 }
                 break;
@@ -880,11 +837,9 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
                                            String permissions[], int[] grantResults) {
         switch (requestCode) {
             case MY_PERMISSIONS_REQUEST_WRITE: {
-                // If request is cancelled, the result arrays are empty.
+
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                    // permission was granted, yay! Do the
 
                 } else {
 
@@ -893,8 +848,6 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
                     finish();
                     finish();
 
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
                 }
             }
 
@@ -1076,7 +1029,7 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
     public String getExt(String filePath){
         int strLength = filePath.lastIndexOf(".");
         if(strLength > 0)
-            //return filePath.substring(strLength + 1).toLowerCase();
+
             if(filePath.substring(strLength + 1).toLowerCase().equals("txt")) {
 
             } else if(filePath.substring(strLength + 1).toLowerCase().equals("c") || filePath.substring(strLength + 1).toLowerCase().equals("cpp") || filePath.substring(strLength + 1).toLowerCase().equals("h") || filePath.substring(strLength + 1).toLowerCase().equals("cc")) {
@@ -1136,7 +1089,7 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
 
                                             try {
                                                 FileOutputStream fos = new FileOutputStream(pathexternal + "/" + input);
-                                                //fos.write(dataoftext.replace("\\n", "\n").trim().getBytes());
+
                                                 fos.write(htmlunescapedbytoken.getBytes());
                                                 fos.close();
                                             } catch (IOException e) {
@@ -1165,7 +1118,7 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
     public static String getFilePath(Context context, Uri uri) throws URISyntaxException {
         String selection = null;
         String[] selectionArgs = null;
-        // Uri is different in versions after KITKAT (Android 4.4), we need to
+
         if (Build.VERSION.SDK_INT >= 19 && DocumentsContract.isDocumentUri(context.getApplicationContext(), uri)) {
             if (isExternalStorageDocument(uri)) {
                 final String docId = DocumentsContract.getDocumentId(uri);
@@ -1224,12 +1177,11 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
     }
 
 
-    //javascript interface
+
     private class JsInterface{
-        //function that will be called from assets/test.js
-        //js example: android.log('my message');
+        
         public void log(String msg){
-            //Toast.makeText(getApplicationContext(), "GetValue: " + msg, Toast.LENGTH_LONG).show();
+
 
         }
     }

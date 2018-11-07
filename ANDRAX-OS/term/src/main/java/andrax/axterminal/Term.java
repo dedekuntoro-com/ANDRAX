@@ -25,6 +25,7 @@ import android.os.AsyncTask;
 
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.NotificationManagerCompat;
 import android.text.TextUtils;
 
 import andrax.HackPrefs;
@@ -85,6 +86,7 @@ import android.view.ContextMenu.ContextMenuInfo;
 import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -93,8 +95,12 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import andrax.axterminal.ShellTermSession.*;
 
 
 
@@ -364,8 +370,29 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
         //getSupportActionBar();
 
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String HOSTNAME = preferences.getString("HOSTNAME", "ANDRAX-Mobile-Pentest");
 
-        /**if(NotificationManagerCompat.from(Term.this).areNotificationsEnabled()) {
+        if(HOSTNAME.equals("")) {
+
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("HOSTNAME", "ANDRAX-Mobile-Pentest");
+            editor.commit();
+
+            changehostname("ANDRAX-Mobile-Pentest");
+
+
+        } else {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("HOSTNAME", HOSTNAME);
+            editor.commit();
+
+            changehostname(HOSTNAME);
+        }
+
+
+
+        if(NotificationManagerCompat.from(Term.this).areNotificationsEnabled()) {
 
         } else {
 
@@ -373,9 +400,21 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             finish();
             finish();
 
-        } **/
+        }
 
         checkinstallterm();
+
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        if (sharedPref.getString("TWOTimeOpen", "").equals("none")) {
+
+        } else {
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.clear().apply();
+
+            editor.putString("TWOTimeOpen", "none");
+            editor.apply();
+        }
 
 
         Log.v(TermDebug.LOG_TAG, "onCreate");
@@ -447,6 +486,8 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
         updatePrefs();
         mAlreadyStarted = true;
+
+
     }
 
     private String makePathFromBundle(Bundle extras) {
@@ -499,6 +540,9 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             for (TermSession session : mTermSessions) {
                 EmulatorView view = createEmulatorView(session);
                 mViewFlipper.addView(view);
+                //InputMethodManager imm = (InputMethodManager)
+                //        getSystemService(Context.INPUT_METHOD_SERVICE);
+                //imm.toggleSoftInput(InputMethodManager.SHOW_FORCED,1);
             }
 
             updatePrefs();
@@ -739,6 +783,40 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             doPreferences();
         } else if(id == R.id.menu_layout) {
             changeLayout();
+        } else if(id == R.id.menu_set_hostname) {
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(Term.this);
+
+            LayoutInflater inflater = getLayoutInflater();
+            View dialogView = inflater.inflate(R.layout.hostnamedialog,null);
+
+
+            builder.setCancelable(false);
+
+
+            builder.setView(dialogView);
+
+
+            Button btn_positive = (Button) dialogView.findViewById(R.id.dialog_positive_btn);
+            final EditText et_name = (EditText) dialogView.findViewById(R.id.et_name);
+
+
+            final AlertDialog dialog = builder.create();
+
+            btn_positive.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    dialog.cancel();
+                    String hostname = et_name.getText().toString();
+                    changehostname(hostname);
+
+                }
+            });
+
+            dialog.show();
+
         } else if(id == R.id.menu_new_window) {
             doCreateNewWindow();
         } else if(id == R.id.menu_close_window) {
@@ -852,7 +930,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         return super.onOptionsItemSelected(item);
     }
 
-    private void changeLayout() {
+    public void changeLayout() {
 
         //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         //String LayoutParams = preferences.getString("LayoutNOTHING", "false");
@@ -861,9 +939,12 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
+
             //SharedPreferences.Editor editor = preferences.edit();
             //editor.putString("LayoutNOTHING", "true");
             //editor.commit();
+
+
 
             LayoutParams = "true";
 
@@ -873,6 +954,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
 
         } else {
+
 
             getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
@@ -891,6 +973,9 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     }
 
     private void doCreateNewWindow() {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Activity.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
         if (mTermSessions == null) {
             Log.w(TermDebug.LOG_TAG, "Couldn't create new window because mTermSessions == null");
             return;
@@ -1325,12 +1410,12 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         try {
 
 
-            Process process04 = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/ANDRAX/bin/checkinstall");
+            Process checkinstall = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/ANDRAX/bin/checkinstall");
             // Reads stdout.
             // NOTE: You can write to stdin of the command using
             //       process.getOutputStream().
             BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(process04.getInputStream()));
+                    new InputStreamReader(checkinstall.getInputStream()));
             int read;
 
             char[] buffer = new char[8000];
@@ -1342,7 +1427,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
             }
 
-            process04.waitFor();
+            checkinstall.waitFor();
 
             reader.close();
 
@@ -1362,6 +1447,12 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
         try {
 
+            if(installchecker == null){
+
+                installchecker = "fail";
+
+            }
+
 
             if(installchecker.equals("OK")) {
 
@@ -1371,7 +1462,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
                     moveshell.waitFor();
 
                 }
-                catch (IOException | InterruptedException e) {
+                catch (IOException | InterruptedException | NullPointerException e) {
                     e.printStackTrace();
                 }
 
@@ -1455,6 +1546,26 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             // display dialog
             dialog.show();
 
+        }
+
+
+    }
+
+    public void changehostname(String hostnameprovided) {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("HOSTNAME", hostnameprovided);
+        editor.commit();
+
+        try {
+            Process sethostname = Runtime.getRuntime().exec("su -c hostname " + hostnameprovided);
+            sethostname.waitFor();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
 
 

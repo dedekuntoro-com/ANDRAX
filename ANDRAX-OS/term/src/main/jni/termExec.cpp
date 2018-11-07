@@ -31,31 +31,19 @@
 #include "termExec.h"
 
 static void android_os_Exec_setPtyWindowSize(JNIEnv *env, jobject clazz,
-    jint fd, jint row, jint col, jint xpixel, jint ypixel)
+                                             jint fd, jint row, jint col, jint xpixel, jint ypixel)
 {
     struct winsize sz;
 
-    sz.ws_row = static_cast<unsigned short>(row);
-    sz.ws_col = static_cast<unsigned short>(col);
-    sz.ws_xpixel = static_cast<unsigned short>(xpixel);
-    sz.ws_ypixel = static_cast<unsigned short>(ypixel);
+    sz.ws_row = row;
+    sz.ws_col = col;
+    sz.ws_xpixel = xpixel;
+    sz.ws_ypixel = ypixel;
 
     // TODO: handle the situation, when the file descriptor is incompatible with TIOCSWINSZ (e.g. not from /dev/ptmx)
     if (ioctl(fd, TIOCSWINSZ, &sz) == -1)
         env->ThrowNew(env->FindClass("java/io/IOException"), "Failed to issue TIOCSWINSZ ioctl");
 }
-
-// tcgetattr /tcsetattr are not part of Bionic at API level 4. Here's a compatible version.
-
-//static __inline__ int my_tcgetattr(int fd, struct termios *s)
-//{
-//    return ioctl(fd, TCGETS, s);
-//}
-
-//static __inline__ int my_tcsetattr(int fd, const struct termios *s)
-//{
-//    return ioctl(fd, TCSETS, (void *)s);
-//}
 
 static void android_os_Exec_setPtyUTF8Mode(JNIEnv *env, jobject clazz, jint fd, jboolean utf8Mode)
 {
@@ -79,15 +67,15 @@ static void android_os_Exec_setPtyUTF8Mode(JNIEnv *env, jobject clazz, jint fd, 
 
 static const char *classPathName = "andrax/axterminal/Exec";
 static JNINativeMethod method_table[] = {
-    { "setPtyWindowSizeInternal", "(IIIII)V",
-        (void*) android_os_Exec_setPtyWindowSize},
-    { "setPtyUTF8ModeInternal", "(IZ)V",
-        (void*) android_os_Exec_setPtyUTF8Mode}
+        { "setPtyWindowSizeInternal", "(IIIII)V",
+                (void*) android_os_Exec_setPtyWindowSize},
+        { "setPtyUTF8ModeInternal", "(IZ)V",
+                (void*) android_os_Exec_setPtyUTF8Mode}
 };
 
 int init_Exec(JNIEnv *env) {
     if (!registerNativeMethods(env, classPathName, method_table,
-                 sizeof(method_table) / sizeof(method_table[0]))) {
+                               sizeof(method_table) / sizeof(method_table[0]))) {
         return JNI_FALSE;
     }
 

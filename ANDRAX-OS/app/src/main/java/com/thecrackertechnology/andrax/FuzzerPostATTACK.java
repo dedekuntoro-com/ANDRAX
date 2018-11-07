@@ -63,10 +63,10 @@ public class FuzzerPostATTACK extends AppCompatActivity implements AdapterView.O
 
 
 
-        // Spinner click listener
+        
         useragent.setOnItemSelectedListener(this);
 
-        // Spinner Drop down elements
+
         List<String> attackuseragents = new ArrayList<String>();
         attackuseragents.add("Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/47.0.2526.73 Safari/537.36");
         attackuseragents.add("Opera/9.80 (Windows NT 6.0) Presto/2.12.388 Version/12.14");
@@ -92,13 +92,13 @@ public class FuzzerPostATTACK extends AppCompatActivity implements AdapterView.O
         attackuseragents.add("Nokia5250/10.0.011 (SymbianOS/9.4; U; Series60/5.0 Mozilla/5.0; Profile/MIDP-2.1 Configuration/CLDC-1.1 ) AppleWebKit/525 (KHTML, like Gecko) Safari/525 3gpp-gba");
 
 
-        // Creating adapter for spinner
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, attackuseragents);
 
-        // Drop down layout style - list view with radio button
+
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
-        // attaching data adapter to spinner
+
         useragent.setAdapter(dataAdapter);
 
 
@@ -124,11 +124,11 @@ public class FuzzerPostATTACK extends AppCompatActivity implements AdapterView.O
 
 
         try {
-            // Executes the command.
+
             Process process = Runtime.getRuntime().exec("su -c cat /data/data/com.thecrackertechnology.andrax/ANDRAX/output | sed 's/^.*POST/POST/' | tail -n+5 | head -n-4 | sed '/Accept:/d'");
-            // Reads stdout.
-            // NOTE: You can write to stdin of the command using
-            //       process.getOutputStream().
+
+
+
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(process.getInputStream()));
             int read;
@@ -139,7 +139,7 @@ public class FuzzerPostATTACK extends AppCompatActivity implements AdapterView.O
             }
             reader.close();
 
-            // Waits for the command to finish.
+
             process.waitFor();
 
 
@@ -178,7 +178,7 @@ public class FuzzerPostATTACK extends AppCompatActivity implements AdapterView.O
 
         spinneritem = item;
 
-        // Showing selected spinner item
+
         Toast.makeText(parent.getContext(), "Useragent: " + item, Toast.LENGTH_SHORT).show();
 
 

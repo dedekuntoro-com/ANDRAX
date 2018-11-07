@@ -51,6 +51,7 @@ import android.view.inputmethod.ExtractedText;
 import android.view.inputmethod.ExtractedTextRequest;
 import android.view.inputmethod.InputConnection;
 import android.widget.Scroller;
+import android.widget.Toast;
 
 /**
  * A view on a {@link TermSession}.  Displays the terminal emulator's screen,
@@ -596,7 +597,7 @@ public class EmulatorView extends View implements GestureDetector.OnGestureListe
 
         }
         if (mKeyListener != null) {
-            //mKeyListener.onResume();
+            mKeyListener.onResume();
         }
         invalidate();
     }
@@ -1439,7 +1440,7 @@ public class EmulatorView extends View implements GestureDetector.OnGestureListe
         }
     }
 
-    private void updateText() {
+    public void updateText() {
         ColorScheme scheme = mColorScheme;
         if (mTextSize > 0) {
             mTextRenderer = new PaintRenderer(mTextSize, scheme);
@@ -1454,6 +1455,7 @@ public class EmulatorView extends View implements GestureDetector.OnGestureListe
         mCharacterHeight = mTextRenderer.getCharacterHeight();
 
         updateSize(true);
+
 
     }
 
@@ -1474,6 +1476,7 @@ public class EmulatorView extends View implements GestureDetector.OnGestureListe
             mKnownSize = true;
             initialize();
         } else {
+
             updateSize(true);
         }
     }
@@ -1511,8 +1514,15 @@ public class EmulatorView extends View implements GestureDetector.OnGestureListe
                 mVisibleWidth = w;
                 mVisibleHeight = h;
                 updateSize(mVisibleWidth, mVisibleHeight);
+
+
+
             }
         }
+
+
+
+
     }
 
     /**
