@@ -17,6 +17,7 @@
 package andrax.axterminal;
 
 import android.annotation.SuppressLint;
+import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.Service;
 import android.content.Context;
@@ -119,18 +120,33 @@ public class TermService extends Service implements TermSession.FinishCallback
         notificationIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent contentIntent = PendingIntent.getActivity(this, 0, notificationIntent, 0);
 
+        int notificationId = 1;
+        String channelId = "channel-01";
+        String channelName = "AX-TERMINAL";
+        int importance = NotificationManager.IMPORTANCE_DEFAULT;
+
+        NotificationManager notificationManager = (NotificationManager) getApplicationContext().getSystemService(Context.NOTIFICATION_SERVICE);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            NotificationChannel mChannel = new NotificationChannel(
+                    channelId, channelName, importance);
+            notificationManager.createNotificationChannel(mChannel);
+        }
+
         Notification notification = new NotificationCompat.Builder(this)
                 .setCategory(Notification.CATEGORY_PROMO)
                 .setContentTitle("AX-TERMINAL Running")
                 .setContentText("Running in background")
                 .setSubText("Close all windows to stop")
+                .setChannelId(channelId)
+                .setPriority(importance)
                 .setSmallIcon(R.drawable.axterminalnotification)
                 .setAutoCancel(false)
                 .setOngoing(true)
                 .setContentIntent(contentIntent)
                 .build();
-        NotificationManager notificationManager =
-                (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+        //NotificationManager notificationManager =
+          //      (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
         notificationManager.notify(1, notification);
 
         startForeground(1, notification);
@@ -171,6 +187,9 @@ public class TermService extends Service implements TermSession.FinishCallback
 
             Process chmoddns = Runtime.getRuntime().exec("su -c chmod -R 777 /etc/resolv.conf");
             chmoddns.waitFor();
+
+            Process chmoddevnukk = Runtime.getRuntime().exec("su -c chmod -R 777 /dev/null");
+            chmoddevnukk.waitFor();
 
 
             //Process sethostname = Runtime.getRuntime().exec("su -c hostname ANDRAX-Mobile-Pentest");

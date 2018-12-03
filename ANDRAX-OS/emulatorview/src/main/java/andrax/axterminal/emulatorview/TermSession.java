@@ -614,7 +614,11 @@ public class TermSession {
      */
     public void finish() {
         mIsRunning = false;
-        mEmulator.finish();
+        try {
+            mEmulator.finish();
+        } catch (NullPointerException e){
+
+        }
         if (mTranscriptScreen != null) {
             mTranscriptScreen.finish();
         }

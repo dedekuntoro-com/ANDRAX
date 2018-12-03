@@ -79,7 +79,7 @@
                         android:layout_alignParentTop="true"
                         android:layout_toEndOf="@+id/imageView_odin"
                         android:gravity="center"
-                        android:text="ODIN"
+                        android:text="0D1N"
                         android:textColor="@color/accent"
                         android:textSize="18sp"
                         android:textStyle="bold"
@@ -94,6 +94,64 @@
                         android:layout_toEndOf="@+id/imageView_odin"
                         android:gravity="center"
                         android:text="Customized attacks against web applications"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_arjun"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_arjun"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_arjun_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_arjun"
+                        android:gravity="center"
+                        android:text="ARJUN"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_arjun_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_arjun_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_arjun"
+                        android:gravity="center"
+                        android:text="HTTP parameter discovery suite"
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -624,6 +682,64 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/card_view_jshell"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_jshell"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_jshell_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_jshell"
+                        android:gravity="center"
+                        android:text="JSHELL"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_jshell_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_jshell_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_jshell"
+                        android:gravity="center"
+                        android:text="Get a JavaScript shell with XSS"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:id="@+id/card_view_slowhttptest"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -856,6 +972,64 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/card_view_xsstrike"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_xsstrike"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/xsstrike" />
+
+                    <TextView
+                        android:id="@+id/textView_xsstrike_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_xsstrike"
+                        android:gravity="center"
+                        android:text="XSSTRIKE"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_xsstrike_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_xsstrike_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_xsstrike"
+                        android:gravity="center"
+                        android:text="Advanced XSS Detection Suite"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:id="@+id/card_view_photon"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -1022,6 +1196,64 @@
                         android:layout_toEndOf="@+id/imageView_commix"
                         android:gravity="center"
                         android:text="All-in-One OS command injection and exploitation tool"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_put2win"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_put2win"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_put2win_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_put2win"
+                        android:gravity="center"
+                        android:text="PUT2WIN"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_put2win_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_put2win_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_put2win"
+                        android:gravity="center"
+                        android:text="Script to automatize shell upload by PUT"
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp"
                         android:textStyle="bold" />

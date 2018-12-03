@@ -82,7 +82,7 @@ public class MainFragment extends Fragment  implements View.OnClickListener{
 
         btnmanual.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://andrax-pentest.org/documentation"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://andrax.thecrackertechnology.com/documentation"));
                 startActivity(intent);
             }
         });

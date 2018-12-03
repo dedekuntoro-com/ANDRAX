@@ -60,14 +60,14 @@ public class      AddShortcut
   {
     if(path==null) path="";
     final AlertDialogCompat.Builder alert =
-        AlertDialogCompat.newInstanceBuilder(context, AlertDialogCompat.THEME_HOLO_DARK);
+        AlertDialogCompat.newInstanceBuilder(context, AlertDialogCompat.THEME_DEVICE_DEFAULT_DARK);
     LinearLayout   lv=new LinearLayout(context);
                    lv.setOrientation(LinearLayout.VERTICAL);
     for(int i=0, n=et.length; i<n; i++) {et[i]=new EditText(context); et[i].setSingleLine(true);}
     if(!path.equals("")) et[0].setText(path);
-    et[PATH].setHint(getString(R.string.addshortcut_command_hint));//"command");
+    //et[PATH].setHint(getString(R.string.addshortcut_command_hint));//"command");
     et[NAME].setText(name);
-    et[ARGS].setHint(getString(R.string.addshortcut_example_hint));//"--example=\"a\"");
+    et[ARGS].setHint("andrax");//"--example=\"a\"");
     et[ARGS].setOnFocusChangeListener(
       new OnFocusChangeListener()
       {
@@ -86,54 +86,54 @@ public class      AddShortcut
       }
     );
 
-    Button  btn_path=new Button(context);
-            btn_path.setText(getString(R.string.addshortcut_button_find_command));//"Find command");
-            btn_path.setOnClickListener(
-              new View.OnClickListener()
-              {
-                public void onClick(View p1)
-                {
-                  String lastPath=SP.getString("lastPath", null);
-                  File get= (lastPath==null)
-                            ?Environment.getExternalStorageDirectory()
-                            :new File(lastPath).getParentFile();
-                    Intent pickerIntent=new Intent();
-                    if(SP.getBoolean("useInternalScriptFinder", false))
-                    {
-                      pickerIntent.setClass(getApplicationContext(), andrax.axterminal.shortcuts.FSNavigator.class)
-                      .setData(Uri.fromFile(get))
-                      .putExtra("title", getString(R.string.addshortcut_navigator_title));//"SELECT SHORTCUT TARGET")
-                    }
-                    else
-                    {
-                      pickerIntent
-                      .putExtra("CONTENT_TYPE", "*/*")
-                      .setAction(Intent.ACTION_PICK);
-                    }
-                    startActivityForResult(pickerIntent, OP_MAKE_SHORTCUT);
-                }
-              }
-            );
-    lv.addView(
+    //Button  btn_path=new Button(context);
+    //        btn_path.setText(getString(R.string.addshortcut_button_find_command));//"Find command");
+    //        btn_path.setOnClickListener(
+    //          new View.OnClickListener()
+    //          {
+    //            public void onClick(View p1)
+    //            {
+    //              String lastPath=SP.getString("lastPath", null);
+    //              File get= (lastPath==null)
+    //                        ?Environment.getExternalStorageDirectory()
+    //                        :new File(lastPath).getParentFile();
+    //                Intent pickerIntent=new Intent();
+    //                if(SP.getBoolean("useInternalScriptFinder", false))
+    //                {
+    //                  pickerIntent.setClass(getApplicationContext(), andrax.axterminal.shortcuts.FSNavigator.class)
+    //                  .setData(Uri.fromFile(get))
+    //                  .putExtra("title", getString(R.string.addshortcut_navigator_title));//"SELECT SHORTCUT TARGET")
+    //                }
+    //                else
+    //                {
+    //                  pickerIntent
+    //                  .putExtra("CONTENT_TYPE", "*/*")
+    //                  .setAction(Intent.ACTION_PICK);
+    //                }
+    //                startActivityForResult(pickerIntent, OP_MAKE_SHORTCUT);
+    //            }
+    //          }
+    //        );
+    /**lv.addView(
       layoutTextViewH(
         getString(R.string.addshortcut_command_window_instructions)//"Command window requires full path, no arguments. For other commands use Arguments window (ex: cd /sdcard)."
       , null
       , false
       )
-    );
-    lv.addView(layoutViewViewH(btn_path,          et[PATH]));
-    lv.addView(layoutTextViewH(getString(R.string.addshortcut_arguments_label), et[ARGS]));
+    ); **/
+    //lv.addView(layoutViewViewH(btn_path,          et[PATH]));
+    lv.addView(layoutTextViewH("Command", et[ARGS]));
     lv.addView(layoutTextViewH(getString(R.string.addshortcut_shortcut_label),  et[NAME]));
 
     final ImageView img=new ImageView(context);
-                    img.setImageResource(andrax.axterminal.R.drawable.ic_launcher);
+                    img.setImageResource(R.drawable.andraxicon);
                     img.setMaxHeight(100);
                     img.setTag(0xFFFFFFFF);
                     img.setMaxWidth(100);
                     img.setAdjustViewBounds(true);
                     img.setScaleType(ImageView.ScaleType.CENTER_INSIDE);
     final Button    btn_color=new Button(context);
-                    btn_color.setText(getString(R.string.addshortcut_button_text_icon));//"Text icon");
+                    btn_color.setText("TEXT ICON");//"Text icon");
                     btn_color.setOnClickListener(
                       new View.OnClickListener()
                       {
@@ -281,7 +281,7 @@ public class      AddShortcut
              {
                wrapper.putExtra(
                  Intent.EXTRA_SHORTCUT_ICON_RESOURCE
-               , Intent.ShortcutIconResource.fromContext(context, andrax.axterminal.R.drawable.ic_launcher)
+               , Intent.ShortcutIconResource.fromContext(context, R.drawable.andraxicon)
                );
              }
       setResult(RESULT_OK, wrapper);

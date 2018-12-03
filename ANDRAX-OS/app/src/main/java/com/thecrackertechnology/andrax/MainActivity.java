@@ -26,6 +26,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -51,13 +52,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     String resulzsh = "";
 
-    String versiondefault = "176";
+    String versiondefault = "1101";
 
-    String urlcore = "http://download.thecrackertechnology.com/andrax/andrax.r1.tar.xz";
+    String urlcore = "http://download.thecrackertechnology.com/andrax/andrax.r1-stable.tar.xz";
 
     String urlbusybox = "http://download.thecrackertechnology.com/andrax/busybox";
 
     String coreversion;
+
+    StringBuilder postgresqldaemonresult = new StringBuilder();
 
     private static final int MY_PERMISSIONS_REQUEST_WRITE = 22;
 
@@ -70,6 +73,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private ProgressDialog busyboxprogressDialog;
 
     private ProgressDialog installbusyboxprogressDialog;
+
+    private ProgressDialog postgresqldaemonprogressDialog;
 
     public static final int progressType = 0;
 
@@ -95,6 +100,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+
 
 
 
@@ -166,7 +173,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         try {
 
-            Process process04 = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/ANDRAX/bin/checkinstall");
+            Process process04 = Runtime.getRuntime().exec("su -c " + MainActivity.this.getApplicationInfo().dataDir + "/ANDRAX/bin/checkinstall");
 
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(process04.getInputStream()));
@@ -308,6 +315,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         //}
 
+        //Toast.makeText(MainActivity.this, "PATH = " + MainActivity.this.getApplicationInfo().dataDir ,Toast.LENGTH_LONG).show();
+
 
 
 
@@ -344,8 +353,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 unpackprogressDialog.setProgressStyle(R.style.AppCompatAlertDialogStyle);
                 unpackprogressDialog.setMessage("Extracting and installing ANDRAX CORE, WAIT...");
                 unpackprogressDialog.setIndeterminate(true);
-                unpackprogressDialog.setMax(100);
-                unpackprogressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
+                //unpackprogressDialog.setMax(100);
+                unpackprogressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
                 unpackprogressDialog.setCancelable(false);
                 unpackprogressDialog.show();
                 return unpackprogressDialog;
@@ -371,8 +380,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 installbusyboxprogressDialog.setCancelable(false);
                 installbusyboxprogressDialog.show();
                 return installbusyboxprogressDialog;
+
+            case 6:
+                postgresqldaemonprogressDialog = new ProgressDialog(this, android.app.AlertDialog.THEME_DEVICE_DEFAULT_LIGHT);
+                postgresqldaemonprogressDialog.setProgressStyle(R.style.AppCompatAlertDialogStyle);
+                postgresqldaemonprogressDialog.setMessage("Starting PostgreSQL daemon...");
+                postgresqldaemonprogressDialog.setIndeterminate(true);
+                //postgresqldaemonprogressDialog.setMax(0);
+                postgresqldaemonprogressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                postgresqldaemonprogressDialog.setCancelable(false);
+                postgresqldaemonprogressDialog.show();
+                return postgresqldaemonprogressDialog;
             default:
                 return null;
+
         }
     }
 
@@ -446,12 +467,28 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intent);
 
 
+        } else if (id == R.id.action_installbusybox) {
+
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = sharedPref.edit();
+
+            editor.putBoolean("INSTALLEDBUSYBOX", false);
+            editor.apply();
+
+
+            installbusybox();
+
+
         } else if (id == R.id.action_chmod) {
 
             new fixcore().execute("nothing");
 
 
-        } else if(id == R.id.action_patchshell) {
+        } /** else if (id == R.id.action_postgresqlstart) {
+
+            new postgresqlstartdaemon().execute("FUCKYOU");
+
+        }**/ else if(id == R.id.action_patchshell) {
 
             try {
 
@@ -607,6 +644,24 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             intentstart.addCategory(Intent.CATEGORY_DEFAULT);
             intentstart.putExtra("andrax.axterminal.iInitialCommand", "mdk3 --help");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if (id == R.id.nav_mdk3) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "mdk4 --help");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
+        } else if (id == R.id.nav_bully) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "bully");
             intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intentstart);
 
@@ -1186,6 +1241,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             startActivity(intentstart);
 
 
+        } else if(id == R.id.nav_xsstrike) {
+
+            Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+            intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+            intentstart.putExtra("andrax.axterminal.iInitialCommand", "xsstrike");
+            intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intentstart);
+
         } else if(id == R.id.nav_photon) {
 
             Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
@@ -1510,8 +1574,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 } else {
 
                     finish();
-                    finish();
-                    finish();
 
                 }
                 return;
@@ -1526,7 +1588,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            showDialog(progressType);
+            try{
+                showDialog(progressType);
+            } catch (IllegalArgumentException e) {
+
+            }
+
         }
 
         @Override
@@ -1570,7 +1637,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected void onPostExecute(String file_url) {
 
-            dismissDialog(progressType);
+            try{
+                dismissDialog(progressType);
+            } catch (IllegalArgumentException e) {
+
+            }
+
+
             new unpackandinstall().execute(urlcore);
 
 
@@ -1582,7 +1655,13 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            showDialog(2);
+            try {
+
+                showDialog(2);
+
+            } catch (IllegalArgumentException e) {
+
+            }
         }
 
         @Override
@@ -1590,7 +1669,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             try {
 
-                Process chmodentirecore = Runtime.getRuntime().exec("su -c chmod -R 777 /data/data/com.thecrackertechnology.andrax/ANDRAX");
+                Process chmodentirecore = Runtime.getRuntime().exec("su -c chmod -R 777 " + MainActivity.this.getApplicationInfo().dataDir + "/ANDRAX");
                 chmodentirecore.waitFor();
 
             } catch (IOException | InterruptedException e) {
@@ -1609,11 +1688,16 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected void onPostExecute(String file_url) {
 
-            dismissDialog(2);
+            try {
+
+                dismissDialog(2);
+
+            } catch (IllegalArgumentException e) {
+
+            }
+
             Intent intent = new Intent(MainActivity.this,SplashActivity.class);
             startActivity(intent);
-            finish();
-            finish();
             finish();
 
 
@@ -1626,7 +1710,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            showDialog(3);
+            try{
+                showDialog(3);
+            } catch (IllegalArgumentException e) {
+
+            }
         }
 
         @Override
@@ -1634,10 +1722,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             try {
 
-                Process removeoldcore = Runtime.getRuntime().exec("su -c rm -rf /data/data/com.thecrackertechnology.andrax/ANDRAX/*");
+                Process removeoldcore = Runtime.getRuntime().exec("su -c rm -rf " + MainActivity.this.getApplicationInfo().dataDir + "/ANDRAX/*");
                 removeoldcore.waitFor();
 
-                Process unzipcore = Runtime.getRuntime().exec("su -c /system/xbin/busybox tar -xJf /sdcard/Download/andraxcore.tar.xz -C /data/data/com.thecrackertechnology.andrax/ANDRAX/");
+                Process unzipcore = Runtime.getRuntime().exec("su -c /system/xbin/busybox tar -xJf /sdcard/Download/andraxcore.tar.xz -C " + MainActivity.this.getApplicationInfo().dataDir + "/ANDRAX/");
 
                 unzipcore.waitFor();
 
@@ -1645,7 +1733,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 cleanzipcore.waitFor();
 
-                Process createversionfile = Runtime.getRuntime().exec("su -c echo " + versiondefault + "" + "> /data/data/com.thecrackertechnology.andrax/ANDRAX/version");
+                Process createversionfile = Runtime.getRuntime().exec("su -c echo " + versiondefault + "" + "> " + MainActivity.this.getApplicationInfo().dataDir + "/ANDRAX/version");
 
                 createversionfile.waitFor();
 
@@ -1697,57 +1785,15 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     public void installbusybox() {
 
-
-        try {
-
-            Process checkbusybox = Runtime.getRuntime().exec("su -c /system/xbin/busybox id");
-
-            int resultcode;
-
-            checkbusybox.waitFor();
-
-            resultcode = checkbusybox.exitValue();
-
-            if(resultcode != 0) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences.Editor editor = sharedPref.edit();
 
 
-                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                builder.setTitle(R.string.busyoftitle);
-                builder.setMessage(R.string.busyofdesc);
-                builder.setIcon(R.mipmap.ic_launcher);
-                builder.setCancelable(false);
+        if(sharedPref.getBoolean("INSTALLEDBUSYBOX", false)) {
 
-                String positiveText = getString(android.R.string.ok);
-                builder.setPositiveButton(positiveText,
-                        new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
+        } else {
 
-                                new downloadbusybox().execute(urlbusybox);
-
-                            }
-                        });
-
-                AlertDialog dialog = builder.create();
-
-                dialog.show();
-
-
-
-
-
-
-            } else {
-
-                Process checkbusyboxofandrax = Runtime.getRuntime().exec("su -c /system/xbin/busybox | grep -q \"ANDRAX\"");
-
-                checkbusyboxofandrax.waitFor();
-
-
-
-
-
-                if(checkbusyboxofandrax.exitValue() != 0) {
+            try {
 
                     AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                     builder.setTitle(R.string.busyboxnottitle);
@@ -1766,30 +1812,35 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                 }
                             });
 
+                    builder.setNegativeButton("FORCE INSTALL",
+                            new DialogInterface.OnClickListener() {
+                                @Override
+                                public void onClick(DialogInterface dialog, int which) {
+
+                                    editor.putBoolean("INSTALLEDBUSYBOX", true);
+                                    editor.apply();
+
+                                    new downloadbusybox().execute(urlbusybox);
+
+                                }
+                            });
+
                     AlertDialog dialog = builder.create();
 
                     dialog.show();
 
 
 
-                }
+            } catch (NullPointerException e) {
+                e.getMessage();
+
+
 
             }
 
-
-
-
-        } catch (IOException e) {
-            e.getMessage();
-
-
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-
-
-
         }
+
+
 
 
     }
@@ -1801,7 +1852,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         try {
 
-            Process checkcoreversioncmd = Runtime.getRuntime().exec("su -c cat /data/data/com.thecrackertechnology.andrax/ANDRAX/version");
+            Process checkcoreversioncmd = Runtime.getRuntime().exec("su -c cat " + MainActivity.this.getApplicationInfo().dataDir + "/ANDRAX/version");
 
             BufferedReader reader = new BufferedReader(
                     new InputStreamReader(checkcoreversioncmd.getInputStream()));
@@ -1914,7 +1965,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected void onPostExecute(String file_url) {
 
-            if(VersionFromServer > 176) {
+            if(VersionFromServer > 1101) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("NEW VERSION");
@@ -1928,7 +1979,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
-                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://andrax-pentest.org")));
+                                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("andrax.thecrackertechnology.com")));
 
                             }
                         });
@@ -1957,7 +2008,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            showDialog(4);
+            try{
+                showDialog(4);
+            } catch (IllegalArgumentException e) {
+
+            }
         }
 
         @Override
@@ -1970,7 +2025,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
                 int fileLength = urlConnection.getContentLength();
                 InputStream inputStream = new BufferedInputStream(url.openStream(), 8192);
-                OutputStream outputStream = new FileOutputStream("/data/data/com.thecrackertechnology.andrax/files/busybox");
+                OutputStream outputStream = new FileOutputStream(getApplicationContext().getFilesDir().getAbsolutePath() + "/busybox");
 
                 byte data[] = new byte[80000];
                 long total = 0;
@@ -1989,6 +2044,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 Log.e("Error DOWNLOAD: ", e.getMessage());
 
 
+
+
             }
             return null;
         }
@@ -2003,7 +2060,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected void onPostExecute(String file_url) {
 
-            dismissDialog(4);
+            try {
+
+                dismissDialog(4);
+
+            } catch (IllegalArgumentException e) {
+
+            }
+
             new installbusybox().execute(urlcore);
 
 
@@ -2017,8 +2081,11 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
+            try{
+                showDialog(5);
+            } catch (IllegalArgumentException e) {
 
-            showDialog(5);
+            }
         }
 
         @Override
@@ -2028,45 +2095,69 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
             try {
 
+                Process toymount = Runtime.getRuntime().exec("su -c /system/bin/toybox mount -o rw,remount /system /system");
 
-                Process chmodbusytmp = Runtime.getRuntime().exec("su -c chmod -R 777 /data/data/com.thecrackertechnology.andrax/files/busybox");
+                toymount.waitFor();
+
+                Process toymount02 = Runtime.getRuntime().exec("su -c /system/bin/toybox mount -o rw,remount /system");
+
+                toymount02.waitFor();
+
+                Process cprfbusybox = Runtime.getRuntime().exec("su -c /system/bin/toybox cp -Rf " + getApplicationContext().getFilesDir().getAbsolutePath() + "/busybox" + " /system/xbin/busybox");
+
+                cprfbusybox.waitFor();
+
+                Process toychmod = Runtime.getRuntime().exec("su -c /system/bin/toybox chmod -R 777 /system/xbin/busybox");
+
+                toychmod.waitFor();
+
+                Process busyboxinstall = Runtime.getRuntime().exec("su -c /system/xbin/busybox --install -s /system/xbin/");
+
+                busyboxinstall.waitFor();
+
+                Process toychmodapplets = Runtime.getRuntime().exec("su -c /system/bin/toybox chmod -R 777 /system/xbin/*");
+
+                toychmodapplets.waitFor();
+
+                /**
+                 *
+                 * SECOND BUSYBOX INSTALL to get 100% of luck
+                 *
+                 **/
+
+
+                Process chmodbusytmp = Runtime.getRuntime().exec("su -c chmod -R 777 " + getApplicationContext().getFilesDir().getAbsolutePath() + "/busybox");
 
                 chmodbusytmp.waitFor();
 
-                Process remountsystem = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/files/busybox mount -o rw,remount /system /system");
+                Process remountsystem = Runtime.getRuntime().exec("su -c " + getApplicationContext().getFilesDir().getAbsolutePath() + "/busybox" + " mount -o rw,remount /system /system");
 
                 remountsystem.waitFor();
 
-                int remountsystemresult = remountsystem.exitValue();
 
-
-
-                Process remountsystem02 = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/files/busybox mount -o rw,remount /system");
+                Process remountsystem02 = Runtime.getRuntime().exec("su -c " + getApplicationContext().getFilesDir().getAbsolutePath() + "/busybox" + " mount -o rw,remount /system");
 
                 remountsystem02.waitFor();
 
 
-
-                Process removebusyboxsystem = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/files/busybox rm /system/xbin/busybox");
+                Process removebusyboxsystem = Runtime.getRuntime().exec("su -c " + getApplicationContext().getFilesDir().getAbsolutePath() + "/busybox" + " rm /system/xbin/busybox");
 
                 removebusyboxsystem.waitFor();
 
-                Process copybusybox = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/files/busybox cp /data/data/com.thecrackertechnology.andrax/files/busybox /system/xbin/");
+                Process copybusybox = Runtime.getRuntime().exec("su -c " + getApplicationContext().getFilesDir().getAbsolutePath() + "/busybox" + "  cp " + getApplicationContext().getFilesDir().getAbsolutePath() + "/busybox" + " /system/xbin/");
 
                 copybusybox.waitFor();
 
-                Process chmodnewbusybox = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/files/busybox chmod -R 777 /system/xbin/busybox");
+                Process chmodnewbusybox = Runtime.getRuntime().exec("su -c " + getApplicationContext().getFilesDir().getAbsolutePath() + "/busybox" + " chmod -R 777 /system/xbin/busybox");
 
                 chmodnewbusybox.waitFor();
 
 
                 Process installbusyonxbin = Runtime.getRuntime().exec("su -c /system/xbin/busybox --install -s /system/xbin/");
 
-                int resultcodeinstallbusyonxbin;
-
                 installbusyonxbin.waitFor();
 
-                Process chmodsystem = Runtime.getRuntime().exec("su -c /data/data/com.thecrackertechnology.andrax/files/busybox chmod -R 777 /system/xbin/*");
+                Process chmodsystem = Runtime.getRuntime().exec("su -c " + getApplicationContext().getFilesDir().getAbsolutePath() + "/busybox" + " chmod -R 777 /system/xbin/*");
 
                 chmodsystem.waitFor();
 
@@ -2079,6 +2170,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+
+            SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(MainActivity.this);
+            SharedPreferences.Editor editor = sharedPref.edit();
+
+            editor.putBoolean("INSTALLEDBUSYBOX", true);
+            editor.apply();
 
 
 
@@ -2093,7 +2190,14 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         @Override
         protected void onPostExecute(String file_url) {
-            dismissDialog(5);
+
+            try {
+
+                dismissDialog(5);
+
+            } catch (IllegalArgumentException e) {
+
+            }
 
             Intent intent = new Intent(MainActivity.this,SplashActivity.class);
             startActivity(intent);
@@ -2101,6 +2205,99 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             finish();
 
         }
+    }
+
+
+    class postgresqlstartdaemon extends AsyncTask<String, String, String> {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            try{
+                showDialog(6);
+            } catch (IllegalArgumentException e) {
+
+            }
+        }
+
+        @Override
+        protected String doInBackground(String... fileUrl) {
+
+            getpostgreresult();
+
+            return null;
+        }
+
+
+
+        protected void onProgressUpdate(String... progress) {
+
+        }
+
+        @Override
+        protected void onPostExecute(String file_url) {
+
+            try {
+
+                dismissDialog(6);
+
+            } catch (IllegalArgumentException e) {
+
+            }
+
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle("PostgreSQL Daemon result");
+            builder.setMessage(postgresqldaemonresult);
+            builder.setIcon(R.mipmap.ic_launcher);
+            builder.setCancelable(false);
+
+            String positiveText = getString(android.R.string.ok);
+            builder.setPositiveButton(positiveText,
+                    new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+
+                        }
+                    });
+
+            AlertDialog dialog = builder.create();
+
+            dialog.show();
+
+
+        }
+    }
+
+    public void getpostgreresult() {
+
+        try {
+
+
+            Process startdb = Runtime.getRuntime().exec(MainActivity.this.getApplicationInfo().dataDir + "/ANDRAX/bin/service postgresql start");
+
+            startdb.waitFor();
+
+            BufferedReader postgrefuckbuffer = new BufferedReader(new InputStreamReader(startdb.getInputStream()));
+
+
+
+            String tmpfuckline;
+            while ((tmpfuckline = postgrefuckbuffer.readLine()) != null) {
+                postgresqldaemonresult.append(tmpfuckline).append("\n");
+            }
+
+            postgrefuckbuffer.close();
+
+
+
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        } catch (IOException e1) {
+            e1.printStackTrace();
+        }
+
     }
 
 

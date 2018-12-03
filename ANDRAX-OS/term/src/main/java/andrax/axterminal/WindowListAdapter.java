@@ -87,7 +87,11 @@ public class WindowListAdapter extends BaseAdapter implements UpdateCallback {
             public void onClick(View v) {
                 TermSession session = sessions.remove(closePosition);
                 if (session != null) {
-                    session.finish();
+                    try {
+                        session.finish();
+                    } catch (NullPointerException e){
+
+                    }
                     notifyDataSetChanged();
                 }
             }

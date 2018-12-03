@@ -22,7 +22,7 @@
 
     <string name="titlediaabout">About ANDRAX</string>
     <string name="descdiaabout">
-        ANDRAX is a Mobile Pentest distribution developed by The Cracker Technology - Advanced Pentest under the command of Weidsom Nascimento, ANDRAX was created to destroy Pentest Mobile systems monopoly. Specifically, an alternative to the NETHUNTER system that is nothing more than only a shit poorly developed emulation!\n\nANDRAX was created to run in conjunction with Android without damaging your handset or modifying it, Support almost all modern handsets being compatible with Android 5.+ and with open development for the Open Source community.\n\nANDRAX is a great evolution showing that the future of hacking is mobile!\n\nDate beginning: 08/09/2016\n\nReloaded on: 05/10/2018\n\nDevelopers:\n\nWeidsom Nascimento.
+        ANDRAX is a Mobile Pentest distribution developed by The Cracker Technology - Advanced Pentest under the command of Weidsom Nascimento, ANDRAX was created to destroy Pentest Mobile systems monopoly. Specifically, an alternative to the NETHUNTER system that is nothing more than only a shit poorly developed emulation!\n\nANDRAX was created to run in conjunction with Android without damaging your handset or modifying it, Support almost all modern handsets being compatible with Android 5.+ and with open development for the Open Source community.\n\nANDRAX is a great evolution showing that the future of hacking is mobile!\n\nDate beginning: 08/09/2016\n\nReloaded on: 05/10/2018\n\nDevelopers:\nWeidsom Nascimento.\n\nBETA TESTERS:\n@Mathysics\n@FuckSystm\n@C0d3Sky\n@mrstringer\n@Ivam3\n@forid786\n@Shanks08\n@C_RO1\n@ZveR32_X_Selent\n\n(Telegram nick\'s)
     </string>
     <string name="title_activity_dir_scanner" translatable="false">Dir/File Scanner</string>
     <string name="title_activity_airodump" translatable="false">Airdump-ng VIEWER</string>
@@ -32,7 +32,7 @@
     <string name="busyoftitle">BusyBox not installed!</string>
     <string name="busyofdesc">You do not have a BusyBox installed or it is not installed in the correct place \"/system/xbin\" ANDRAX needs a busybox\nClick \"OK\" and ANDRAX will install it.</string>
     <string name="busyboxnottitle">Unofficial BusyBox!</string>
-    <string name="busyboxnotdesc">You have a BusyBox installed but it is NOT OFFICIAL and will not work with ANDRAX\nClick on \"OK\" and ANDRAX will perform the installation of a new BusyBox</string>
+    <string name="busyboxnotdesc">ANDRAX could not find the official busybox, click \"OK\" and ANDRAX will perform the installation of ANDRAX BusyBox or click \"FORCE INSTALL\" to force installtion and never ask.\n\nThis can be dangerous ANDRAX need your own busybox to work properly!!!</string>
     <string name="acra_dialog_text">ANDRAX has CRASHED Send US a Report!!!</string>
     <string name="acra_dialog_comment">We need you to submit this report so we can correct the errors.</string>
     <string name="acra_dialod_title">ANDRAX has CRASHED!</string>

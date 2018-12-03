@@ -28,6 +28,7 @@ public class Dco_network_hacking extends Activity {
         CardView cardviewgodoh = findViewById(R.id.card_view_godoh);
         CardView cardviewdns2tcp = findViewById(R.id.card_view_dns2tcp);
         CardView cardviewfragroute = findViewById(R.id.card_view_fragroute);
+        CardView cardviewudp2raw = findViewById(R.id.card_view_udp2raw);
 
 
 
@@ -137,6 +138,18 @@ public class Dco_network_hacking extends Activity {
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
                 intentstart.putExtra("andrax.axterminal.iInitialCommand", "fragroute");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewudp2raw.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "udp2raw");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }

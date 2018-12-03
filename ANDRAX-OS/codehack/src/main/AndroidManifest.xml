@@ -12,7 +12,7 @@
         android:persistent="true"
         android:hardwareAccelerated="true">
         <activity
-            android:excludeFromRecents="true"
+            android:excludeFromRecents="false"
             android:persistent="true"
             android:label="CodeHACK IDE"
             android:launchMode="singleTask"

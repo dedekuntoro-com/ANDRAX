@@ -127,7 +127,13 @@ class GenericTermSession extends TermSession {
             // ok
         }
 
-        super.finish();
+        try {
+            super.finish();
+        } catch (NullPointerException e){
+
+        }
+
+
     }
 
     /**

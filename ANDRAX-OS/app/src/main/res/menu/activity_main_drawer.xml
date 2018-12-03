@@ -75,6 +75,16 @@
                     android:title="MDK3" />
 
                 <item
+                    android:id="@+id/nav_mdk4"
+                    android:icon="@drawable/wifi_off"
+                    android:title="MDK4" />
+
+                <item
+                    android:id="@+id/nav_bully"
+                    android:icon="@drawable/wifi"
+                    android:title="BULLY" />
+
+                <item
                     android:id="@+id/nav_reaver"
                     android:icon="@drawable/wifi"
                     android:title="Reaver" />
@@ -372,6 +382,11 @@
                         android:id="@+id/nav_httrack"
                         android:icon="@drawable/andraxicon_svg"
                         android:title="Httrack" />
+
+                    <item
+                        android:id="@+id/nav_xsstrike"
+                        android:icon="@drawable/xsstrike"
+                        android:title="XSSTRIKE" />
 
                     <item
                         android:id="@+id/nav_photon"

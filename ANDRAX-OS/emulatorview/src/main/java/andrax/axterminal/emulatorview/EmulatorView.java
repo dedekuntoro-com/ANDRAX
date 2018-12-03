@@ -1477,7 +1477,10 @@ public class EmulatorView extends View implements GestureDetector.OnGestureListe
             initialize();
         } else {
 
-            updateSize(true);
+
+            updateSize(false);
+
+
         }
     }
 

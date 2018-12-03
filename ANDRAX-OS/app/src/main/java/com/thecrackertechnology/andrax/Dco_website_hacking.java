@@ -26,6 +26,7 @@ public class Dco_website_hacking extends Activity {
         CardView cardviewreconng = findViewById(R.id.card_view_reconng);
         CardView cardviewevilginx2 = findViewById(R.id.card_view_evilginx2);
         CardView cardviewphpsploit = findViewById(R.id.card_view_phpsploit);
+        CardView cardviewxsstrike = findViewById(R.id.card_view_xsstrike);
         CardView cardviewphoton = findViewById(R.id.card_view_photon);
         CardView cardviewxsser = findViewById(R.id.card_view_xsser);
         CardView cardviewcommix = findViewById(R.id.card_view_commix);
@@ -40,6 +41,9 @@ public class Dco_website_hacking extends Activity {
         CardView cardviewhttrack = findViewById(R.id.card_view_httrack);
         CardView cardviewsiege = findViewById(R.id.card_view_siege);
         CardView cardviewslowhttptest = findViewById(R.id.card_view_slowhttptest);
+        CardView cardviewarjun = findViewById(R.id.card_view_arjun);
+        CardView cardviewjshell = findViewById(R.id.card_view_jshell);
+        CardView cardviewput2win = findViewById(R.id.card_view_put2win);
 
         cardviewodin.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -108,6 +112,18 @@ public class Dco_website_hacking extends Activity {
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
                 intentstart.putExtra("andrax.axterminal.iInitialCommand", "phpsploit");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewxsstrike.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "xsstrike");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }
@@ -276,6 +292,42 @@ public class Dco_website_hacking extends Activity {
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
                 intentstart.putExtra("andrax.axterminal.iInitialCommand", "slowhttptest");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewarjun.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "arjun -h");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewjshell.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "jshell");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewput2win.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "put2win -h");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }

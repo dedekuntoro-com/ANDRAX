@@ -10,21 +10,17 @@ android {
         applicationId "com.thecrackertechnology.andrax"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 7
-        versionName 'v1R: RESURRECTION BETA:7'
+        versionCode 10
+        versionName 'v1R: RESURRECTION (STABLE)'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [onesignal_app_id               : "18549c0c-ad20-48c5-84a9-979596bf3806",
                                 // Project number pulled from dashboard, local value is ignored.
                                 onesignal_google_project_number: "REMOTE"]
-        versionNameSuffix ' (BETA Reload)'
-
         vectorDrawables.useSupportLibrary = true
-
         generatedDensities = []
         aaptOptions {
             additionalParameters "--no-version-vectors"
         }
-
     }
 
     buildTypes {

@@ -212,7 +212,7 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
 
 
         Bundle extras = getIntent().getExtras();
-        if(extras !=null){
+        if(extras !=null && !extras.equals("")){
             extralanguages = extras.getString("LANG");
             mHandler.postDelayed(changelanghandler, 1000);
             Toast.makeText(getApplicationContext(), "LANGUAGE " + extralanguages, Toast.LENGTH_LONG).show();
@@ -595,7 +595,7 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
                     .input(R.string.fontdefault, R.string.fontsizeselected, new MaterialDialog.InputCallback() {
                         @Override
                         public void onInput(MaterialDialog dialog, CharSequence input) {
-                            if(input.equals("")){
+                            if(input == null){
 
                             } else {
                                 web.loadUrl("javascript:(function() { document.getElementById('editor').style.fontSize='" + input + "' })();");
@@ -653,7 +653,9 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
                             return true;
                         }
                     })
-                    .positiveText("Select")
+                    //.positiveText("Select")
+                    //  HACK to BYPASS CRASH
+                    .negativeText("Select")
                     .show();
 
         } else if(id == R.id.nav_theme) {
@@ -673,7 +675,8 @@ public class MainActivityCodeHackIDE extends AppCompatActivity
                             return true;
                         }
                     })
-                    .positiveText("Select")
+                    //.positiveText("Select")
+                    .negativeText("Select")
                     .show();
 
         } else if(id == R.id.nav_telegram) {

@@ -46,15 +46,13 @@ public class SplashActivity extends AppCompatActivity {
 
         try {
 
-            Process chmodhack = Runtime.getRuntime().exec("su -c id");
+            Process chmodhack = Runtime.getRuntime().exec("su -h");
             chmodhack.waitFor();
 
-            if(isInstalledOnSdCard()) {
+            Process createsymlinkmnt = Runtime.getRuntime().exec("su -c ln -s " + SplashActivity.this.getApplicationInfo().dataDir + " /data/data/com.thecrackertechnology.andrax");
+            createsymlinkmnt.waitFor();
 
-                Process createsymlinkmnt = Runtime.getRuntime().exec("su -c ln -s /mnt/expand/*/user/0/com.thecrackertechnology.andrax /data/data/com.thecrackertechnology.andrax");
-                createsymlinkmnt.waitFor();
 
-            }
 
 
         } catch (InterruptedException | IOException e) {

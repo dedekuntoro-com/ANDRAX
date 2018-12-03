@@ -15,6 +15,7 @@
  */
 
 #include "process.h"
+#include "../../../../../../Android/Sdk/ndk-bundle/platforms/android-21/arch-arm/usr/include/pthread.h"
 
 #include <sys/types.h>
 #include <sys/ioctl.h>
@@ -118,6 +119,8 @@ static void closeNonstandardFileDescriptors() {
     }
 }
 
+
+
 static int create_subprocess(JNIEnv *env, const char *cmd, char *const argv[], char *const envp[], int masterFd)
 {
     // same size as Android 1.6 libc/unistd/ptsname_r.c
@@ -171,6 +174,8 @@ static int create_subprocess(JNIEnv *env, const char *cmd, char *const argv[], c
         }
 
         execv(cmd, argv);
+
+
         exit(0);
     } else {
         return (int) pid;

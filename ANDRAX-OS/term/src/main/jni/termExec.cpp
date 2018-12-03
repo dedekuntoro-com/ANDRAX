@@ -33,6 +33,8 @@
 static void android_os_Exec_setPtyWindowSize(JNIEnv *env, jobject clazz,
                                              jint fd, jint row, jint col, jint xpixel, jint ypixel)
 {
+
+
     struct winsize sz;
 
     sz.ws_row = row;
@@ -40,9 +42,13 @@ static void android_os_Exec_setPtyWindowSize(JNIEnv *env, jobject clazz,
     sz.ws_xpixel = xpixel;
     sz.ws_ypixel = ypixel;
 
+
+
     // TODO: handle the situation, when the file descriptor is incompatible with TIOCSWINSZ (e.g. not from /dev/ptmx)
     if (ioctl(fd, TIOCSWINSZ, &sz) == -1)
         env->ThrowNew(env->FindClass("java/io/IOException"), "Failed to issue TIOCSWINSZ ioctl");
+
+
 }
 
 static void android_os_Exec_setPtyUTF8Mode(JNIEnv *env, jobject clazz, jint fd, jboolean utf8Mode)

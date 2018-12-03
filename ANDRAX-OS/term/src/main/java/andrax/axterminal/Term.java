@@ -102,6 +102,8 @@ import android.widget.Toast;
 
 import andrax.axterminal.ShellTermSession.*;
 
+import andrax.axterminal.emulatorview.EmulatorView;
+
 
 
 
@@ -118,6 +120,8 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
 
     private TermViewFlipper mViewFlipper;
+
+
 
     /**
      * The name of the ViewFlipper in the resources.
@@ -390,6 +394,10 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             changehostname(HOSTNAME);
         }
 
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("shell", "/system/xbin/andraxzsh");
+        editor.apply();
+
 
 
         if(NotificationManagerCompat.from(Term.this).areNotificationsEnabled()) {
@@ -404,17 +412,32 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
         checkinstallterm();
 
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-        if (sharedPref.getString("TWOTimeOpen", "").equals("none")) {
+        if (preferences.getString("TWOTimeOpen", "").equals("none")) {
 
         } else {
-            SharedPreferences.Editor editor = sharedPref.edit();
             editor.clear().apply();
-
             editor.putString("TWOTimeOpen", "none");
             editor.apply();
         }
+
+        try {
+
+            Process chmodhack = Runtime.getRuntime().exec("su -c id");
+            chmodhack.waitFor();
+
+            Process createsymlinkmnt = Runtime.getRuntime().exec("su -c ln -s " + Term.this.getApplicationInfo().dataDir + " /data/data/com.thecrackertechnology.andrax");
+            createsymlinkmnt.waitFor();
+
+
+
+
+        } catch (InterruptedException | IOException e) {
+            e.printStackTrace();
+        } finally {
+
+        }
+
 
 
         Log.v(TermDebug.LOG_TAG, "onCreate");
@@ -757,7 +780,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
         EmulatorView v = (EmulatorView) mViewFlipper.getCurrentView();
         if (v != null) {
-            v.updateSize(true);
+            v.updateSize(false);
         }
 
         if (mWinListAdapter != null) {
@@ -937,7 +960,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
         if(LayoutParams.equals("false")) {
 
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
+            Term.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
 
 
             //SharedPreferences.Editor editor = preferences.edit();
@@ -956,7 +979,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         } else {
 
 
-            getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
+            Term.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
             //SharedPreferences.Editor editor = preferences.edit();
             //editor.putString("LayoutNOTHING", "false");

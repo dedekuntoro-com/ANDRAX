@@ -215,7 +215,12 @@ public class ShellTermSession extends GenericTermSession {
     @Override
     public void finish() {
         hangupProcessGroup();
-        super.finish();
+        try {
+            super.finish();
+        } catch (NullPointerException e){
+
+        }
+
     }
 
     /**

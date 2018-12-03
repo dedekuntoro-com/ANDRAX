@@ -35,6 +35,7 @@ public class Dco_Information_Gathering extends Activity {
         CardView cardviewdmitry = findViewById(R.id.card_view_dmitry);
         CardView cardviewdhcping = findViewById(R.id.card_view_dhcping);
         CardView cardviewintrace = findViewById(R.id.card_view_intrace);
+        CardView cardviewsshauditor = findViewById(R.id.card_view_ssh_auditor);
 
         cardviewwhois.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -187,6 +188,18 @@ public class Dco_Information_Gathering extends Activity {
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
                 intentstart.putExtra("andrax.axterminal.iInitialCommand", "intrace");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewsshauditor.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "ssh-auditor");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }
