@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ANDRAX-OS.iml" filepath="$PROJECT_DIR$/ANDRAX-OS.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/busybox/busybox.iml" filepath="$PROJECT_DIR$/busybox/busybox.iml" />
       <module fileurl="file://$PROJECT_DIR$/codehack/codehack.iml" filepath="$PROJECT_DIR$/codehack/codehack.iml" />
       <module fileurl="file://$PROJECT_DIR$/emulatorview/emulatorview.iml" filepath="$PROJECT_DIR$/emulatorview/emulatorview.iml" />
       <module fileurl="file://$PROJECT_DIR$/samples/intents/intents.iml" filepath="$PROJECT_DIR$/samples/intents/intents.iml" />

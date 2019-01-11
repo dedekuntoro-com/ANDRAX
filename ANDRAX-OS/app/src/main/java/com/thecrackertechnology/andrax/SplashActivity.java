@@ -33,7 +33,6 @@ public class SplashActivity extends AppCompatActivity {
         setContentView(R.layout.activity_splash);
 
 
-
         new Timer().schedule(new TimerTask() {
             @Override
             public void run() {
@@ -49,14 +48,23 @@ public class SplashActivity extends AppCompatActivity {
             Process chmodhack = Runtime.getRuntime().exec("su -h");
             chmodhack.waitFor();
 
-            Process createsymlinkmnt = Runtime.getRuntime().exec("su -c ln -s " + SplashActivity.this.getApplicationInfo().dataDir + " /data/data/com.thecrackertechnology.andrax");
-            createsymlinkmnt.waitFor();
+            if(isInstalledOnSdCard()) {
 
+                Process createsymlinkmnt = Runtime.getRuntime().exec("su -c ln -s " + SplashActivity.this.getApplicationInfo().dataDir + " /data/data/com.thecrackertechnology.andrax");
+                createsymlinkmnt.waitFor();
 
+                //Toast.makeText(SplashActivity.this, "Installed: " + SplashActivity.this.getApplicationInfo().dataDir, Toast.LENGTH_LONG).show();
+
+                Process rmdoublelink = Runtime.getRuntime().exec("su -c rm " + "/data/data/com.thecrackertechnology.andrax/com.thecrackertechnology.andrax");
+                rmdoublelink.waitFor();
+
+            }
 
 
         } catch (InterruptedException | IOException e) {
+
             e.printStackTrace();
+
         } finally {
 
             new chmodandraxroot().execute();
@@ -90,17 +98,17 @@ public class SplashActivity extends AppCompatActivity {
             try {
 
 
-                SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                //SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
-                if (sharedPref.getString("TWOTimeOpen", "").equals("none")) {
+                //if (sharedPref.getString("TWOTimeOpen", "").equals("none")) {
 
-                } else {
-                    SharedPreferences.Editor editor = sharedPref.edit();
-                    editor.clear().apply();
+                //} else {
+                //    SharedPreferences.Editor editor = sharedPref.edit();
+                //    editor.clear().apply();
 
-                    editor.putString("TWOTimeOpen", "none");
-                    editor.apply();
-                }
+                //    editor.putString("TWOTimeOpen", "none");
+                //    editor.apply();
+                //}
 
 
                 Process process = Runtime.getRuntime().exec("su -c mkdir /data/data/com.thecrackertechnology.andrax/ANDRAX");
@@ -223,7 +231,7 @@ public class SplashActivity extends AppCompatActivity {
         Context context =  getApplicationContext();
 
         try {
-            String filesDir = context.getFilesDir().getAbsolutePath();
+            String filesDir = SplashActivity.this.getApplicationInfo().dataDir;
             if (filesDir.startsWith("/data/")) {
                 return false;
             } else if (filesDir.contains("/mnt/") || filesDir.contains("/sdcard/")) {

@@ -27,7 +27,8 @@ public class Dco_Password_Hacking extends Activity {
         CardView cardviewcrunch = findViewById(R.id.card_view_crunch);
         CardView cardviewmassh = findViewById(R.id.card_view_massh);
         CardView cardviewacccheck = findViewById(R.id.card_view_acccheck);
-        CardView cardviewfindmyhash = findViewById(R.id.card_view_findmyhash);
+        CardView cardviewsshauditor = findViewById(R.id.card_view_ssh_auditor);
+        CardView cardviewbopscrk = findViewById(R.id.card_view_bopscrk);
 
 
         cardviewhydra.setOnClickListener(new View.OnClickListener(){
@@ -102,13 +103,26 @@ public class Dco_Password_Hacking extends Activity {
             }
         });
 
-        cardviewfindmyhash.setOnClickListener(new View.OnClickListener(){
+
+        cardviewsshauditor.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
                 Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-                intentstart.putExtra("andrax.axterminal.iInitialCommand", "hash-tool -h");
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "ssh-auditor");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewbopscrk.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "bopscrk");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }

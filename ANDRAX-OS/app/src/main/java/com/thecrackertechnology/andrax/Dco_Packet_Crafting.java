@@ -36,6 +36,7 @@ public class Dco_Packet_Crafting extends Activity {
         CardView cardviewrtpmixsound = findViewById(R.id.card_view_rtpmixsound);
         CardView cardviewsipsak = findViewById(R.id.card_view_sipsak);
         CardView cardviewenumiax = findViewById(R.id.card_view_enumiax);
+        CardView cardviewdelorean = findViewById(R.id.card_view_delorean);
 
         cardviewhping.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -224,6 +225,18 @@ public class Dco_Packet_Crafting extends Activity {
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
                 intentstart.putExtra("andrax.axterminal.iInitialCommand", "enumiax");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewdelorean.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "delorean -h");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }

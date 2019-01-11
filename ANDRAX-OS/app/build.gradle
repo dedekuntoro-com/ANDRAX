@@ -4,14 +4,15 @@ apply plugin: 'com.android.application'
 
 
 android {
+
     compileSdkVersion 27
     buildToolsVersion '28.0.3'
     defaultConfig {
         applicationId "com.thecrackertechnology.andrax"
         minSdkVersion 21
         targetSdkVersion 26
-        versionCode 10
-        versionName 'v1R: RESURRECTION (STABLE)'
+        versionCode 11
+        versionName 'v2R: PAYBACK (BETA: 1)'
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         manifestPlaceholders = [onesignal_app_id               : "18549c0c-ad20-48c5-84a9-979596bf3806",
                                 // Project number pulled from dashboard, local value is ignored.
@@ -21,6 +22,7 @@ android {
         aaptOptions {
             additionalParameters "--no-version-vectors"
         }
+
     }
 
     buildTypes {
@@ -53,6 +55,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.0.0'
     implementation 'com.onesignal:OneSignal:3.7.1'
     testImplementation 'junit:junit:4.12'
+    implementation project(':busybox')
     implementation project(':term')
     implementation project(':emulatorview')
     implementation project(':libtermexec')

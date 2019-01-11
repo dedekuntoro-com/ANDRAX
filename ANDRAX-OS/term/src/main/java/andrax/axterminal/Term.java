@@ -421,23 +421,6 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             editor.apply();
         }
 
-        try {
-
-            Process chmodhack = Runtime.getRuntime().exec("su -c id");
-            chmodhack.waitFor();
-
-            Process createsymlinkmnt = Runtime.getRuntime().exec("su -c ln -s " + Term.this.getApplicationInfo().dataDir + " /data/data/com.thecrackertechnology.andrax");
-            createsymlinkmnt.waitFor();
-
-
-
-
-        } catch (InterruptedException | IOException e) {
-            e.printStackTrace();
-        } finally {
-
-        }
-
 
 
         Log.v(TermDebug.LOG_TAG, "onCreate");

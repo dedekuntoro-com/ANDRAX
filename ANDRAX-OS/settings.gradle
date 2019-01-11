@@ -1,1 +1,1 @@
-include ':app', ':term', ':samples:telnet', ':emulatorview', ':samples:pathbroadcasts', ':samples:intents', ':libtermexec', ':codehack'
+include ':app', ':term', ':samples:telnet', ':emulatorview', ':samples:pathbroadcasts', ':samples:intents', ':libtermexec', ':codehack', ':busybox'

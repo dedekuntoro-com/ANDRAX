@@ -29,6 +29,10 @@ public class Dco_network_hacking extends Activity {
         CardView cardviewdns2tcp = findViewById(R.id.card_view_dns2tcp);
         CardView cardviewfragroute = findViewById(R.id.card_view_fragroute);
         CardView cardviewudp2raw = findViewById(R.id.card_view_udp2raw);
+        CardView cardviewdns2proxy = findViewById(R.id.card_view_dns2proxy);
+        CardView cardviewvsaudit = findViewById(R.id.card_view_vsaudit);
+        CardView cardviewsnmpwn = findViewById(R.id.card_view_snmpwn);
+
 
 
 
@@ -154,6 +158,43 @@ public class Dco_network_hacking extends Activity {
                 startActivity(intentstart);
             }
         });
+
+        cardviewdns2proxy.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "dns2proxy -h");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewvsaudit.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "vsaudit");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        cardviewsnmpwn.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "snmpwn --help");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
 
 
 

@@ -102,6 +102,296 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/card_view_rapidscan"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_rapidscan"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/rapidscan" />
+
+                    <TextView
+                        android:id="@+id/textView_rapidscan_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_rapidscan"
+                        android:gravity="center"
+                        android:text="RapidScan"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_rapidscan_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_rapidscan_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_rapidscan"
+                        android:gravity="center"
+                        android:text="The Multi-Tool Web Vulnerability Scanner"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_wascan"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_wascan"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_wascan_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_wascan"
+                        android:gravity="center"
+                        android:text="WAScan"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_wascan_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_wascan_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_wascan"
+                        android:gravity="center"
+                        android:text="Web Application Scanner"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_golismero"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_golismero"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/golismero" />
+
+                    <TextView
+                        android:id="@+id/textView_golismero_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_golismero"
+                        android:gravity="center"
+                        android:text="Golismero"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_golismero_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_golismero_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_golismero"
+                        android:gravity="center"
+                        android:text="The Web Knife"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_wafninja"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_wafninja"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_wafninja_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_wafninja"
+                        android:gravity="center"
+                        android:text="WAFNinja"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_wafninja_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_wafninja_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_wafninja"
+                        android:gravity="center"
+                        android:text="Penetration testers favorite for WAF Bypassing"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_wafw00f"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_wafw00f"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_wafw00f_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_wafw00f"
+                        android:gravity="center"
+                        android:text="WAFw00f"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_wafw00f_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_wafw00f_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_wafw00f"
+                        android:gravity="center"
+                        android:text="Identifies and fingerprints WAF"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:id="@+id/card_view_arjun"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -152,6 +442,122 @@
                         android:layout_toEndOf="@+id/imageView_arjun"
                         android:gravity="center"
                         android:text="HTTP parameter discovery suite"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_pyfilebuster"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_pyfilebuster"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_pyfilebuster_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_pyfilebuster"
+                        android:gravity="center"
+                        android:text="pyFileBuster"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_pyfilebuster_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_pyfilebuster_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_pyfilebuster"
+                        android:gravity="center"
+                        android:text="Fast web fuzzer"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_evilurl"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_evilurl"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_evilurl_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_evilurl"
+                        android:gravity="center"
+                        android:text="EVILUrl"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_evilurl_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_evilurl_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_evilurl"
+                        android:gravity="center"
+                        android:text="Unicode evil domains for IDN Homograph Attack"
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
@@ -276,6 +682,180 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/card_view_fiesta"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_fiesta"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/fiesta" />
+
+                    <TextView
+                        android:id="@+id/textView_fiesta_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_fiesta"
+                        android:gravity="center"
+                        android:text="Fiesta"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_fiesta_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_fiesta_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_fiesta"
+                        android:gravity="center"
+                        android:text="Form Information Exposed via Size Transmitted Attack"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_xsrfprobe"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_xsrfprobe"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_xsrfprobe_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_xsrfprobe"
+                        android:gravity="center"
+                        android:text="XSRFprobe"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_xsrfprobe_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_xsrfprobe_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_xsrfprobe"
+                        android:gravity="center"
+                        android:text="Advanced Cross Site Request Forgery Framework"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_whatweb"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_whatweb"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_whatweb_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_whatweb"
+                        android:gravity="center"
+                        android:text="WhatWeb"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_whatweb_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_whatweb_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_whatweb"
+                        android:gravity="center"
+                        android:text="Next generation web scanner"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:id="@+id/card_view_wapiti"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -392,6 +972,122 @@
             </android.support.v7.widget.CardView>
 
             <android.support.v7.widget.CardView
+                android:id="@+id/card_view_wpxf"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_wpxf"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/wpxf" />
+
+                    <TextView
+                        android:id="@+id/textView_wpxf_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_wpxf"
+                        android:gravity="center"
+                        android:text="WPXF"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_wpxf_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_wpxf_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_wpxf"
+                        android:gravity="center"
+                        android:text="WordPress eXploit Framework"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_sitebroker"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_sitebroker"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_sitebroker_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_sitebroker"
+                        android:gravity="center"
+                        android:text="SiteBroker"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_sitebroker_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_sitebroker_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_sitebroker"
+                        android:gravity="center"
+                        android:text="Fnformation Gathering and Penetration automation"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
                 android:id="@+id/card_view_grabber"
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
@@ -442,6 +1138,64 @@
                         android:layout_toEndOf="@+id/imageView_grabber"
                         android:gravity="center"
                         android:text="Web application scanner"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="12sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+            </android.support.v7.widget.CardView>
+
+            <android.support.v7.widget.CardView
+                android:id="@+id/card_view_hydraform"
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:selectableItemBackground"
+                android:theme="@style/Theme.AppCompat"
+                app:cardBackgroundColor="#111111"
+                app:cardCornerRadius="2dp"
+                app:contentPadding="10dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                    <android.support.v7.widget.AppCompatImageView
+                        android:id="@+id/imageView_hydraform"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_centerHorizontal="false"
+                        android:layout_centerVertical="true"
+                        android:scaleType="fitXY"
+                        android:tint="@color/accent"
+                        app:srcCompat="@drawable/andraxicon_svg" />
+
+                    <TextView
+                        android:id="@+id/textView_hydraform_title"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_toEndOf="@+id/imageView_hydraform"
+                        android:gravity="center"
+                        android:text="Hydra-Form"
+                        android:textColor="@color/accent"
+                        android:textSize="18sp"
+                        android:textStyle="bold"
+                        android:typeface="serif" />
+
+                    <TextView
+                        android:id="@+id/textView_hydraform_desc"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/textView_hydraform_title"
+                        android:layout_centerVertical="false"
+                        android:layout_toEndOf="@+id/imageView_hydraform"
+                        android:gravity="center"
+                        android:text="Dictionary-attacking web-based login forms"
                         android:textColor="@color/colorPrimary"
                         android:textSize="12sp"
                         android:textStyle="bold" />
