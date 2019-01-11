@@ -2277,11 +2277,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     editor.putBoolean("INSTALLEDBUSYBOX", true);
                                     editor.apply();
 
-                                    Intent intent2 = new Intent(MainActivity.this,SplashActivity.class);
-                                    startActivity(intent2);
-                                    finish();
-                                    finish();
-
 
                                 }
                             });
@@ -2302,11 +2297,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                         e.printStackTrace();
                                     }
                                     startActivity(intent);
-
-                                    Intent intent2 = new Intent(MainActivity.this,SplashActivity.class);
-                                    startActivity(intent2);
-                                    finish();
-                                    finish();
 
                                 }
                             });
