@@ -101,7 +101,7 @@ public class Logger {
      * @param msg message
      */
     public static void log(Context c, String msg) {
-        appendMessage(c, msg);
+        appendMessage(c, msg+'\n');
     }
 
     /**

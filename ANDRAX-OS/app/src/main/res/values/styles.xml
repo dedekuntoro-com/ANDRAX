@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="alertDialogTheme">@style/AppCompatAlertDialogStyle</item>
         <item name="android:colorBackground">@color/background_material_dark</item>
+        <item name="android:windowFullscreen">true</item>
 
 
     </style>

@@ -27,6 +27,12 @@ public class VmpActivity extends AppCompatActivity implements View.OnClickListen
     private RadioGroup mRadioGrp;
     private RadioButton mRadioBtn;
 
+    /**
+     *
+     * Help me, i'm dying...
+     *
+     **/
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

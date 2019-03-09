@@ -13,8 +13,6 @@
 
     <uses-permission-sdk-23 android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
-
-
     <application
         android:name=".AndraxApp"
         android:allowBackup="true"
@@ -153,8 +151,8 @@
             android:excludeFromRecents="false"
             android:hardwareAccelerated="true"
             android:icon="@drawable/information_gathering"
-            android:roundIcon="@drawable/information_gathering"
             android:label="01 Information Gathering"
+            android:roundIcon="@drawable/information_gathering"
             android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -168,8 +166,8 @@
             android:excludeFromRecents="false"
             android:hardwareAccelerated="true"
             android:icon="@drawable/scanning"
-            android:roundIcon="@drawable/scanning"
             android:label="02 Scanning"
+            android:roundIcon="@drawable/scanning"
             android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -183,8 +181,8 @@
             android:excludeFromRecents="false"
             android:hardwareAccelerated="true"
             android:icon="@drawable/packet_crafting"
-            android:roundIcon="@drawable/packet_crafting"
             android:label="03 Packet Crafting"
+            android:roundIcon="@drawable/packet_crafting"
             android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -198,8 +196,8 @@
             android:excludeFromRecents="false"
             android:hardwareAccelerated="true"
             android:icon="@drawable/networkhacking"
-            android:roundIcon="@drawable/networkhacking"
             android:label="04 Network Hacking"
+            android:roundIcon="@drawable/networkhacking"
             android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -213,8 +211,8 @@
             android:excludeFromRecents="false"
             android:hardwareAccelerated="true"
             android:icon="@drawable/websitehacking"
-            android:roundIcon="@drawable/websitehacking"
             android:label="05 WebSite Hacking"
+            android:roundIcon="@drawable/websitehacking"
             android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -228,8 +226,8 @@
             android:excludeFromRecents="false"
             android:hardwareAccelerated="true"
             android:icon="@drawable/passwordhacking"
-            android:roundIcon="@drawable/passwordhacking"
             android:label="06 Password Hacking"
+            android:roundIcon="@drawable/passwordhacking"
             android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -243,8 +241,8 @@
             android:excludeFromRecents="false"
             android:hardwareAccelerated="true"
             android:icon="@drawable/wireless"
-            android:roundIcon="@drawable/wireless"
             android:label="07 Wireless Hacking"
+            android:roundIcon="@drawable/wireless"
             android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -258,8 +256,8 @@
             android:excludeFromRecents="false"
             android:hardwareAccelerated="true"
             android:icon="@drawable/exploit"
-            android:roundIcon="@drawable/exploit"
             android:label="08 Exploitation"
+            android:roundIcon="@drawable/exploit"
             android:theme="@android:style/Theme.Dialog">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -269,11 +267,44 @@
         </activity>
         <activity
             android:name=".CustomCrashReport"
-            android:process=":acra"
-            android:theme="@android:style/Theme.Material"
             android:excludeFromRecents="false"
             android:finishOnTaskLaunch="true"
-            android:launchMode="singleInstance">
+            android:launchMode="singleInstance"
+            android:process=":acra"
+            android:theme="@android:style/Theme.Material"></activity>
+        <!--
+        activity
+            android:name=".MARINA"
+            android:label="M.A.R.I.N.A"
+            android:theme="@style/AppTheme"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:excludeFromRecents="false"
+            android:hardwareAccelerated="true"
+            android:icon="@drawable/marina"
+            android:roundIcon="@drawable/marina">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity
+        -->
+        <activity
+            android:name=".TOPTools"
+            android:configChanges="keyboard|keyboardHidden|orientation|screenLayout|uiMode|screenSize|smallestScreenSize"
+            android:excludeFromRecents="false"
+            android:hardwareAccelerated="true"
+            android:icon="@drawable/best"
+            android:label="TOP Tools"
+            android:roundIcon="@drawable/best"
+            android:theme="@android:style/Theme.Dialog">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
     </application>
 

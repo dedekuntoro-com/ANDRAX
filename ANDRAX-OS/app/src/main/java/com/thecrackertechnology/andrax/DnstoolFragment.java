@@ -88,7 +88,14 @@ public class DnstoolFragment extends Fragment  implements View.OnClickListener{
 
     public void onClick(View v) {
 
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
+
     }
+
 
 
     /**

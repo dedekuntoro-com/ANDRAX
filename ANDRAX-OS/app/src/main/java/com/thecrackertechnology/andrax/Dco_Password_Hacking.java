@@ -67,6 +67,12 @@ public class Dco_Password_Hacking extends Activity {
             }
         });
 
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
+
         cardviewcrunch.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

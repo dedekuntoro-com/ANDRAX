@@ -10,9 +10,9 @@ then
     busybox mount -o rw,remount /system
     if busybox test $? -eq 0
     then
-        busybox printf "done\n"
+        busybox printf "DONE\n"
     else
-        busybox printf "fail\n"
+        busybox printf "FAIL: Houston, we have a problem!\n"
         exit 1
     fi
 fi
@@ -28,9 +28,9 @@ do
     busybox cp "$SOURCE_BIN" "$INSTALL_DIR/$fn"
     if busybox test $? -eq 0
     then
-        busybox printf "done\n"
+        busybox printf "DONE\n"
     else
-        busybox printf "fail\n"
+        busybox printf "FAIL: Oh, God, UNINSTALL your previous busybox and try again...\n"
     fi
 
     busybox printf "Changing permissions for $fn ... "
@@ -38,9 +38,9 @@ do
     busybox chmod 755 "$INSTALL_DIR/$fn"
     if busybox test $? -eq 0
     then
-        busybox printf "done\n"
+        busybox printf "DONE\n"
     else
-        busybox printf "fail\n"
+        busybox printf "FAIL\n"
     fi
 done
 
@@ -57,9 +57,9 @@ then
     done
     if busybox test $? -eq 0
     then
-        busybox printf "done\n"
+        busybox printf "DONE\n"
     else
-        busybox printf "fail\n"
+        busybox printf "FAIL\n"
     fi
 fi
 
@@ -69,9 +69,9 @@ then
     "$INSTALL_DIR/busybox" --install -s "$INSTALL_DIR"
     if busybox test $? -eq 0
     then
-        busybox printf "done\n"
+        busybox printf "DONE\n"
     else
-        busybox printf "fail\n"
+        busybox printf "FAIL\n"
     fi
 fi
 
@@ -85,9 +85,9 @@ then
     busybox chmod 755 /system/addon.d/99-busybox.sh
     if busybox test $? -eq 0
     then
-        busybox printf "done\n"
+        busybox printf "DONE\n"
     else
-        busybox printf "fail\n"
+        busybox printf "FAIL\n"
     fi
 fi
 
@@ -97,9 +97,9 @@ then
     busybox mount -o ro,remount /system
     if busybox test $? -eq 0
     then
-        busybox printf "done\n"
+        busybox printf "DONE\n"
     else
-        busybox printf "skip\n"
+        busybox printf "SKIP\n"
         exit 1
     fi
 fi

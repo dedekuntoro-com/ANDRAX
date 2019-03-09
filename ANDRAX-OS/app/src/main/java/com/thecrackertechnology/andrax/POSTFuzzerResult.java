@@ -38,6 +38,12 @@ public class POSTFuzzerResult extends AppCompatActivity {
     String useragent;
     String bufferlinelist = "";
 
+    /**
+     *
+     * Help me, i'm dying...
+     *
+     **/
+
     String textprogress = "";
 
     ProgressDialog dialog;

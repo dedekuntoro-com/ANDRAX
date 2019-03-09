@@ -4,15 +4,16 @@
  -->
 
 <resources >
-    <!-- This style is used for all activities.
-     -->
+    <!-- This style is used for all activities -->
     <style name="Theme" parent="@android:style/Theme.Material">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
 
-        <item name="android:actionBarSize">40dp</item>
+        <item name="android:actionBarStyle">@style/Axbar</item>
+
+        <item name="android:actionBarSize">45dp</item>
         <item name="android:popupTheme">@android:style/ThemeOverlay.Material.Light</item>
-        <item name="android:colorPrimary">@color/primary</item>
+        <item name="android:colorPrimary">@color/blackback</item>
 
         <!--   darker variant for the status bar and contextual app bars -->
         <item name="android:colorPrimaryDark">@color/primary_dark</item>
@@ -22,6 +23,12 @@
         <item name="android:dialogTheme">@style/AppCompatAlertDialogStyle02</item>
         <!--item name="android:alertDialogStyle">@style/AppCompatAlertDialogStyle02</item-->
         <item name="android:alertDialogTheme">@style/AppCompatAlertDialogStyle02</item>
+    </style>
+
+    <style name="Axbar" parent="@android:style/Theme.Material">
+
+        <item name="android:background">#000000</item>
+
     </style>
 
     <style name="AppCompatAlertDialogStyle02" parent="Theme.AppCompat.Dialog.Alert">

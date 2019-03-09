@@ -130,6 +130,12 @@ public class Dco_Scanning extends Activity {
             }
         });
 
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
+
         cardviewreconspider.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

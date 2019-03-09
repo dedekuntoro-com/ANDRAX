@@ -98,6 +98,11 @@ public class FuzzerPostATTACK extends AppCompatActivity implements AdapterView.O
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
 
         useragent.setAdapter(dataAdapter);
 

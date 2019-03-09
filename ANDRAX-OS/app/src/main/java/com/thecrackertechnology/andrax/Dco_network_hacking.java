@@ -32,6 +32,8 @@ public class Dco_network_hacking extends Activity {
         CardView cardviewdns2proxy = findViewById(R.id.card_view_dns2proxy);
         CardView cardviewvsaudit = findViewById(R.id.card_view_vsaudit);
         CardView cardviewsnmpwn = findViewById(R.id.card_view_snmpwn);
+        CardView cardviewtshark = findViewById(R.id.card_view_tshark);
+
 
 
 
@@ -190,6 +192,24 @@ public class Dco_network_hacking extends Activity {
 
                 intentstart.addCategory(Intent.CATEGORY_DEFAULT);
                 intentstart.putExtra("andrax.axterminal.iInitialCommand", "snmpwn --help");
+                intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intentstart);
+            }
+        });
+
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
+
+        cardviewtshark.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
+
+                intentstart.addCategory(Intent.CATEGORY_DEFAULT);
+                intentstart.putExtra("andrax.axterminal.iInitialCommand", "tshark --help");
                 intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intentstart);
             }

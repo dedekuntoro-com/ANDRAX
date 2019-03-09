@@ -61,12 +61,19 @@ class ExecScript extends Thread {
                 info();
                 break;
             case "install":
-                Logger.log(context, "### BEGIN INSTALL\n");
+
+                Logger.log(context, "### BEGIN FORCE REMOVE\n");
+                Logger.log(context, " \n");
+                remove();
+                Logger.log(context, "\n### END FORCE REMOVE\n");
+
+                Logger.log(context, "\n### BEGIN INSTALL\n");
+                Logger.log(context, " \n");
                 install();
-                Logger.log(context, "### END\n");
+                Logger.log(context, "\n### END INSTALL \n");
                 break;
             case "remove":
-                Logger.log(context, "### BEGIN REMOVE\n");
+                Logger.log(context, "### BEGIN FORCE REMOVE\n");
                 remove();
                 Logger.log(context, "### END\n");
                 break;

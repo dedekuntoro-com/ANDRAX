@@ -42,6 +42,12 @@ public class RadareFragment extends Fragment implements View.OnClickListener{
 
     public RadareFragment() {
 
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
+
     }
 
 

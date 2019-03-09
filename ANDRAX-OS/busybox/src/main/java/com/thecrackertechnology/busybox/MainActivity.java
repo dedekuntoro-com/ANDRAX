@@ -72,6 +72,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onBackPressed() {
+
+        new AlertDialog.Builder(this)
+                .setTitle("Installation COMPLETED")
+                .setMessage("When you press \"EXIT\" ANDRAX will restart and check again for BusyBox, if everything is ok ANDRAX will proceed to installation.")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setCancelable(false)
+                .setPositiveButton("EXIT",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                Intent intent = null;
+                                try {
+                                    intent = new Intent(MainActivity.this, Class.forName("com.thecrackertechnology.andrax.SplashActivity"));
+                                } catch (ClassNotFoundException e) {
+                                    e.printStackTrace();
+                                }
+                                startActivity(intent);
+                            }
+                        })
+                .setNegativeButton("Back",
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        }).show();
+
+    }
+
+    @Override
     public void setTheme(int resid) {
         super.setTheme(PrefStore.getTheme(this));
     }
@@ -90,6 +121,12 @@ public class MainActivity extends AppCompatActivity {
         } else {
             showLog(log);
         }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        finish();
     }
 
     /**
@@ -137,7 +174,7 @@ public class MainActivity extends AppCompatActivity {
                         }).show();
     }
 
-    /**public void removeBtnOnClick(final View view) {
+    public void removeBtnOnClick(final View view) {
         new AlertDialog.Builder(this)
                 .setTitle(R.string.title_confirm_remove_dialog)
                 .setMessage(R.string.message_confirm_remove_dialog)
@@ -157,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                                 dialog.cancel();
                             }
                         }).show();
-    } **/
+    }
 
     private void makeZipArchiveDialog() {
         String archiveName = PrefStore.getStorage() + "/busybox-" + PrefStore.getArch() + ".zip";

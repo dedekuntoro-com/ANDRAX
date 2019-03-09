@@ -132,6 +132,12 @@ public class DirScanner extends AppCompatActivity {
 
                 }
 
+                /**
+                 *
+                 * Help me, i'm dying...
+                 *
+                 **/
+
 
                 reader.close();
 

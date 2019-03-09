@@ -50,6 +50,12 @@ public class Dco_Wireless_Hacking extends Activity {
             }
         });
 
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
+
         cardviewcowpatty.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

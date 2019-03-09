@@ -35,5 +35,7 @@
     <string name="acra_dialog_text">ANDRAX has CRASHED Send US a Report!!!</string>
     <string name="acra_dialog_comment">We need you to submit this report so we can correct the errors.</string>
     <string name="acra_dialod_title">ANDRAX has CRASHED!</string>
+    <string name="title_activity_marin">"M.A.R.I.N.A. "</string>
+    <string name="title_activity_toptools">TOP Tools</string>
 
 </resources>

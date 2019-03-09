@@ -27,6 +27,13 @@ public class HttpLeak extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
 
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
+
+
 
         Button btninject = (Button) findViewById(R.id.button_httpinject);
         final EditText editTextpattern = (EditText) findViewById(R.id.httpleakpattern);

@@ -38,6 +38,11 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
 
 
+                /**
+                 *
+                 * Help me, i'm dying...
+                 *
+                 **/
 
             }
         }, 2000);

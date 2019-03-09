@@ -119,6 +119,12 @@ public class POSTFuzzer extends AppCompatActivity {
 
         web.loadUrl(website);
 
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
+
 
         btnfuzzerit.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {

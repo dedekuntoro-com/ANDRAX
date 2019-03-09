@@ -735,11 +735,6 @@
                         android:title="SSH-Auditor" />
 
                     <item
-                        android:id="@+id/nav_findmyhash"
-                        android:icon="@drawable/andraxicon_svg"
-                        android:title="FindMyHash" />
-
-                    <item
                         android:id="@+id/nav_bopscrk"
                         android:icon="@drawable/andraxicon_svg"
                         android:title="Bopscrk" />

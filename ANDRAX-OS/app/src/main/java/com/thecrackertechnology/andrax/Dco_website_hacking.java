@@ -106,6 +106,12 @@ public class Dco_website_hacking extends Activity {
             }
         });
 
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
+
         cardviewevilginx2.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

@@ -244,7 +244,9 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     }
 
     private ActionBarCompat.OnNavigationListener mWinListItemSelected = new ActionBarCompat.OnNavigationListener() {
+
         public boolean onNavigationItemSelected(int position, long id) {
+
             int oldPosition = mViewFlipper.getDisplayedChild();
             if (position != oldPosition) {
                 if (position >= mViewFlipper.getChildCount()) {
@@ -422,7 +424,6 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         }
 
 
-
         Log.v(TermDebug.LOG_TAG, "onCreate");
 
         mPrivateAlias = new ComponentName(this, RemoteInterface.PRIVACT_ACTIVITY_ALIAS);
@@ -455,7 +456,7 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             if (AndroidCompat.V11ToV20) {
                 switch (actionBarMode) {
                     case TermSettings.ACTION_BAR_MODE_ALWAYS_VISIBLE:
-                        //setTheme(R.style.Theme_Holo);
+                        //setTheme(R.style.Theme_ActionDark);
                         break;
                     case TermSettings.ACTION_BAR_MODE_HIDES:
                         //setTheme(R.style.Theme_Holo_ActionBarOverlay);
@@ -775,9 +776,9 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.mainaxterminal, menu);
-        MenuItemCompat.setShowAsAction(menu.findItem(R.id.menu_layout), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
         MenuItemCompat.setShowAsAction(menu.findItem(R.id.menu_new_window), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
         MenuItemCompat.setShowAsAction(menu.findItem(R.id.dco_menu), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
+        MenuItemCompat.setShowAsAction(menu.findItem(R.id.menu_recovery), MenuItemCompat.SHOW_AS_ACTION_ALWAYS);
         MenuItemCompat.setShowAsAction(menu.findItem(R.id.menu_close_window), MenuItemCompat.SHOW_AS_ACTION_IF_ROOM);
         return true;
     }
@@ -787,8 +788,6 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
         int id = item.getItemId();
         if (id == R.id.menu_preferences) {
             doPreferences();
-        } else if(id == R.id.menu_layout) {
-            changeLayout();
         } else if(id == R.id.menu_set_hostname) {
 
 
@@ -825,6 +824,8 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
 
         } else if(id == R.id.menu_new_window) {
             doCreateNewWindow();
+        } else if(id == R.id.menu_recovery) {
+            recoverymode();
         } else if(id == R.id.menu_close_window) {
             confirmCloseWindow();
         } else if(id == R.id.menu_window_list) {
@@ -934,48 +935,6 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             mActionBar.hide();
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    public void changeLayout() {
-
-        //SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        //String LayoutParams = preferences.getString("LayoutNOTHING", "false");
-
-        if(LayoutParams.equals("false")) {
-
-            Term.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_NOTHING);
-
-
-            //SharedPreferences.Editor editor = preferences.edit();
-            //editor.putString("LayoutNOTHING", "true");
-            //editor.commit();
-
-
-
-            LayoutParams = "true";
-
-            doToggleSoftKeyboard();
-
-            Toast.makeText(getApplicationContext(), "Layout: BLOCKED!", Toast.LENGTH_SHORT).show();
-
-
-        } else {
-
-
-            Term.this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
-
-            //SharedPreferences.Editor editor = preferences.edit();
-            //editor.putString("LayoutNOTHING", "false");
-            //editor.commit();
-
-            LayoutParams = "false";
-
-            doToggleSoftKeyboard();
-
-            Toast.makeText(getApplicationContext(), "Layout: RESPONSIVE!", Toast.LENGTH_SHORT).show();
-
-        }
-
     }
 
     private void doCreateNewWindow() {
@@ -1574,6 +1533,27 @@ public class Term extends Activity implements UpdateCallback, SharedPreferences.
             e.printStackTrace();
         }
 
+
+    }
+
+    public void recoverymode() {
+
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("shell", "/system/bin/sh");
+        editor.apply();
+
+        try {
+            Process sethostname = Runtime.getRuntime().exec("su -c hostname ANDRAX-RECOVERY");
+            sethostname.waitFor();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+        doCreateNewWindow();
 
     }
 

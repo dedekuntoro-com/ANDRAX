@@ -46,7 +46,17 @@
                     android:textSize="15sp"
                     android:textStyle="bold" />
 
+                <android.support.v7.widget.AppCompatImageView
+                    android:id="@+id/imageView_training_banner"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@+id/linearboxmain"
+                    android:paddingLeft="5dp"
+                    android:paddingRight="5dp"
+                    app:srcCompat="@drawable/andrax_training" />
+
                 <LinearLayout
+                    android:id="@+id/linearboxmain"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_below="@+id/textView3"
@@ -80,10 +90,10 @@
                             android:text="TELEGRAM" />
 
                         <Button
-                            android:id="@+id/btndonation"
+                            android:id="@+id/btntutorials"
                             android:layout_width="140dp"
                             android:layout_height="wrap_content"
-                            android:text="DONATION" />
+                            android:text="TUTORIALS" />
 
                     </GridLayout>
 
@@ -110,7 +120,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:text="ANDRAX v2R: PAYBACK BUILD:1"
+        android:layout_marginTop="30dp"
+        android:text="ANDRAX v2R: PAYBACK STABLE"
         android:textColor="@color/colorAccent"
         android:textColorHighlight="@color/colorAccent"
         android:typeface="serif" />

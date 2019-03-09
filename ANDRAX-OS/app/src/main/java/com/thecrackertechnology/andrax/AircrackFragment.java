@@ -63,6 +63,12 @@ public class AircrackFragment extends Fragment  implements View.OnClickListener{
                         Toast.makeText(getContext(), "Erro! Interface don't supported", Toast.LENGTH_LONG).show();
                     }
 
+                    /**
+                     *
+                     * Help me, i'm dying...
+                     *
+                     **/
+
 
                 } else {
 

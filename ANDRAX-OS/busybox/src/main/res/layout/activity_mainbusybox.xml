@@ -38,8 +38,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_toStartOf="@+id/removeBtn"
-        android:layout_toLeftOf="@+id/removeBtn"
         android:minWidth="110dp"
         android:onClick="installBtnOnClick"
         android:text="@string/install_button" />

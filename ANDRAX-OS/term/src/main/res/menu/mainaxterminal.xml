@@ -21,6 +21,7 @@
         android:id="@+id/dco_menu"
         android:title="Tools"
         app:showAsAction="collapseActionView"
+
         android:icon="@drawable/tools">
         <menu>
             <item
@@ -50,10 +51,10 @@
 
         </menu>
     </item>
-    <item android:id="@+id/menu_layout"
-        android:title="Layout"
-        android:icon="@drawable/terminallayout"
-        app:showAsAction="always"/>
+    <item android:id="@+id/menu_recovery"
+        android:title="Recovery"
+        android:icon="@drawable/recovery_icon"
+        app:showAsAction="ifRoom"/>
     <item android:id="@+id/menu_new_window"
         android:title="@string/new_window"
         android:icon="@drawable/ic_menu_add_ax" />

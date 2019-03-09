@@ -41,6 +41,12 @@ public class HIDAttack extends AppCompatActivity implements AdapterView.OnItemSe
         Button btnstart = (Button) findViewById(R.id.buttonhidstart);
         Button btnstop = (Button) findViewById(R.id.buttonhidstop);
 
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
+
         Spinner spinner = (Spinner) findViewById(R.id.spinnerhid);
 
         spinner.setOnItemSelectedListener(this);

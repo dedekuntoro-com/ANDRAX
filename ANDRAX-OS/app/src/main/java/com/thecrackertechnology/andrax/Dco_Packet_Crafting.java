@@ -86,6 +86,12 @@ public class Dco_Packet_Crafting extends Activity {
             }
         });
 
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
+
         cardviewncat.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

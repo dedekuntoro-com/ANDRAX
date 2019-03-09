@@ -339,6 +339,12 @@ public class Dco_Information_Gathering extends Activity {
             }
         });
 
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
+
         cardviewxray.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {

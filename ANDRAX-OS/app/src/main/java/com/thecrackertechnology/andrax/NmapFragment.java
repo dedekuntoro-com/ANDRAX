@@ -11,9 +11,14 @@ import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +31,17 @@ public class NmapFragment extends Fragment  implements View.OnClickListener, Ada
     public String scanstr;
 
     public String spinneritem;
+
+    public String nmapstylesave;
+    public String vulners;
+    public String dnsbrute;
+
+
+
+    Switch SwitchSTYLE;
+    Switch SwitchVULNERS;
+    Switch SwitchDNSBrute;
+
 
 
     public NmapFragment() {
@@ -53,6 +69,7 @@ public class NmapFragment extends Fragment  implements View.OnClickListener, Ada
         spinner.setOnItemSelectedListener(this);
 
 
+
         List<String> scanmodes = new ArrayList<String>();
         scanmodes.add("Intense Steath: -sS -A -Pn");
         scanmodes.add("TCP SYN: -sS");
@@ -68,11 +85,84 @@ public class NmapFragment extends Fragment  implements View.OnClickListener, Ada
         scanmodes.add("Os fingerprint SYN: -sS -O");
 
 
+
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this.getActivity(), android.R.layout.simple_spinner_item, scanmodes);
+
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+
         spinner.setAdapter(dataAdapter);
+
+        SwitchSTYLE = (Switch) rootView.findViewById(R.id.switchstylesheet);
+
+        SwitchSTYLE.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+
+                    nmapstylesave = "--stylesheet=/sdcard/nmap.xsl -oX /sdcard/nmapscan.xml";
+                    try {
+                        Process process = Runtime.getRuntime().exec("cp -Rf /data/data/com.thecrackertechnology.andrax/ANDRAX/nmap/nmap.xsl /sdcard/");
+
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getContext(), "Error! Can't move nmap stylesheet", Toast.LENGTH_LONG).show();
+                    }
+
+                } else {
+
+                    nmapstylesave = "";
+
+                }
+
+            }
+        });
+
+        SwitchVULNERS= (Switch) rootView.findViewById(R.id.SwitchVulners);
+
+        SwitchVULNERS.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+
+                     vulners = "vulners,";
+
+                } else {
+
+                    vulners = "";
+
+                }
+
+            }
+        });
+
+        SwitchDNSBrute= (Switch) rootView.findViewById(R.id.SwitchDNSbrute);
+
+        SwitchDNSBrute.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                if(isChecked){
+
+                    dnsbrute = "dns-brute,";
+
+                } else {
+
+                    dnsbrute = "";
+
+                }
+
+            }
+        });
+
+
+
 
 
 
@@ -97,7 +187,8 @@ public class NmapFragment extends Fragment  implements View.OnClickListener, Ada
 
 
 
-    public void onClick(View v) {
+
+        public void onClick(View v) {
 
     }
 
@@ -130,7 +221,7 @@ public class NmapFragment extends Fragment  implements View.OnClickListener, Ada
 
         spinneritem = item;
 
-        Toast.makeText(parent.getContext(), "SCAN Mode: " + item, Toast.LENGTH_SHORT).show();
+        Toast.makeText(parent.getContext(), "Scan mode: " + item, Toast.LENGTH_SHORT).show();
 
 
     }
@@ -187,7 +278,7 @@ public class NmapFragment extends Fragment  implements View.OnClickListener, Ada
         Intent intentstart = new Intent("andrax.axterminal.RUN_SCRIPT");
 
         intentstart.addCategory(Intent.CATEGORY_DEFAULT);
-        intentstart.putExtra("andrax.axterminal.iInitialCommand", "nmap " + scanstr + " " + scanmode + " " + "--system-dns");
+        intentstart.putExtra("andrax.axterminal.iInitialCommand", "nmap " + scanstr + " " + scanmode + " " + " " + nmapstylesave + " --script=" + vulners + dnsbrute);
         intentstart.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intentstart);
 

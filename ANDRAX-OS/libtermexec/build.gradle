@@ -4,7 +4,7 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.2.1'
+        classpath 'com.android.tools.build:gradle:3.3.1'
     }
 }
 apply plugin: 'com.android.library'
@@ -55,7 +55,7 @@ android.libraryVariants.all { variant ->
         into "$buildDir/intermediates/bundles/${variant.dirName}/aidl/"
     }
 
-    variant.javaCompile.dependsOn packageAidl
+    //variant.javaCompile.dependsOn packageAidl
 }
 
 dependencies {

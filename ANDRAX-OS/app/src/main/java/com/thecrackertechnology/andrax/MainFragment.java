@@ -32,16 +32,24 @@ public class MainFragment extends Fragment  implements View.OnClickListener{
 
 
         Button btnrun = (Button) rootView.findViewById(R.id.btnrun);
-        Button btndonation = (Button) rootView.findViewById(R.id.btndonation);
+        Button btntutorials = (Button) rootView.findViewById(R.id.btntutorials);
         Button btnyoutube = (Button) rootView.findViewById(R.id.btnyoutube);
         Button btntelegram = (Button) rootView.findViewById(R.id.btntelegram);
         Button btnmanual = (Button) rootView.findViewById(R.id.btnmanual);
 
         ImageView imgmain = (ImageView) rootView.findViewById(R.id.imageViewmainbanner);
 
+        ImageView imgtraining = (ImageView) rootView.findViewById(R.id.imageView_training_banner);
+
         imgmain.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 clickimagerefresh();
+            }
+        });
+
+        imgtraining.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                clicktraining();
             }
         });
 
@@ -60,9 +68,9 @@ public class MainFragment extends Fragment  implements View.OnClickListener{
             });
 
 
-        btndonation.setOnClickListener(new View.OnClickListener() {
+        btntutorials.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=NRF8B7W2VHGEJ"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://androidhacking.thecrackertechnology.com/"));
                 startActivity(intent);
             }
         });
@@ -76,7 +84,7 @@ public class MainFragment extends Fragment  implements View.OnClickListener{
 
         btntelegram.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/andraxofficial"));
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://t.me/andraxofficialchannel"));
                 startActivity(intent);            }
         });
 
@@ -95,6 +103,11 @@ public class MainFragment extends Fragment  implements View.OnClickListener{
         return rootView;
 
 
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
 
     }
 
@@ -103,6 +116,11 @@ public class MainFragment extends Fragment  implements View.OnClickListener{
         android.support.v4.app.FragmentTransaction fragmentTransaction = getActivity().getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.fragment_container, fragment);
         fragmentTransaction.commit();
+    }
+
+    public void clicktraining() {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://androidhacking.thecrackertechnology.com/"));
+        startActivity(intent);
     }
 
 

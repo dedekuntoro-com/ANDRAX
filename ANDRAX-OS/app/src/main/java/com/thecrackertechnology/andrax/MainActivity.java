@@ -53,9 +53,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     String resulzsh = "";
 
-    String versiondefault = "211";
+    String versiondefault = "233";
 
-    String urlcore = "http://download.thecrackertechnology.com/andrax/andrax.r2-beta1.tar.xz";
+    String urlcore = "http://download.thecrackertechnology.com/andrax/andrax.r2-stable.tar.xz";
 
     String coreversion;
 
@@ -120,6 +120,12 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             }
         }
 
+
+        /**
+         *
+         * Help me, i'm dying...
+         *
+         **/
 
 
         MainFragment fragment = new MainFragment();
@@ -418,7 +424,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
         } else if (id == R.id.action_telegram) {
 
-            Intent telegram = new Intent(Intent.ACTION_VIEW , Uri.parse("https://telegram.me/thecrackertechnology"));
+            Intent telegram = new Intent(Intent.ACTION_VIEW , Uri.parse("https://t.me/crkmythical"));
             startActivity(telegram);
 
         } else if (id == R.id.action_installmanual) {
@@ -2277,6 +2283,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                                     editor.putBoolean("INSTALLEDBUSYBOX", true);
                                     editor.apply();
 
+                                    finish();
+
 
                                 }
                             });
@@ -2443,7 +2451,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         @Override
         protected void onPostExecute(String file_url) {
 
-            if(VersionFromServer > 211) {
+            if(VersionFromServer > Integer.parseInt(versiondefault)) {
 
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
                 builder.setTitle("NEW VERSION");
